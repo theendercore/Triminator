@@ -1,88 +1,147 @@
 import { useRef, useState } from "preact/hooks";
-import { getTrimDatapack } from "./api/genZip";
-import { sleep } from "./api/log";
+import { genTrimDatapack, genTrimResourcepack } from "./api/genZip";
+import TextInput from "./components/TextInput";
+import { sleep } from "./api/Util";
+import ImageInput from "./components/ImageInput";
+
+const nullObj = {
+  namespace: "",
+  name: "",
+  lang: "",
+  item: "",
+  baseTexture: null,
+  legsTexture: null,
+};
 
 export default function App() {
-  const [val, setVal] = useState<DataPackValues>({
-    namespace: "",
-    name: "",
-    lang: "",
-    item: "",
-  });
+  const [val, setVal] = useState<PackValues>(nullObj);
   const [url, setUrl] = useState("");
+  const [url2, setUrl2] = useState("");
+  const [selection, setSelection] = useState<"DP" | "RP">("DP");
 
   const clickThing = useRef(null);
+  const clickThing2 = useRef(null);
 
   return (
     <div className="flex flex-col items-center justify-center gap-2 p-20">
-      <h1 className="font-mono text-3xl">Triminator</h1>
+      <h1 className="text-3xl">Triminator</h1>
       <form
-        className="flex flex-col gap-2"
+        className="flex flex-col items-center gap-2"
         onSubmit={(e) => {
           e.preventDefault();
-          getTrimDatapack(val).then(async (url) => {
-            setUrl(url);
-            await sleep(100)
-            // @ts-ignore
-            if (clickThing.current !== null) clickThing.current.click();
-          });
+
+          if (selection === "RP") {
+            if (val.baseTexture === null || val.legsTexture === null) return;
+            // alert("how did you not add a texture?");
+
+            genTrimResourcepack(val).then(async (url) => {
+              setUrl2(url);
+              await sleep(100);
+              // @ts-ignore
+              clickThing2.current.click();
+              setVal(nullObj);
+            });
+          }
+
+          if (selection === "DP") {
+            genTrimDatapack(val).then(async (url) => {
+              setUrl(url);
+              await sleep(100);
+              // @ts-ignore
+              clickThing.current.click();
+              setVal(nullObj);
+            });
+          }
         }}
       >
-        <label>
-          Namespace: <br />
-          <input
-            type="text"
-            name="namespace"
-            id="namespace"
-            onInput={(e) =>
-              setVal({ ...val, namespace: e.currentTarget.value })
-            }
-            value={val.namespace}
-          />
-        </label>
+        <TextInput
+          title="Namespace"
+          name="namespace"
+          onChange={(e) =>
+            setVal({
+              ...val,
+              namespace: e.currentTarget.value
+                .toLocaleLowerCase()
+                .replace(" ", "_"),
+            })
+          }
+          val={val.namespace}
+        />
 
-        <label>
-          Trim Name: <br />
-          <input
-            type="text"
-            name="name"
-            id="name"
-            onInput={(e) => setVal({ ...val, name: e.currentTarget.value })}
-            value={val.name}
-          />
-        </label>
+        <TextInput
+          title="Trim Name"
+          name="name"
+          onChange={(e) =>
+            setVal({
+              ...val,
+              name: e.currentTarget.value.toLocaleLowerCase().replace(" ", "_"),
+            })
+          }
+          val={val.name}
+        />
 
-        <label>
-          Translation: <br />
-          <input
-            type="text"
-            name="lang"
-            id="lang"
-            onInput={(e) => setVal({ ...val, lang: e.currentTarget.value })}
-            value={val.lang}
-          />
-        </label>
+        <TextInput
+          title="Translation"
+          name="lang"
+          onChange={(e) => setVal({ ...val, lang: e.currentTarget.value })}
+          val={val.lang}
+        />
 
-        <label>
-          Item: <br />
-          <input
-            type="text"
-            name="item"
-            id="item"
-            onInput={(e) => setVal({ ...val, item: e.currentTarget.value })}
-            value={val.item}
-          />
-        </label>
+        <TextInput
+          title="Item"
+          name="item"
+          onChange={(e) =>
+            setVal({
+              ...val,
+              item: e.currentTarget.value.toLocaleLowerCase().replace(" ", "_"),
+            })
+          }
+          val={val.item}
+        />
 
-        <button className="p-2 py-1 bg-gray-800 rounded-lg" type="submit">
-          Generate DP
-        </button>
+        <ImageInput
+          title="Base texture"
+          name="base-texture"
+          onChange={(e) =>
+            setVal({ ...val, baseTexture: e.currentTarget.files![0] })
+          }
+        />
+        <ImageInput
+          title="Leggings texture"
+          name="legs-texture"
+          onChange={(e) =>
+            setVal({ ...val, legsTexture: e.currentTarget.files![0] })
+          }
+        />
+        <div class="flex gap-2">
+          <button
+            className="p-2 py-1 bg-gray-800 rounded-lg"
+            type="submit"
+            onClick={() => setSelection("DP")}
+          >
+            Get DataPack
+          </button>
+
+          <button
+            className="p-2 py-1 bg-gray-800 rounded-lg"
+            type="submit"
+            onClick={() => setSelection("RP")}
+          >
+            Get Resource Pack
+          </button>
+        </div>
       </form>
       <a
         className="none"
         ref={clickThing}
         href={url}
         download={`${val.name}_trim_datapack.zip`}
+      />
+      <a
+        className="none"
+        ref={clickThing2}
+        href={url2}
+        download={`${val.name}_trim_resourcepack.zip`}
       />
     </div>
   );
