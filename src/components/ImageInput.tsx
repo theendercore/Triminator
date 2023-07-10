@@ -14,9 +14,20 @@ export default function ImageInput({
   onChange,
 }: TextInputProps) {
   return (
-    <label>
+    <label class="flex flex-col items-center">
       {`${title}:`} <br />
-      <input type="file" name={name} id={name} onInput={onChange} required />
+      <span class="px-2 bg-slate-500 rounded-md hover:bg-slate-400">
+        Upload File...
+      </span>
+      <input
+        class="hidden"
+        type="file"
+        name={name}
+        id={name}
+        onInput={onChange}
+        accept="image/png"
+        required
+      />
       {children}
     </label>
   );

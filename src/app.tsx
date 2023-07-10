@@ -105,14 +105,18 @@ export default function App() {
           onChange={(e) =>
             setVal({ ...val, baseTexture: e.currentTarget.files![0] })
           }
-        />
+        >
+          {val.baseTexture?.name}
+        </ImageInput>
         <ImageInput
           title="Leggings texture"
           name="legs-texture"
           onChange={(e) =>
             setVal({ ...val, legsTexture: e.currentTarget.files![0] })
           }
-        />
+        >
+          {val.legsTexture?.name}
+        </ImageInput>
         <div class="flex gap-2">
           <button
             className="p-2 py-1 bg-gray-800 rounded-lg"
@@ -132,13 +136,13 @@ export default function App() {
         </div>
       </form>
       <a
-        className="none"
+        className="hidden"
         ref={clickThing}
         href={url}
         download={`${val.name}_trim_datapack.zip`}
       />
       <a
-        className="none"
+        className="hidden"
         ref={clickThing2}
         href={url2}
         download={`${val.name}_trim_resourcepack.zip`}
