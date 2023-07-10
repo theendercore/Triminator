@@ -39,7 +39,7 @@ export default function App() {
               await sleep(100);
               // @ts-ignore
               clickThing2.current.click();
-              setVal(nullObj);
+              // setVal(nullObj);
             });
           }
 
@@ -49,7 +49,7 @@ export default function App() {
               await sleep(100);
               // @ts-ignore
               clickThing.current.click();
-              setVal(nullObj);
+              // setVal(nullObj);
             });
           }
         }}
