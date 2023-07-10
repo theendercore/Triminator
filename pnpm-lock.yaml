@@ -8,6 +8,9 @@ dependencies:
   '@zip.js/zip.js':
     specifier: ^2.7.17
     version: 2.7.17
+  minecraft-textures:
+    specifier: ^1.20.0
+    version: 1.20.0
   preact:
     specifier: ^10.15.1
     version: 10.15.1
@@ -1008,6 +1011,10 @@ packages:
       braces: 3.0.2
       picomatch: 2.3.1
     dev: true
+
+  /minecraft-textures@1.20.0:
+    resolution: {integrity: sha512-+l/WrfnNvXJjsAyWCr4Ti3wWwojIxXZCyslhLKnzphzBWBL9tHltlBs3RZd3CZzB0J+C9FmQcr4lsxs8qfnDmg==}
+    dev: false
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}

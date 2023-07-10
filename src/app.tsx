@@ -1,8 +1,9 @@
 import { useRef, useState } from "preact/hooks";
 import { genTrimDatapack, genTrimResourcepack } from "./api/genZip";
 import TextInput from "./components/TextInput";
-import { sleep } from "./api/Util";
+import { fetchMcData, sleep } from "./api/Util";
 import ImageInput from "./components/ImageInput";
+import { Item } from "minecraft-textures";
 
 const nullObj = {
   namespace: "",
@@ -17,6 +18,8 @@ export default function App() {
   const [val, setVal] = useState<PackValues>(nullObj);
   const [url, setUrl] = useState("");
   const [url2, setUrl2] = useState("");
+
+  const [items, setItems] = useState<Item[] | null>(null);
   const [selection, setSelection] = useState<"DP" | "RP">("DP");
 
   const clickThing = useRef(null);
@@ -147,6 +150,22 @@ export default function App() {
         href={url2}
         download={`${val.name}_trim_resourcepack.zip`}
       />
+      <button
+        class="p-2 py-1 bg-gray-800 rounded-lg"
+        onClick={() => fetchMcData().then((i) => setItems(i.items))}
+      >
+        Yes button
+      </button>
+
+      <div class="flex flex-wrap gap-5">
+        {items !== null &&
+          items.map((i) => (
+            <div class="bg-slate-400 rounded-xl p-4">
+              <img src={i.texture} alt={i.readable} />
+              <p>{i.readable}</p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
