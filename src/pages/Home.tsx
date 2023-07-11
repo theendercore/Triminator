@@ -1,8 +1,8 @@
 import { useRef, useState } from "preact/hooks";
-import { genTrimDatapack, genTrimResourcepack } from "./api/genZip";
-import TextInput from "./components/TextInput";
-import { fetchMcData, sleep } from "./api/Util";
-import ImageInput from "./components/ImageInput";
+import { genTrimDatapack, genTrimResourcepack } from "../api/original/genZip";
+import TextInput from "../components/TextInputOld";
+import { fetchMcData, sleep } from "../api/Util";
+import ImageInput from "../components/ImageInputOld";
 import { Item } from "minecraft-textures";
 
 const nullObj = {
@@ -14,7 +14,7 @@ const nullObj = {
   legsTexture: null,
 };
 
-export default function App() {
+export default function Home({ path }: { path: string }) {
   const [val, setVal] = useState<PackValues>(nullObj);
   const [url, setUrl] = useState("");
   const [url2, setUrl2] = useState("");
@@ -26,8 +26,7 @@ export default function App() {
   const clickThing2 = useRef(null);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 p-20">
-      <h1 className="text-3xl">Triminator</h1>
+    <div className="flex flex-col items-center justify-center gap-2 p-20 pt-5">
       <form
         className="flex flex-col items-center gap-2"
         onSubmit={(e) => {

@@ -11,7 +11,8 @@
   "dependencies": {
     "@zip.js/zip.js": "^2.7.17",
     "minecraft-textures": "^1.20.0",
-    "preact": "^10.15.1"
+    "preact": "^10.15.1",
+    "preact-router": "^4.1.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

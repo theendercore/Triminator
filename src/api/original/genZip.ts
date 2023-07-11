@@ -11,7 +11,7 @@ import {
   genLang,
   genArmorTrimsJson,
 } from "./genJson";
-import { format } from "./Util";
+import { format } from "../Util";
 
 export async function genTrimDatapack(val: PackValues) {
   const zipWriter = new ZipWriter(new BlobWriter());
