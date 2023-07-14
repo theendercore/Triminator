@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "go": "pnpm build && pnpm preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
     "@zip.js/zip.js": "^2.7.17",
     "minecraft-textures": "^1.20.0",
     "preact": "^10.15.1",

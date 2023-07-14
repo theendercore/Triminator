@@ -23,7 +23,7 @@ export default function ImageInput({
 
   return (
     <label class={`flex items-center gap-4 p-1 ${className}`}>
-      <span class="text-xl">{title}</span>
+      <span class="text-lg">{title}</span>
       <span
         class={`rounded-md p-2 py-1 text-indigo-200 hover:bg-gray-500 ${
           isfile ? "bg-gray-600" : "bg-gray-700"
