@@ -1,7 +1,8 @@
 import { TargetedEvent } from "preact/compat";
+import {VNode} from "preact";
 
 type TextInputProps = {
-  children?: string;
+  children?: string | VNode<any>;
   title: string;
   name: string;
   onChange: (e: TargetedEvent<HTMLInputElement, Event>) => void;

@@ -14,7 +14,7 @@ const nullObj = {
     legsTexture: null,
 };
 
-export default function Prototype({}: { path: string }) {
+export default function PatternPrototype({}: { path: string }) {
     const [val, setVal] = useState<PackValues>(nullObj);
     const [url, setUrl] = useState("");
     const [url2, setUrl2] = useState("");

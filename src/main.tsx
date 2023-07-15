@@ -1,10 +1,11 @@
 import {createContext, render} from "preact";
 import "./index.css";
-import Prototype from "./pages/Prototype.tsx";
+import PatternPrototype from "./pages/PatternPrototype.tsx";
 import Router from "preact-router";
 import Generator from "./pages/Generator";
 import Error from "./pages/Error";
 import Home from "./pages/Home.tsx";
+import MaterialPrototype from "./pages/MaterialPrototype.tsx";
 
 const Debug = createContext(true);
 
@@ -22,10 +23,16 @@ const Header = () => (
                 Generator
             </a>
             <a
-                href="/proto"
+                href="/proto/pat"
                 className="p-4 py-2 rounded-md bg-slate-700 hover:bg-stone-700"
             >
-                Generator<span class="italic text-slate-500">(Prototype)</span>
+                Pattern<span class="italic text-slate-500">(Prototype)</span> Gen
+            </a>
+            <a
+                href="/proto/mat"
+                className="p-4 py-2 rounded-md bg-slate-700 hover:bg-stone-700"
+            >
+                Matterial<span className="italic text-slate-500">(Prototype)</span> Gen
             </a>
         </nav>
     </header>
@@ -38,7 +45,8 @@ const Main = () => (
             <Router>
                 <Home path="/"/>
                 <Generator path="/gen"/>
-                <Prototype path="/proto"/>
+                <PatternPrototype path="/proto/pat"/>
+                <MaterialPrototype path="/proto/mat"/>
                 <Error type="404" default/>
             </Router>
         </div>
