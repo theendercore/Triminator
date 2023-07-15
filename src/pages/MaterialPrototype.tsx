@@ -110,7 +110,5 @@ export default function MaterialPrototype({}: { path: string }) {
             <a href={url} ref={clickThing} download={`${data.name}ResourcePack.zip`}/>
             <a href={url2} ref={clickThing2} download={`${data.name}DataPack.zip`}/>
             {devMode && <CodePre>{format(data)}</CodePre>}
-
-
         </div>)
 }

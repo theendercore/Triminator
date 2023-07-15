@@ -6,7 +6,8 @@ export default function Home({}: { path: string }) {
             <p>The site is split up in to to parts:
                 <ul class="text-sm list-disc pl-6">
                     <li>The Main Generator</li>
-                    <li>The Prototype<span class="italic text-slate-400">(Old)</span> Generator</li>
+                    <li>The Prototype Patter<span class="italic text-slate-400">(Old)</span> Generator</li>
+                    <li>The Prototype Material<span className="italic text-slate-400"></span> Generator</li>
                 </ul>
             </p>
             <p>So what are you waiting for? Go try them out! :gun:</p>
