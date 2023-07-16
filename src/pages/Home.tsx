@@ -7,12 +7,12 @@ export default function Home({}: { path: string }) {
                 <ul class="text-sm list-disc pl-6">
                     <li>The Main Generator</li>
                     <li>The Prototype Patter<span class="italic text-slate-400">(Old)</span> Generator</li>
-                    <li>The Prototype Material<span className="italic text-slate-400"></span> Generator</li>
+                    <li>The Prototype Material<span className="italic text-slate-400">(Old)</span> Generator</li>
                 </ul>
             </p>
             <p>So what are you waiting for? Go try them out! :gun:</p>
 
-            <span class="italic text-slate-400 absolute bottom-8">PS. Material generation has not been added yet</span>
+            {/*<span class="italic text-slate-400 absolute bottom-8">PS. Material generation has not been added yet</span>*/}
         </ div>
     );
 

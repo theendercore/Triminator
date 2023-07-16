@@ -38,8 +38,8 @@ const validateImg = (
 // Special Util
 const getImgAlertMessage = (
     code: "NoImage" | "WrongSize",
-    x?: number,
-    y: number | undefined = x
+    x: number,
+    y: number = x
 ) => {
     switch (code) {
         case "NoImage":
