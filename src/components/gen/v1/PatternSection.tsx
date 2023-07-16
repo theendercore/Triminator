@@ -36,13 +36,19 @@ export default function PatternSection({
     const addPat = (pattern: PatternData) =>
         setPackData({...packData, patterns: [...packData.patterns, pattern]});
 
+
+    const editPat = (id: string) => {
+        setPattern(packData.patterns.find(pat => pat.id === id)!)
+        removePat(id)
+    }
+
     return (
         <div class="p-3 bg-slate-800 rounded-xl flex flex-col">
             <h3 class="text-2xl">Patterns</h3>
 
             <div class="flex flex-col gap-2">
                 {packData.patterns.map((p) => (
-                    <Pattern key={p.name} pattern={p} remove={removePat}/>
+                    <Pattern key={p.name} pattern={p} remove={removePat} edit={editPat}/>
                 ))}
                 {isOpen && (
                     <form

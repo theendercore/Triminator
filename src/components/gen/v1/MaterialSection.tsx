@@ -31,13 +31,19 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
     const addMat = (material: MaterialData) =>
         setPackData({...packData, materials: [...packData.materials, material]});
 
+
+    const editMat = (id: string) => {
+        setMaterial(packData.materials.find(mat => mat.id === id)!)
+        removeMat(id)
+    }
+
     return (
         <div class="p-3 bg-slate-800 rounded-xl flex flex-col">
             <h3 class="text-2xl">Materials</h3>
 
             <div class="flex flex-col gap-2">
                 {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat}/>
+                    <Material key={p.name} material={p} remove={removeMat} edit={editMat}/>
                 ))}
                 {isOpen && (
                     <form
@@ -108,6 +114,19 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                             <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
 
+                        {devMode &&
+                            <TextInput
+                                title="Index:"
+                                name="m-index"
+                                value={`${material.index}`}
+                                placeholder="apple, stick, etc..."
+                                onChange={(e) =>
+                                    setMaterial({
+                                        ...material,
+                                        index: Number(e.currentTarget.value),
+                                    })
+                                }
+                            />}
                         <ImageInput
                             title="Base Texture:"
                             name="m-pallet-texture"
@@ -124,7 +143,17 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                             }}
                             fileName={material.palletTexture?.name}
                             required
-                        />
+                        >
+                            {material.palletTexture &&
+                                <img src={URL.createObjectURL(material.palletTexture)}
+                                     alt={material.palletTexture!.name} height={16} width={128} style={
+                                    "-ms-interpolation-mode: nearest-neighbor;" +
+                                    " image-rendering: -webkit-optimize-contrast;" +
+                                    " image-rendering: crisp-edges; " +
+                                    "image-rendering: pixelated;"
+                                }/>
+                            }
+                        </ImageInput>
 
                         <RoundButton
                             className="self-center p-2 py-1.5 mt-4 bg-slate-700 hover:bg-slate-600"
@@ -140,7 +169,12 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                     className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500  ${
                         isOpen && "cursor-not-allowed"
                     }`}
-                    onClick={() => setMaterial({...material, id: crypto.randomUUID(), index: genIndex(), color:"#ffffff"})}
+                    onClick={() => setMaterial({
+                        ...material,
+                        id: crypto.randomUUID(),
+                        index: genIndex(),
+                        color: "#ffffff"
+                    })}
                     disabled={isOpen}
                 >
                     <svg

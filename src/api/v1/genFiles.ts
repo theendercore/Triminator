@@ -71,7 +71,7 @@ function genTrimAtlas(namespace: string, patterns: string[], materials: string[]
     }
 }
 
-function getBlockAtlas(materials: string[]): BlocksAtlasJSON {
+function getBlockAtlas(namespace: string, materials: string[]): BlocksAtlasJSON {
     return {
         sources: [{
             type: "paletted_permutations",
@@ -83,7 +83,7 @@ function getBlockAtlas(materials: string[]): BlocksAtlasJSON {
             ],
             palette_key: "trims/color_palettes/trim_palette",
             permutations: materials.reduce((record, name) => {
-                record[name] = `trims/color_palettes/${name}`;
+                record[name] = `${namespace}:trims/color_palettes/${name}`;
                 return record;
             }, {} as Record<string, string>)
         }]
@@ -112,14 +112,15 @@ function genVanillaModelOverride(namespace: string, names: string[], material: s
                             trim_type: indexes[i]
                         }
                     })
-                , genVanillaOverrides(material, part)),
+                , genVanillaOverrides(material, part,))
+                .sort((a, b) => a.predicate.trim_type - b.predicate.trim_type),
         textures: {
             layer0: `minecraft:item/${material}_${part}`
         }
     }
 }
 
-function genVanillaOverrides(material: string, part: string): ModelOverrides[] {
+function genVanillaOverrides(material: string, part: string,): ModelOverrides[] {
     const vanilla = [
         {index: 0.1, mat: "quartz"},
         {index: 0.2, mat: "iron"},
@@ -134,7 +135,9 @@ function genVanillaOverrides(material: string, part: string): ModelOverrides[] {
     ]
     return vanilla.reduce((arr, data) =>
             arr.concat({
-                model: `minecraft:item/${material}_${part}_${data.mat}_trim`,
+                model: `minecraft:item/${material}_${part}_${
+                    (data.mat === material || data.mat === "gold") ? `${data.mat}_darker` : data.mat
+                }_trim`,
                 predicate: {
                     trim_type: data.index,
                 },

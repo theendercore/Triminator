@@ -49,7 +49,7 @@ const getImgAlertMessage = (
     }
 };
 
-const genIndex = () => Number(`173.${Math.floor(Math.random() * 100000)}`)
+const genIndex = () => Number(`0.3${Math.floor(Math.random() * 10000)}`)
 
 let _cached: TexturesType;
 const fetchMcData = async (): Promise<TexturesType> => {

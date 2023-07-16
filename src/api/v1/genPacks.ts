@@ -84,7 +84,7 @@ async function genResourcePack(packData: PackContextData) {
         ),
 
         zipWriter.add("assets/minecraft/atlases/blocks.json",
-            new TextReader(format(getBlockAtlas(packData.materials.map(({name}) => name))))
+            new TextReader(format(getBlockAtlas(packData.namespace, packData.materials.map(({name}) => name))))
         ),
 
     ]);
@@ -107,17 +107,17 @@ async function genResourcePack(packData: PackContextData) {
         for (const matPart of Armor.materialsWithParts) {
             let [material, part] = matPart.split("_")
 
-            await zipWriter.add(`assets/${packData.namespace}/models/items/${matPart}_${mat.name}_trim.json`,
+            await zipWriter.add(`assets/${packData.namespace}/models/item/${matPart}_${mat.name}_trim.json`,
                 new TextReader(format(genArmorModel(material, part, mat.name)))
             )
-            await zipWriter.add(`assets/minecraft/models/items/${material}_${part}.json`,
+            await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
                 new TextReader(format(genVanillaModelOverride(packData.namespace, [mat.name], material, part, [mat.index])))
             )
         }
 
         Armor.materials.forEach(material => {
             Armor.parts.forEach(async part => {
-                await zipWriter.add(`assets/${packData.namespace}/models/items/${material}_${part}_${mat.name}_trim.json`,
+                await zipWriter.add(`assets/${packData.namespace}/models/item/${material}_${part}_${mat.name}_trim.json`,
                     new TextReader(format(genArmorModel(material, part, mat.name)))
                 )
 
@@ -128,7 +128,7 @@ async function genResourcePack(packData: PackContextData) {
 
     Armor.materials.forEach(material => {
         Armor.parts.forEach(async part => {
-            await zipWriter.add(`assets/minecraft/models/items/${material}_${part}.json`,
+            await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
                 new TextReader(format(
                     genVanillaModelOverride(packData.namespace, packData.materials.map(({name}) => name), material, part, packData.materials.map(({index}) => index))
                 ))
