@@ -56,7 +56,6 @@ export default function GenHeader({
                     setPackData({...packData, description: e.currentTarget.value})
                 }
                 value={packData.description}
-                required
             />
             <ImageInput
                 name="icon"

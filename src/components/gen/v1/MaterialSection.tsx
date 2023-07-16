@@ -1,12 +1,11 @@
 import {StateUpdater, useState} from "preact/hooks";
-import Pattern from "./Pattern";
 import RoundButton from "../../generic/RoundButton";
-import {getEmptyPattern} from "../../../api/v1/consts";
+import {getEmptyMaterial} from "../../../api/v1/consts";
 import TextInput from "../../generic/TextInput";
 import ImageInput from "../../generic/ImageInput";
 import {
     format,
-    formatIdentifier,
+    formatIdentifier, genIndex,
     getImgAlertMessage,
     validateImg,
 } from "../../../api/Util";
@@ -14,61 +13,57 @@ import ItemRender from "../../generic/ItemRender";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
 import Trash from "../../icons/Trash.tsx";
+import Material from "./Material.tsx";
+import ColorInput from "../../generic/ColorInput.tsx";
 
-type PatternSectionProps = {
+type MaterialSectionProps = {
     packData: PackContextData;
     setPackData: StateUpdater<PackContextData>;
 };
 
-export default function PatternSection({
-                                           packData,
-                                           setPackData,
-                                       }: PatternSectionProps) {
-    const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
-    const isOpen = pattern.id !== "";
+export default function MaterialSection({packData, setPackData,}: MaterialSectionProps) {
+    const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
+    const isOpen = material.id !== "";
 
-    const removePat = (id: string) =>
-        setPackData({
-            ...packData,
-            patterns: packData.patterns.filter((p) => p.id !== id),
-        });
+    const removeMat = (id: string) =>
+        setPackData({...packData, materials: packData.materials.filter(p => p.id !== id),});
 
-    const addPat = (pattern: PatternData) =>
-        setPackData({...packData, patterns: [...packData.patterns, pattern]});
+    const addMat = (material: MaterialData) =>
+        setPackData({...packData, materials: [...packData.materials, material]});
 
     return (
         <div class="p-3 bg-slate-800 rounded-xl flex flex-col">
-            <h3 class="text-2xl">Patterns</h3>
+            <h3 class="text-2xl">Materials</h3>
 
             <div class="flex flex-col gap-2">
-                {packData.patterns.map((p) => (
-                    <Pattern key={p.name} pattern={p} remove={removePat}/>
+                {packData.materials.map((p) => (
+                    <Material key={p.name} material={p} remove={removeMat}/>
                 ))}
                 {isOpen && (
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            addPat(pattern);
-                            setPattern(getEmptyPattern());
+                            addMat(material);
+                            setMaterial(getEmptyMaterial());
                         }}
                         class="flex flex-col relative bg-slate-700 p-4 rounded-xl"
                     >
                         <RoundButton
                             className="absolute px-4 py-0 bg-black top-2 right-2"
                             type="button"
-                            onClick={() => setPattern(getEmptyPattern())}
+                            onClick={() => setMaterial(getEmptyMaterial())}
                         >
                             <Trash className="fill-slate-600"></Trash>
                         </RoundButton>
-                        <h3 class="text-xl">Add Pattern</h3>
+                        <h3 class="text-xl">Add Material</h3>
                         <TextInput
-                            title="Pattern name:"
-                            name="p-name"
-                            value={pattern.name}
+                            title="Material name:"
+                            name="m-name"
+                            value={material.name}
                             placeholder="name..."
                             onChange={(e) =>
-                                setPattern({
-                                    ...pattern,
+                                setMaterial({
+                                    ...material,
                                     name: formatIdentifier(e.currentTarget.value),
                                 })
                             }
@@ -76,64 +71,61 @@ export default function PatternSection({
                         />
                         <TextInput
                             title="Translation:"
-                            name="p-translation"
-                            value={pattern.translation}
+                            name="m-translation"
+                            value={material.translation}
                             placeholder="Name..."
                             onChange={(e) =>
-                                setPattern({...pattern, translation: e.currentTarget.value})
+                                setMaterial({...material, translation: e.currentTarget.value})
                             }
                             required
                         />
+                        <ColorInput
+                            title="Color:"
+                            name="m-color"
+                            value={material.color}
+                            onChange={(e) =>
+                                setMaterial({
+                                    ...material,
+                                    color: e.currentTarget.value,
+                                })
+                            }
+                            required
+                        />
+
                         <TextInput
                             title="Item:"
-                            name="p-item"
-                            value={pattern.item}
+                            name="m-item"
+                            value={material.item}
                             placeholder="apple, stick, etc..."
                             onChange={(e) =>
-                                setPattern({
-                                    ...pattern,
+                                setMaterial({
+                                    ...material,
                                     item: formatIdentifier(e.currentTarget.value),
                                 })
                             }
                             required
                         >
-                            <ItemRender item={`minecraft:${pattern.item}`} noAlt/>
+                            <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
 
                         <ImageInput
                             title="Base Texture:"
-                            name="p-base-texture"
+                            name="m-pallet-texture"
                             onChange={(e) => {
-                                let image = validateImg(e.currentTarget.files![0], 64, 32);
+                                let image = validateImg(e.currentTarget.files![0], 8, 1);
                                 if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 64, 32));
+                                    alert(getImgAlertMessage(image, 8, 1));
                                     return;
                                 }
-                                setPattern({
-                                    ...pattern,
-                                    baseTexture: e.currentTarget.files![0],
+                                setMaterial({
+                                    ...material,
+                                    palletTexture: e.currentTarget.files![0],
                                 });
                             }}
-                            fileName={pattern.baseTexture?.name}
+                            fileName={material.palletTexture?.name}
                             required
                         />
-                        <ImageInput
-                            title="Legging Texture:"
-                            name="p-leggings-texture"
-                            onChange={(e) => {
-                                let image = validateImg(e.currentTarget.files![0], 64, 32);
-                                if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 64, 32));
-                                    return;
-                                }
-                                setPattern({
-                                    ...pattern,
-                                    leggingsTexture: e.currentTarget.files![0],
-                                });
-                            }}
-                            fileName={pattern.leggingsTexture?.name}
-                            required
-                        />
+
                         <RoundButton
                             className="self-center p-2 py-1.5 mt-4 bg-slate-700 hover:bg-slate-600"
                             type="submit"
@@ -148,7 +140,7 @@ export default function PatternSection({
                     className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500  ${
                         isOpen && "cursor-not-allowed"
                     }`}
-                    onClick={() => setPattern({...pattern, id: crypto.randomUUID()})}
+                    onClick={() => setMaterial({...material, id: crypto.randomUUID(), index: genIndex(), color:"#ffffff"})}
                     disabled={isOpen}
                 >
                     <svg
@@ -169,13 +161,14 @@ export default function PatternSection({
                         className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500`}
                         onClick={() => {
                             let id = crypto.randomUUID();
-                            addPat({
+                            addMat({
                                 id: id,
                                 name: id.slice(0, 5),
-                                translation: "qPattern",
-                                item: "ender_chest",
-                                baseTexture: new File([], "temp"),
-                                leggingsTexture: new File([], "temp"),
+                                translation: "qMaterial",
+                                item: "chest",
+                                palletTexture: new File([], "temp"),
+                                color: "#FFFFFF",
+                                index: genIndex()
                             });
                         }}
                     >
@@ -183,7 +176,7 @@ export default function PatternSection({
                     </RoundButton>
                 )}
             </div>
-            {devMode && <CodePre>{format(pattern)}</CodePre>}
+            {devMode && <CodePre>{format(material)}</CodePre>}
         </div>
     );
 }

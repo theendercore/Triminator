@@ -17,8 +17,15 @@ type PatternData = {
     leggingsTexture?: File;
 };
 
-type MaterialData = {};
-
+type MaterialData = {
+    id: string;
+    name: string;
+    translation: string;
+    color: string;
+    item: string;
+    palletTexture?: File;
+    index: number;
+};
 
 type MCVersion = "1.20"
 
@@ -52,3 +59,48 @@ type TrimAtlasesJSON = {
         permutations: Record<string, string>
     }[];
 };
+
+type MaterialTag = {
+    values: string[];
+}
+
+type MaterialJSON = {
+    asset_name: string;
+    description: {
+        translate: string;
+        color: string;
+    };
+    ingredient: string;
+    item_model_index: number;
+}
+
+type BlocksAtlasJSON = {
+    sources: {
+        type: string;
+        textures: string[];
+        palette_key: string;
+        permutations: Record<string, string>;
+    }[];
+}
+
+type ArmorModelJSON = {
+    parent: string;
+    textures: {
+        layer0: string;
+        layer1: string;
+    };
+}
+
+type VanillaModelOverrideJSON = {
+    parent: string;
+    overrides: ModelOverrides[];
+    textures: {
+        layer0: string;
+    };
+}
+type ModelOverrides = {
+    model: string;
+    predicate: {
+        trim_type: number;
+    };
+}

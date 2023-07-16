@@ -49,6 +49,8 @@ const getImgAlertMessage = (
     }
 };
 
+const genIndex = () => Number(`173.${Math.floor(Math.random() * 100000)}`)
+
 let _cached: TexturesType;
 const fetchMcData = async (): Promise<TexturesType> => {
     if (_cached === null || _cached === undefined) {
@@ -84,6 +86,11 @@ const resolveResourcePackVersion = (version: MCVersion) => {
     }
 };
 
+const getDoof = () => fetch("./img/dr_doof.png").then(e => e.blob())
+
+const genDescription = (desc: string, type: string) =>
+    desc.trim() !== "" ? `${desc}\nBy Triminator` : `${type} generated\nby Triminator`
+
 export {
     log,
     sleep,
@@ -92,8 +99,11 @@ export {
     formatIdentifier,
     validateImg,
     getImgAlertMessage,
+    genIndex,
     fetchMcData,
     getItemTexture,
     resolveDataPackVersion,
     resolveResourcePackVersion,
+    getDoof,
+    genDescription
 };

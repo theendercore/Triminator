@@ -7,7 +7,8 @@ import RoundButton from "../components/generic/RoundButton";
 import PatternSection from "../components/gen/v1/PatternSection";
 import {devMode} from "../api/dev";
 import {TargetedEvent} from "preact/compat";
-import {genDatapack, genResourcePack} from "../api/v1/genZip.ts";
+import {genDatapack, genResourcePack} from "../api/v1/genPacks.ts";
+import MaterialSection from "../components/gen/v1/MaterialSection.tsx";
 
 export default function Generator({}: { path: string }) {
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());
@@ -36,29 +37,31 @@ export default function Generator({}: { path: string }) {
                 <h2 class="text-2xl font-semibold py-4 text-center">
                     {packData.name.trim() === "" ? "Trim" : packData.name} Pack
                 </h2>
-                {devMode && <>
+                {devMode && <div class="flex justify-center gap-2">
                     <RoundButton onClick={() => {
                         setPackData({
                             ...packData,
-                            description: "Test Desc",
-                            name: "test",
+                            name: `Test-${crypto.randomUUID().slice(0,5)}`,
                             namespace: "test_ns",
                             version: "1.20"
 
                         })
-                    }}>Test Fill</RoundButton>
+                    }} className="bg-slate-700">Test Fill</RoundButton>
                     <RoundButton onClick={() => {
                         console.log(format(JSON.stringify(
                             ""
                         )))
-                    }}>LOG</RoundButton>
-                </>}
+                    }} className="bg-slate-700">LOG</RoundButton>
+                </div>}
                 <GenHeader
                     packData={packData}
                     setPackData={setPackData}
                     onSubmit={generate}
                 />
-                <PatternSection packData={packData} setPackData={setPackData}/>
+                <div class="flex gap-6">
+                    <PatternSection packData={packData} setPackData={setPackData}/>
+                    <MaterialSection packData={packData} setPackData={setPackData}/>
+                </div>
                 <RoundButton className="bg-slate-700" from="header" type="submit">
                     Gen
                 </RoundButton>
