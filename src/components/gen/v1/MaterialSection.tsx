@@ -166,10 +166,10 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                         </ImageInput>
 
                         <PrimaryButton
-                            className="self-center mt-4 bg-opacity-90"
+                            className="self-center mt-4 px-6 bg-opacity-90"
                             type="submit"
                         >
-                            Submit
+                            Add
                         </PrimaryButton>
                     </form>
                 )}

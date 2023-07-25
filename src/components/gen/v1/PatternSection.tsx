@@ -151,10 +151,10 @@ export default function PatternSection({
                             hoverText="Leggings pattern texture. Size 64x32"
                         />
                         <PrimaryButton
-                            className="self-center mt-4 bg-opacity-90"
+                            className="self-center mt-4 px-6 bg-opacity-90"
                             type="submit"
                         >
-                            Submit
+                            Add
                         </PrimaryButton>
                     </form>
                 )}
