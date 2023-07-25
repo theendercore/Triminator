@@ -1,20 +1,22 @@
 import {StateUpdater, useState} from "preact/hooks";
-import RoundButton from "../../generic/RoundButton";
 import {getEmptyMaterial} from "../../../api/v1/consts";
-import TextInput from "../../generic/TextInput";
-import ImageInput from "../../generic/ImageInput";
+import TextInput from "../../generic/input/TextInput.tsx";
+import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
     formatIdentifier, genIndex,
     getImgAlertMessage,
     validateImg,
 } from "../../../api/Util";
-import ItemRender from "../../generic/ItemRender";
+import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
 import Trash from "../../icons/Trash.tsx";
 import Material from "./Material.tsx";
-import ColorInput from "../../generic/ColorInput.tsx";
+import ColorInput from "../../generic/input/ColorInput.tsx";
+import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
+import Plus from "../../icons/Plus.tsx";
+import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 
 type MaterialSectionProps = {
     packData: PackContextData;
@@ -38,12 +40,12 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
     }
 
     return (
-        <div class="p-3 bg-slate-800 rounded-xl flex flex-col">
-            <h3 class="text-2xl">Materials</h3>
+        <div class="px-12 py-6 bg-secondary bg-opacity-40 rounded-xl flex flex-col">
+            <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
 
             <div class="flex flex-col gap-2">
                 {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat} edit={editMat}/>
+                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen}/>
                 ))}
                 {isOpen && (
                     <form
@@ -52,16 +54,17 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                             addMat(material);
                             setMaterial(getEmptyMaterial());
                         }}
-                        class="flex flex-col relative bg-slate-700 p-4 rounded-xl"
+                        class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >
-                        <RoundButton
-                            className="absolute px-4 py-0 bg-black top-2 right-2"
+                        <SecondaryButton
+                            className="absolute top-3 right-3 rounded-xl"
                             type="button"
                             onClick={() => setMaterial(getEmptyMaterial())}
                         >
-                            <Trash className="fill-slate-600"></Trash>
-                        </RoundButton>
-                        <h3 class="text-xl">Add Material</h3>
+                            <Trash className="fill-accent"></Trash>
+                        </SecondaryButton>
+
+                        <h3 class="text-2xl italic font-semibold pb-1">Add Material</h3>
                         <TextInput
                             title="Material name:"
                             name="m-name"
@@ -74,6 +77,8 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                 })
                             }
                             required
+
+                            hoverText="Name of the material. All lower cases no spaces or symbols!"
                         />
                         <TextInput
                             title="Translation:"
@@ -84,6 +89,7 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                 setMaterial({...material, translation: e.currentTarget.value})
                             }
                             required
+                            hoverText="In game name of the material. This is how the material is gonna be called in game. No restrictions here."
                         />
                         <ColorInput
                             title="Color:"
@@ -96,6 +102,7 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                 })
                             }
                             required
+                            hoverText="Material text color."
                         />
 
                         <TextInput
@@ -110,6 +117,7 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                 })
                             }
                             required
+                            hoverText={"The item used to make the material. For vanilla materials that is \"iron_ingot\", \"amethyst_shard\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exits."}
                         >
                             <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
@@ -126,9 +134,10 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                         index: Number(e.currentTarget.value),
                                     })
                                 }
+                                hoverText="this one is for me :)"
                             />}
                         <ImageInput
-                            title="Base Texture:"
+                            title="Pallet Texture:"
                             name="m-pallet-texture"
                             onChange={(e) => {
                                 let image = validateImg(e.currentTarget.files![0], 8, 1);
@@ -143,6 +152,7 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                             }}
                             fileName={material.palletTexture?.name}
                             required
+                            hoverText="Pallet texture. Size 8x1"
                         >
                             {material.palletTexture &&
                                 <img src={URL.createObjectURL(material.palletTexture)}
@@ -155,20 +165,18 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                             }
                         </ImageInput>
 
-                        <RoundButton
-                            className="self-center p-2 py-1.5 mt-4 bg-slate-700 hover:bg-slate-600"
+                        <PrimaryButton
+                            className="self-center mt-4 bg-opacity-90"
                             type="submit"
                         >
                             Submit
-                        </RoundButton>
+                        </PrimaryButton>
                     </form>
                 )}
             </div>
-            <div class="flex gap-2 self-center">
-                <RoundButton
-                    className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500  ${
-                        isOpen && "cursor-not-allowed"
-                    }`}
+            <div class="flex items-center gap-2 self-center p-3">
+                <PrimaryButton
+                    className={`p-1 h-min rounded-xl ${isOpen && "cursor-not-allowed hover:scale-100"}`}
                     onClick={() => setMaterial({
                         ...material,
                         id: crypto.randomUUID(),
@@ -177,22 +185,14 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                     })}
                     disabled={isOpen}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        width="16"
-                        height="16"
-                        class="fill-slate-300 "
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.75 4.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
-                        ></path>
-                    </svg>
-                </RoundButton>
-                {devMode && (
-                    <RoundButton
-                        className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500`}
+                    <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
+            </div>
+
+            {devMode &&
+                <>
+                    <CodePre>{format(material)}</CodePre>
+                    <SecondaryButton
+                        className={`px-3 fixed left-3 top-56`}
                         onClick={() => {
                             let id = crypto.randomUUID();
                             addMat({
@@ -205,12 +205,10 @@ export default function MaterialSection({packData, setPackData,}: MaterialSectio
                                 index: genIndex()
                             });
                         }}
-                    >
-                        q
-                    </RoundButton>
-                )}
-            </div>
-            {devMode && <CodePre>{format(material)}</CodePre>}
+                    >qMat
+                    </SecondaryButton>
+                </>
+            }
         </div>
     );
 }

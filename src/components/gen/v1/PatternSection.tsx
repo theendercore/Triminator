@@ -1,19 +1,21 @@
 import {StateUpdater, useState} from "preact/hooks";
 import Pattern from "./Pattern";
-import RoundButton from "../../generic/RoundButton";
 import {getEmptyPattern} from "../../../api/v1/consts";
-import TextInput from "../../generic/TextInput";
-import ImageInput from "../../generic/ImageInput";
+import TextInput from "../../generic/input/TextInput.tsx";
+import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
     formatIdentifier,
     getImgAlertMessage,
     validateImg,
 } from "../../../api/Util";
-import ItemRender from "../../generic/ItemRender";
+import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
 import Trash from "../../icons/Trash.tsx";
+import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
+import Plus from "../../icons/Plus.tsx";
+import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 
 type PatternSectionProps = {
     packData: PackContextData;
@@ -43,12 +45,12 @@ export default function PatternSection({
     }
 
     return (
-        <div class="p-3 bg-slate-800 rounded-xl flex flex-col">
-            <h3 class="text-2xl">Patterns</h3>
+        <div class="px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
+            <h3 class="text-3xl font-semibold text-center w-full pb-4">Patterns</h3>
 
             <div class="flex flex-col gap-2">
                 {packData.patterns.map((p) => (
-                    <Pattern key={p.name} pattern={p} remove={removePat} edit={editPat}/>
+                    <Pattern key={p.name} pattern={p} remove={removePat} edit={editPat} isOpen={isOpen}/>
                 ))}
                 {isOpen && (
                     <form
@@ -57,16 +59,18 @@ export default function PatternSection({
                             addPat(pattern);
                             setPattern(getEmptyPattern());
                         }}
-                        class="flex flex-col relative bg-slate-700 p-4 rounded-xl"
+                        class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >
-                        <RoundButton
-                            className="absolute px-4 py-0 bg-black top-2 right-2"
+                        <SecondaryButton
+                            className="absolute top-3 right-3 rounded-xl"
                             type="button"
                             onClick={() => setPattern(getEmptyPattern())}
                         >
-                            <Trash className="fill-slate-600"></Trash>
-                        </RoundButton>
-                        <h3 class="text-xl">Add Pattern</h3>
+                            <Trash className="fill-accent"></Trash>
+                        </SecondaryButton>
+
+                        <h3 class="text-2xl italic font-semibold pb-1">Add Pattern</h3>
+
                         <TextInput
                             title="Pattern name:"
                             name="p-name"
@@ -79,17 +83,20 @@ export default function PatternSection({
                                 })
                             }
                             required
+                            hoverText="Name of the patter. All lower cases no spaces or symbols!"
                         />
                         <TextInput
                             title="Translation:"
                             name="p-translation"
                             value={pattern.translation}
-                            placeholder="Name..."
+                            placeholder="Fancy Name..."
                             onChange={(e) =>
                                 setPattern({...pattern, translation: e.currentTarget.value})
                             }
                             required
+                            hoverText="In game name of the patter. This is how the pattern is gonna be called in game. No restrictions here."
                         />
+                        
                         <TextInput
                             title="Item:"
                             name="p-item"
@@ -102,9 +109,10 @@ export default function PatternSection({
                                 })
                             }
                             required
-                        >
-                            <ItemRender item={`minecraft:${pattern.item}`} noAlt/>
+                            hoverText={"The item used to make the pattern. For vanilla patterns that is \"coast_armor_trim\", \"sentry_armor_trim\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exits."}
+                        ><ItemRender item={`minecraft:${pattern.item}`} noAlt/>
                         </TextInput>
+
 
                         <ImageInput
                             title="Base Texture:"
@@ -122,6 +130,7 @@ export default function PatternSection({
                             }}
                             fileName={pattern.baseTexture?.name}
                             required
+                            hoverText="Base pattern texture. Size 64x32"
                         />
                         <ImageInput
                             title="Legging Texture:"
@@ -139,57 +148,47 @@ export default function PatternSection({
                             }}
                             fileName={pattern.leggingsTexture?.name}
                             required
+                            hoverText="Leggings pattern texture. Size 64x32"
                         />
-                        <RoundButton
-                            className="self-center p-2 py-1.5 mt-4 bg-slate-700 hover:bg-slate-600"
+                        <PrimaryButton
+                            className="self-center mt-4 bg-opacity-90"
                             type="submit"
                         >
                             Submit
-                        </RoundButton>
+                        </PrimaryButton>
                     </form>
                 )}
             </div>
-            <div class="flex gap-2 self-center">
-                <RoundButton
-                    className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500  ${
-                        isOpen && "cursor-not-allowed"
-                    }`}
+            <div class="flex items-center gap-2 self-center p-3">
+                <PrimaryButton
+                    className={`p-1 h-min rounded-xl ${isOpen && "cursor-not-allowed hover:scale-100"}`}
                     onClick={() => setPattern({...pattern, id: crypto.randomUUID()})}
                     disabled={isOpen}
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 16 16"
-                        width="16"
-                        height="16"
-                        class="fill-slate-300 "
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.75 4.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"
-                        ></path>
-                    </svg>
-                </RoundButton>
-                {devMode && (
-                    <RoundButton
-                        className={`px-3 mt-3 bg-slate-700 hover:bg-slate-500`}
-                        onClick={() => {
-                            let id = crypto.randomUUID();
-                            addPat({
-                                id: id,
-                                name: id.slice(0, 5),
-                                translation: "qPattern",
-                                item: "ender_chest",
-                                baseTexture: new File([], "temp"),
-                                leggingsTexture: new File([], "temp"),
-                            });
-                        }}
-                    >
-                        q
-                    </RoundButton>
-                )}
+                    <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
+
             </div>
-            {devMode && <CodePre>{format(pattern)}</CodePre>}
+
+
+            {devMode && <>
+                <CodePre>{format(pattern)}</CodePre>
+                <SecondaryButton
+                    className={` fixed left-3 top-44 px-3`}
+                    onClick={() => {
+                        let id = crypto.randomUUID();
+                        addPat({
+                            id: id,
+                            name: id.slice(0, 5),
+                            translation: "qPattern",
+                            item: "ender_chest",
+                            baseTexture: new File([], "temp"),
+                            leggingsTexture: new File([], "temp"),
+                        });
+                    }}
+                >qPat
+                </SecondaryButton>
+            </>
+            }
         </div>
     );
 }

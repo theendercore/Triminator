@@ -2,12 +2,12 @@ import { VNode } from "preact";
 import { TargetedEvent } from "preact/compat";
 
 type RoundButtonProps = {
-  children?: VNode<any> | string;
+  children?: VNode<any> | string | Element;
   className?: string;
   onClick?: (e: TargetedEvent<HTMLButtonElement, Event>) => void;
   type?: string;
   disabled?: boolean;
-  from?: string;
+  fromField?: string;
 };
 export default function RoundButton({
   children,
@@ -15,12 +15,12 @@ export default function RoundButton({
   onClick,
   type,
   disabled,
-  from,
+  fromField,
 }: RoundButtonProps) {
   return (
     <button
-      form={from}
-      class={`rounded-lg p-4 py-2 ${className}`}
+      form={fromField}
+      class={`rounded-xl p-2 hover:scale-110 ${className}`}
       onClick={onClick}
       type={type}
       disabled={disabled}

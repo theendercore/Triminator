@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .pixel-art {
+        -ms-interpolation-mode: nearest-neighbor;
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+    }
+}

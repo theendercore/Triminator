@@ -1,12 +1,12 @@
 import {devMode} from "../api/dev.ts";
 import {useRef, useState} from "preact/hooks";
-import RoundButton from "../components/generic/RoundButton.tsx";
+import RoundButton from "../components/generic/btn/RoundButton.tsx";
 import {format, formatIdentifier, sleep} from "../api/Util.ts";
 import TextInput from "../components/TextInputOld.tsx";
 import ItemRender from "../components/generic/ItemRender.tsx";
 import CodePre from "../components/generic/CodePre.tsx";
 import {genTrimDatapack, genTrimResourcePack} from "../api/original/mats/genfiles.ts";
-import ImageInput from "../components/generic/ImageInput.tsx";
+import ImageInput from "../components/generic/input/ImageInput.tsx";
 
 export default function MaterialPrototype({}: { path: string }) {
 

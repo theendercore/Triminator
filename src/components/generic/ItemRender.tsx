@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { getItemTexture } from "../../api/Util";
+import { getItemTexture } from "../../api/Util.ts";
 
 type ItemRenderProps = {
   item: string;
@@ -18,9 +18,10 @@ export default function ItemRender({
   getItemTexture(item).then((e) => setUrl(e as string));
   return (
     <img
-      class="inline"
+      class="inline pixel-art"
       src={url}
       alt={noAlt ? "" : item}
+
       width={height}
       height={width}
     />

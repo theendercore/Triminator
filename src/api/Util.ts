@@ -12,7 +12,7 @@ const formatName = (name: string) =>
     name
         .replace(/ /gm, "_")
         .replace(/[^A-z0-9:_]/gm, "")
-        .replace(/^/gm, "");
+        .replace(/\^/gm, "");
 
 const validateImg = (
     file: File,
@@ -49,7 +49,7 @@ const getImgAlertMessage = (
     }
 };
 
-const genIndex = () => Number(`0.3${Math.floor(Math.random() * 10000)}`)
+const genIndex = () => Number(`0.714${Math.floor(Math.random() * 10000)}`)
 
 let _cached: TexturesType;
 const fetchMcData = async (): Promise<TexturesType> => {
