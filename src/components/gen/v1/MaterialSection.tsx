@@ -66,32 +66,57 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         </SecondaryButton>
 
                         <h3 class="text-2xl italic font-semibold pb-1">Add Material</h3>
-                        <TextInput
-                            title="Material name:"
-                            name="m-name"
-                            value={material.name}
-                            placeholder="name..."
-                            onChange={(e) =>
-                                setMaterial({
-                                    ...material,
-                                    name: formatIdentifier(e.currentTarget.value),
-                                })
-                            }
-                            required
 
-                            hoverText="Name of the material. All lower cases no spaces or symbols!"
-                        />
-                        <TextInput
-                            title="Translation:"
-                            name="m-translation"
-                            value={material.translation}
-                            placeholder="Name..."
-                            onChange={(e) =>
-                                setMaterial({...material, translation: e.currentTarget.value})
-                            }
-                            required
-                            hoverText="In game name of the material. This is how the material is gonna be called in game. No restrictions here."
-                        />
+                        { advancedState ?
+                        (
+                            <>
+                                <TextInput
+                                    title="Material name:"
+                                    name="m-name"
+                                    value={material.name}
+                                    placeholder="name..."
+                                    onChange={(e) =>
+                                        setMaterial({
+                                            ...material,
+                                            name: formatIdentifier(e.currentTarget.value),
+                                        })
+                                    }
+                                    required
+
+                                    hoverText="Name of the material. All lower cases no spaces or symbols!"
+                                />
+                                <TextInput
+                                    title="Translation:"
+                                    name="m-translation"
+                                    value={material.translation}
+                                    placeholder="Name..."
+                                    onChange={(e) =>
+                                        setMaterial({...material, translation: e.currentTarget.value})
+                                    }
+                                    required
+                                    hoverText="In game name of the material. This is how the material is gonna be called in game. No restrictions here."
+                                />
+                            </>)
+                        :
+                            (
+                                <TextInput
+                                    title="Material name:"
+                                    name="m-name"
+                                    value={material.translation}
+                                    placeholder="name..."
+                                    onChange={(e) => setMaterial({
+                                            ...material,
+                                            translation: e.currentTarget.value,
+                                            name: formatIdentifier(e.currentTarget.value),
+                                       })}
+                                    required
+                                    hoverText="Name of the material. All lower cases no spaces or symbols!"
+                                />
+                            )
+
+
+                                            }
+
                         <ColorInput
                             title="Color:"
                             name="m-color"
@@ -123,19 +148,19 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                             <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
 
-                        {devMode &&
+                        {advancedState &&
                             <TextInput
                                 title="Index:"
                                 name="m-index"
                                 value={`${material.index}`}
-                                placeholder="apple, stick, etc..."
+                                placeholder="index..."
                                 onChange={(e) =>
                                     setMaterial({
                                         ...material,
                                         index: Number(e.currentTarget.value),
                                     })
                                 }
-                                hoverText="this one is for me :)"
+                                hoverText="This is the index, its been auto generated to be unique. Dont touch it unless you know what you are doing."
                             />}
                         <ImageInput
                             title="Pallet Texture:"
