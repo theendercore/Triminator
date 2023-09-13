@@ -21,9 +21,10 @@ import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 type MaterialSectionProps = {
     packData: PackContextData;
     setPackData: StateUpdater<PackContextData>;
+    advancedState: boolean;
 };
 
-export default function MaterialSection({packData, setPackData,}: MaterialSectionProps) {
+export default function MaterialSection({packData, setPackData, advancedState,}: MaterialSectionProps) {
     const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
     const isOpen = material.id !== "";
 

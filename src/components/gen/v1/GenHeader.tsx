@@ -3,15 +3,18 @@ import {formatIdentifier, getImgAlertMessage, validateImg} from "../../../api/Ut
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {TargetedEvent} from "preact/compat";
+import StyledSwitch from "../../generic/Switch.tsx";
 
 type GenHeaderProps = {
     className?: string;
     packData: PackContextData;
     setPackData: StateUpdater<PackContextData>;
     onSubmit: (e: TargetedEvent<HTMLFormElement, Event>) => void;
+    advancedState: boolean;
+    setAdvancedState: StateUpdater<boolean>;
 };
 
-export default function GenHeader({className, packData, setPackData, onSubmit,}: GenHeaderProps) {
+export default function GenHeader({className, packData, setPackData, onSubmit, advancedState, setAdvancedState}: GenHeaderProps) {
     return (
         <form
             id="header"
@@ -65,6 +68,12 @@ export default function GenHeader({className, packData, setPackData, onSubmit,}:
                 }}
                 fileName={packData.icon?.name}
                 hoverText="The Icon of the packs. If left empty you will get Dr Doof."
+            />
+            <StyledSwitch
+                title={"Advnaced Mode:"}
+                state={advancedState}
+                onChange={setAdvancedState}
+                hoverText="Advnaced editing mode for people who know more about datapacks and want finer controles."
             />
         </form>
 
