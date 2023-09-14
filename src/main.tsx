@@ -1,4 +1,4 @@
-import {createContext, render} from "preact";
+import {render} from "preact";
 import "./index.css";
 import Router from "preact-router";
 import Generator from "./pages/Generator";
