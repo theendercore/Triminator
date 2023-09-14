@@ -17,9 +17,7 @@ export default function Generator({}: { path: string }) {
   const [dpUrl, setDpUrl] = useState("");
   const [rpUrl, setRpUrl] = useState("");
 
-  const [downloadState, setDownloadState] = useState<
-    "BOTH" | "DATA" | "RESOURCE"
-  >("BOTH");
+  const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH");
 
   const dpLink = useRef<HTMLAnchorElement>(null);
   const rpLink = useRef<HTMLAnchorElement>(null);

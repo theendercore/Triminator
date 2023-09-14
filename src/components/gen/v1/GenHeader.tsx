@@ -87,10 +87,10 @@ export default function GenHeader({className, packData, setPackData, onSubmit, a
                 hoverText="The Icon of the packs. If left empty you will get Dr Doof."
             />
             <StyledSwitch
-                title={"Advnaced Mode:"}
+                title={"Advanced Mode:"}
                 state={advancedState}
                 onChange={setAdvancedState}
-                hoverText="Advnaced editing mode for people who know more about datapacks and want finer controles."
+                hoverText="Advanced editing mode for people who know more about datapacks and want finer controles."
             />
         </form>
     );
