@@ -8,25 +8,26 @@ type MaterialProps = {
     remove: (id: string) => void;
     edit: (id: string) => void;
     isOpen: boolean
+    advanced: boolean
 };
 
-export default function Material({material, remove, edit, isOpen}: MaterialProps) {
+export default function Material({material, remove, edit, isOpen, advanced}: MaterialProps) {
 
     return (
         <div class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
-              <span className="flex gap-3 items-center">
+            <span className="flex flex-col md:flex-row md:gap-3 items-center">
                 <span>
                     {material.translation}
-                    <span className="text-text opacity-50">{`(${material.name})`}</span>
+                    <span className={`text-text opacity-50 ${ advanced ? "inline" : "hidden"}`}>{`(${material.name})`}</span>
                 </span>
 
-                <span>|</span>
+                <span class="hidden md:inline">|</span>
                 <ItemRender item={`minecraft:${material.item}`} width={32} height={32}/>
-                <span>|</span>
+                <span class="hidden md:inline">|</span>
 
                   {material.palletTexture &&
                       <img src={URL.createObjectURL(material.palletTexture)} alt={material.palletTexture!.name}
-                           class="pixel-art" height={16} width={128}/>
+                           class="pixel-art text-center" height={16} width={128}/>
                   }
             </span>
 

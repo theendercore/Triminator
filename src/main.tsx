@@ -7,7 +7,6 @@ import Home from "./pages/Home.tsx";
 import SecondaryButton from "./components/generic/btn/SecondaryButton.tsx";
 import Merger from "./components/gen/v1/Merger.tsx";
 
-const Debug = createContext(true);
 
 const Header = () => (
     <header class="p-5 md:px-20 mb-8 bg-accent bg-opacity-10 w-full drop-shadow">
@@ -23,7 +22,7 @@ const Header = () => (
 );
 
 const Main = () => (
-    <Debug.Provider value>
+//    <HoverTooltip.Provider value="false">
         <div class="flex flex-col items-center justify-center">
             <Header/>
             <Router>
@@ -33,7 +32,7 @@ const Main = () => (
                 <Error type="404" default/>
             </Router>
         </div>
-    </Debug.Provider>
+//    </HoverTooltip.Provider>
 );
 
 render(<Main/>, document.getElementById("app")!);

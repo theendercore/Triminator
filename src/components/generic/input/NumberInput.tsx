@@ -23,7 +23,7 @@ export default function NumberInput({
   value,
 }: NumberInputProps) {
   return (
-    <label class={`flex items-center gap-4 p-1 ${className}`}>
+    <label class={`flex flex-col md:flex-row items-center md:gap-4 p-1 ${className}`}>
       <span class="text-lg">{title}</span>
       <input
         class="bg-gray-600 rounded-md p-2 py-1 text-indigo-200 outline-none"

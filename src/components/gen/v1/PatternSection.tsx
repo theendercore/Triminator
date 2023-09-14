@@ -46,7 +46,7 @@ export default function PatternSection({
     };
 
     return (
-        <div class="px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
+        <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 class="text-3xl font-semibold text-center w-full pb-4">
                 Patterns
             </h3>
@@ -59,6 +59,7 @@ export default function PatternSection({
                         remove={removePat}
                         edit={editPat}
                         isOpen={isOpen}
+                        advanced={advancedState}
                     />
                 ))}
                 {isOpen && (

@@ -18,7 +18,7 @@ type colorInputProps = {
 export default function ColorInput(
     {children, className, required, title, name, onChange, value, hoverText}: colorInputProps) {
     return (
-        <label class={`flex items-center justify-between gap-6 ${className}`}>
+        <label class={`flex flex-col md:flex-row items-center justify-between md:gap-6 ${className}`}>
             <span class="text-lg font-semibold">{title}</span>
             <span class="flex gap-3 items-center">
                 {children}

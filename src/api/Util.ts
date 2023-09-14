@@ -11,7 +11,7 @@ const formatIdentifier = (id: string) => formatName(id).toLowerCase()
 const formatName = (name: string) =>
     name
         .replace(/ /gm, "_")
-        .replace(/[^A-z0-9:_]/gm, "")
+        .replace(/[^A-z0-9:]/gm, "")
         .replace(/\^/gm, "");
 
 const validateImg = (

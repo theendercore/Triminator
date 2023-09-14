@@ -8,20 +8,21 @@ type PatternProps = {
     remove: (id: string) => void;
     edit: (id: string) => void;
     isOpen: boolean
+    advanced: boolean
 };
 
-export default function Pattern({pattern, remove, edit, isOpen}: PatternProps) {
+export default function Pattern({pattern, remove, edit, isOpen, advanced}: PatternProps) {
     return (
         <div class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
-            <span class="flex gap-3 items-center">
+            <span class="flex flex-col md:flex-row md:gap-3 items-center">
                 <span>
                     {pattern.translation}
-                    <span class="text-text opacity-50">{`(${pattern.name})`}</span>
+                    <span class={`text-text opacity-50 ${ advanced ? "inline" : "hidden"}`}>{`(${pattern.name})`}</span>
                 </span>
 
-                <span>|</span>
+                <span class="hidden md:inline">|</span>
                 <ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>
-                <span>|</span>
+                <span class="hidden md:inline">|</span>
 
                 <span>{pattern.baseTexture?.name}</span>
             </span>

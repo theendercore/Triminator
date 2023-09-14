@@ -41,12 +41,12 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
     }
 
     return (
-        <div class="px-12 py-6 bg-secondary bg-opacity-40 rounded-xl flex flex-col">
+        <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-xl flex flex-col">
             <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
 
             <div class="flex flex-col gap-2">
                 {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen}/>
+                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen} advanced={advancedState}/>
                 ))}
                 {isOpen && (
                     <form
@@ -182,12 +182,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         >
                             {material.palletTexture &&
                                 <img src={URL.createObjectURL(material.palletTexture)}
-                                     alt={material.palletTexture!.name} height={16} width={128} style={
-                                    "-ms-interpolation-mode: nearest-neighbor;" +
-                                    " image-rendering: -webkit-optimize-contrast;" +
-                                    " image-rendering: crisp-edges; " +
-                                    "image-rendering: pixelated;"
-                                }/>
+                                    alt={material.palletTexture!.name} height={16} width={128} class="pixel-art text-right"
+                                />
                             }
                         </ImageInput>
 

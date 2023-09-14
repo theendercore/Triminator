@@ -18,7 +18,7 @@ type TextInputProps = {
 export default function TextInput(
     {children, className, placeholder, required, title, name, onChange, value, hoverText}: TextInputProps) {
     return (
-            <label class={`flex items-center justify-between w-full gap-6 ${className}`}>
+            <label class={`flex flex-col md:flex-row items-center justify-between w-full md:gap-6 ${className}`}>
                 <span class="text-lg font-semibold">{title}</span>
                 <span class="flex gap-3 items-center">
                     {children}

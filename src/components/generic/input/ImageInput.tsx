@@ -18,7 +18,7 @@ export default function ImageInput(
     {children, className, required, title, name, onChange, fileName, hoverText}: TextInputProps) {
     const isFile = fileName !== null && fileName !== undefined;
     return (
-        <label className={`flex items-center justify-between gap-6 ${className}`}>
+        <label className={`flex flex-col md:flex-row items-center justify-between md:gap-6 ${className}`}>
             <span className="text-lg font-semibold">{title}</span>
             <span className="flex gap-3 items-center">
                 {children}

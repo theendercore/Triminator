@@ -41,7 +41,7 @@ export default function Generator({}: { path: string }) {
 
   return (
     <div class="container">
-      <div class="p-10 bg-text bg-opacity-5 rounded-3xl md:grid md:grid-cols-2 md:gap-10 flex flex-col gap-5 w-full ">
+      <div class="p-10 bg-text bg-opacity-5 rounded-3xl lg:grid lg:grid-cols-2 lg:gap-10 flex flex-col gap-5 w-full ">
         <div class="flex flex-col md:flex-row justify-between items-center bg-background p-8 rounded-3xl md:max-w-3xl bg-opacity-75">
           <div>
             <h2 className="text-6xl font-bold">
@@ -79,7 +79,7 @@ export default function Generator({}: { path: string }) {
         <PatternSection packData={packData} setPackData={setPackData} advancedState={advancedState} />
         <MaterialSection packData={packData} setPackData={setPackData} advancedState={advancedState} />
 
-        <div className="text-xl text-center md:col-span-2 md:place-self-center flex gap-6 ">
+        <div className="text-xl text-center md:col-span-2 md:place-self-center flex flex-col md:flex-row gap-6 ">
           <SecondaryButton
             onClick={() => setDownloadState("DATA")}
             fromField="header"
@@ -111,7 +111,7 @@ export default function Generator({}: { path: string }) {
         ></a>
         <a
           class="hidden"
-          download={`${formatName(packData.name)}ResourceRack.zip`}
+          download={`${formatName(packData.name)}ResourcePack.zip`}
           ref={rpLink}
           href={rpUrl}
         ></a>
