@@ -71,10 +71,10 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         (
                             <>
                                 <TextInput
-                                    title="Material name:"
+                                    title="Material id:"
                                     name="m-name"
                                     value={material.name}
-                                    placeholder="name..."
+                                    placeholder="id..."
                                     onChange={(e) =>
                                         setMaterial({
                                             ...material,
@@ -83,7 +83,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     }
                                     required
 
-                                    hoverText="Name of the material. All lower cases no spaces or symbols!"
+                                    hoverText="Identifier of the material. All lower cases no spaces or symbols!"
                                 />
                                 <TextInput
                                     title="Translation:"
@@ -103,14 +103,14 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     title="Material name:"
                                     name="m-name"
                                     value={material.translation}
-                                    placeholder="name..."
+                                    placeholder="Name..."
                                     onChange={(e) => setMaterial({
                                             ...material,
                                             translation: e.currentTarget.value,
                                             name: formatIdentifier(e.currentTarget.value),
                                        })}
                                     required
-                                    hoverText="Name of the material. All lower cases no spaces or symbols!"
+                                    hoverText="Name of the material. This is how the material is gonna be called in game."
                                 />
                             )
 

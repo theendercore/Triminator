@@ -26,7 +26,6 @@ export default function GenHeader({className, packData, setPackData, onSubmit, a
                 title="Name:"
                 placeholder="Pack name..."
                 onChange={(e) => {
-//                    setPackData({ ...packData, name: e.currentTarget.value });
                     setPackData({
                         ...packData,
                         name: e.currentTarget.value,
@@ -35,7 +34,7 @@ export default function GenHeader({className, packData, setPackData, onSubmit, a
                 }}
                 value={packData.name}
                 required
-                hoverText="Name of the pack. (Aesthetic only)"
+                hoverText="Name of the pack."
             />
 
 

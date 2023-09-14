@@ -86,10 +86,10 @@ export default function PatternSection({
                         {advancedState ? (
                             <>
                                 <TextInput
-                                    title="Pattern name:"
+                                    title="Pattern id:"
                                     name="p-name"
                                     value={pattern.name}
-                                    placeholder="name..."
+                                    placeholder="id..."
                                     onChange={(e) =>
                                         setPattern({
                                             ...pattern,
@@ -99,7 +99,7 @@ export default function PatternSection({
                                         })
                                     }
                                     required
-                                    hoverText="Name of the patter. All lower cases no spaces or symbols!"
+                                    hoverText="Identifer of the patter. All lower cases no spaces or symbols!"
                                 />
                                 <TextInput
                                     title="Translation:"
@@ -122,7 +122,7 @@ export default function PatternSection({
                                     title="Pattern name:"
                                     name="p-name"
                                     value={pattern.translation}
-                                    placeholder="name..."
+                                    placeholder="Name..."
                                     onChange={(e) => {
                                         setPattern({
                                             ...pattern,
@@ -133,7 +133,7 @@ export default function PatternSection({
                                         });
                                     }}
                                     required
-                                    hoverText="Name of the patter. All lower cases no spaces or symbols!"
+                                    hoverText="Name of the patter. This is how the material is gonna be called in game."
                                 />
                             </>
                         )}
