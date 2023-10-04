@@ -1,4 +1,4 @@
-import {MaterialData, PackContextData, PatternData} from "./types";
+import {PackContextData} from "./ExtraTypes";
 
 const getEmptyPack = (): PackContextData =>
     JSON.parse(JSON.stringify({

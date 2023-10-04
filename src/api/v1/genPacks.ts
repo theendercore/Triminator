@@ -11,6 +11,7 @@ import {
     genTrimAtlas, genVanillaModelOverride, getBlockAtlas
 } from "./genFiles";
 import * as Armor from "./ArmorTypes.ts"
+import {PackContextData} from "./ExtraTypes";
 
 async function genDatapack(packData: PackContextData) {
     const zipWriter = new ZipWriter(new BlobWriter());

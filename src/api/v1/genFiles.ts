@@ -1,6 +1,7 @@
 // BOTH
 import {getVanillaMaterials, getVanillaPatterns} from "./consts.ts";
 
+
 function genPackMeta(version: number, desc: string): PackMeta {
     return {pack: {pack_format: version, description: desc}};
 }

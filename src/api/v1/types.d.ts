@@ -1,15 +1,3 @@
-import {MCVersionList} from "./consts.ts";
-
-type PackContextData = {
-    name: string;
-    namespace: string;
-    description: string;
-    version: MCVersion;
-    icon: File | null;
-    patterns: PatternData[];
-    materials: MaterialData[];
-};
-
 type PatternData = {
     id: string;
     name: string;
@@ -20,7 +8,7 @@ type PatternData = {
     leggingsTexture?: File;
 };
 
-export type MaterialData = {
+type MaterialData = {
     id: string;
     name: string;
     translation: string;
@@ -30,7 +18,7 @@ export type MaterialData = {
     index: number;
 };
 
-type MCVersion = typeof MCVersionList[number]
+
 
 type PackMeta = {
     pack: {

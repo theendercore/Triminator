@@ -1,4 +1,5 @@
 import {TexturesType} from "minecraft-textures";
+import {MCVersion} from "./v1/ExtraTypes";
 
 // Generic Util
 const log = (...args: unknown[]) => console.log(...args);

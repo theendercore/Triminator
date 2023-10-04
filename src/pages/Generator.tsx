@@ -12,7 +12,7 @@ import PrimaryButton from "../components/generic/btn/PrimaryButton.tsx";
 import SecondaryButton from "../components/generic/btn/SecondaryButton.tsx";
 import StyledSwitch from "../components/generic/StyledSwitch.tsx";
 import Dropdown from "../components/generic/input/Dropdown.tsx";
-import {MCVersion, PackContextData} from "../api/v1/types";
+import type {PackContextData, MCVersion} from "../api/v1/ExtraTypes";
 
 export default function Generator({}: { path: string }) {
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());

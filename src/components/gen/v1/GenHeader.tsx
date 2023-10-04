@@ -3,7 +3,7 @@ import {formatIdentifier, getImgAlertMessage, validateImg} from "../../../api/Ut
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {TargetedEvent} from "preact/compat";
-import {PackContextData} from "../../../api/v1/types";
+import {PackContextData} from "../../../api/v1/ExtraTypes";
 
 type GenHeaderProps = {
     className?: string;

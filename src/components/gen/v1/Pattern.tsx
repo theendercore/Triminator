@@ -2,7 +2,6 @@ import ItemRender from "../../generic/ItemRender.tsx";
 import Trash from "../../icons/Trash.tsx";
 import Pencil from "../../icons/Pencil.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
-import {PatternData} from "../../../api/v1/types";
 
 type PatternProps = {
     pattern: PatternData;

@@ -17,7 +17,7 @@ import ColorInput from "../../generic/input/ColorInput.tsx";
 import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
-import {MaterialData, PackContextData} from "../../../api/v1/types";
+import type {PackContextData} from "../../../api/v1/ExtraTypes";
 
 type MaterialSectionProps = {
     packData: PackContextData;

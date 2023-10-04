@@ -16,8 +16,8 @@ import Trash from "../../icons/Trash.tsx";
 import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
-import {PackContextData, PatternData} from "../../../api/v1/types";
 import StyledSwitch from "../../generic/StyledSwitch.tsx";
+import type {PackContextData} from "../../../api/v1/ExtraTypes";
 
 type PatternSectionProps = {
     packData: PackContextData;
