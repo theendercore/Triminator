@@ -125,24 +125,25 @@ async function genResourcePack(packData: PackContextData) {
         })
     }
 
-    Armor.materials.forEach(material => {
-        Armor.parts.forEach(async part => {
-            await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
+    Armor.materials.forEach(armorMaterial => {
+        Armor.parts.forEach(async armorPart => {
+            await zipWriter.add(`assets/minecraft/models/item/${armorMaterial}_${armorPart}.json`,
                 new TextReader(format(
                     genVanillaModelOverride(packData.namespace,
                         packData.materials.map(({name, index}) => Object({name, index})),
-                        material, part)
+                        armorMaterial, armorPart)
                 ))
             )
         })
     })
+
     for (const matPart of Armor.materialsWithParts) {
-        let [material, part] = matPart.split("_")
-        await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
+        let [armorMaterial, armorPart] = matPart.split("_")
+        await zipWriter.add(`assets/minecraft/models/item/${armorMaterial}_${armorPart}.json`,
             new TextReader(format(
                 genVanillaModelOverride(packData.namespace,
                     packData.materials.map(({name, index}) => Object({name, index})),
-                    material, part)))
+                    armorMaterial, armorPart)))
         )
     }
 

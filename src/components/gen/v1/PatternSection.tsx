@@ -1,21 +1,23 @@
-import { StateUpdater, useState } from "preact/hooks";
+import {StateUpdater, useState} from "preact/hooks";
 import Pattern from "./Pattern";
-import { getEmptyPattern } from "../../../api/v1/consts";
+import {getEmptyPattern} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
     formatIdentifier,
-    getImgAlertMessage,
+    getImgAlertMessage, resolveDataPackVersion,
     validateImg,
 } from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
-import { devMode } from "../../../api/dev";
+import {devMode} from "../../../api/dev";
 import Trash from "../../icons/Trash.tsx";
 import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
+import {PackContextData, PatternData} from "../../../api/v1/types";
+import StyledSwitch from "../../generic/StyledSwitch.tsx";
 
 type PatternSectionProps = {
     packData: PackContextData;
@@ -24,11 +26,13 @@ type PatternSectionProps = {
 };
 
 export default function PatternSection({
-    packData,
-    setPackData,
-    advancedState,
-}: PatternSectionProps) {
+                                           packData,
+                                           setPackData,
+                                           advancedState,
+                                       }: PatternSectionProps) {
     const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
+    const [decal, setDecal] = useState(false)
+    const hasDecal = resolveDataPackVersion(packData.version) >= 18
     const isOpen = pattern.id !== "";
 
     const removePat = (id: string) =>
@@ -38,7 +42,7 @@ export default function PatternSection({
         });
 
     const addPat = (pattern: PatternData) =>
-        setPackData({ ...packData, patterns: [...packData.patterns, pattern] });
+        setPackData({...packData, patterns: [...packData.patterns, pattern]});
 
     const editPat = (id: string) => {
         setPattern(packData.patterns.find((pat) => pat.id === id)!);
@@ -66,7 +70,7 @@ export default function PatternSection({
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            addPat(pattern);
+                            addPat({...pattern, decal: hasDecal ? decal : undefined});
                             setPattern(getEmptyPattern());
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
@@ -206,6 +210,19 @@ export default function PatternSection({
                             required
                             hoverText="Leggings pattern texture. Size 64x32"
                         />
+
+                        {advancedState && hasDecal &&
+                            <StyledSwitch
+                                className="w-full"
+                                title="Decal:"
+                                label="decal"
+                                onChange={setDecal}
+                                state={decal}
+                                hoverText="Look this one up on the wiki, I dont know how to explain it."
+                            />
+                        }
+
+
                         <PrimaryButton
                             className="self-center px-6 mt-4 bg-opacity-90"
                             type="submit"
@@ -221,7 +238,7 @@ export default function PatternSection({
                         isOpen && "cursor-not-allowed hover:scale-100"
                     }`}
                     onClick={() =>
-                        setPattern({ ...pattern, id: crypto.randomUUID() })
+                        setPattern({...pattern, id: crypto.randomUUID()})
                     }
                     disabled={isOpen}
                 >
@@ -243,6 +260,7 @@ export default function PatternSection({
                                 name: id.slice(0, 5),
                                 translation: "qPattern",
                                 item: "ender_chest",
+                                decal: hasDecal ? false : undefined,
                                 baseTexture: new File([], "temp"),
                                 leggingsTexture: new File([], "temp"),
                             });

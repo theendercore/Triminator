@@ -1,3 +1,5 @@
+import {MCVersionList} from "./consts.ts";
+
 type PackContextData = {
     name: string;
     namespace: string;
@@ -13,11 +15,12 @@ type PatternData = {
     name: string;
     translation: string;
     item: string;
+    decal?: boolean;
     baseTexture?: File;
     leggingsTexture?: File;
 };
 
-type MaterialData = {
+export type MaterialData = {
     id: string;
     name: string;
     translation: string;
@@ -27,7 +30,7 @@ type MaterialData = {
     index: number;
 };
 
-type MCVersion = "1.20"
+type MCVersion = typeof MCVersionList[number]
 
 type PackMeta = {
     pack: {
@@ -44,6 +47,7 @@ type PatternRecipe = {
 };
 type PatternJSON = {
     asset_id: string;
+    decal?: boolean;
     description: {
         translate: string;
         fallback: string;

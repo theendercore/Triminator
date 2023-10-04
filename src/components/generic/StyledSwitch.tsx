@@ -10,14 +10,14 @@ type SwitchProps = {
   state: boolean;
   onChange: StateUpdater<boolean>;
   title?: string;
-  lable?: string
+  label?: string
   hoverText?: string;
 };
 
-export default function StyledSwitch({className, state, onChange, title,lable, hoverText}: SwitchProps) {
+export default function StyledSwitch({className, state, onChange, title, label, hoverText}: SwitchProps) {
   return (
     
-    <label class={`flex items-center justify-center gap-6 ${className}`}>
+    <label class={`flex items-center justify-between gap-6 ${className}`}>
       <span class="text-lg font-semibold">{title}</span>
       
         <Switch
@@ -28,7 +28,7 @@ export default function StyledSwitch({className, state, onChange, title,lable, h
            w-[74px] inline-flex border-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent shrink-0
           `}
           >
-          <span className="sr-only">{lable}</span>
+          <span className="sr-only">{label}</span>
           <span
             aria-hidden="true"
             className={`${state ? 'translate-x-9 opacity-100' : 'translate-x-0 opacity-80'}

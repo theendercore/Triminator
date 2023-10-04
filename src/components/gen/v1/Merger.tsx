@@ -1,3 +1,3 @@
 export default function Merger({}: { path: string }) {
-    return <div>WIP</div>
+    return <div>Work in Progress</div>
 }

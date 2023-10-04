@@ -1,3 +1,5 @@
+import {MaterialData, PackContextData, PatternData} from "./types";
+
 const getEmptyPack = (): PackContextData =>
     JSON.parse(JSON.stringify({
         version: "1.20",
@@ -81,10 +83,14 @@ const getVanillaPatterns = (): string[] =>
         "trims/models/armor/host_leggings"
     ]))
 
+const MCVersionList = ["1.20", "1.20.1", "1.20.2"] as const
+
+
 export {
     getEmptyPack,
     getEmptyPattern,
     getEmptyMaterial,
     getVanillaMaterials,
-    getVanillaPatterns
+    getVanillaPatterns,
+    MCVersionList
 };
