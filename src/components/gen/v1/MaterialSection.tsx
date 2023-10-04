@@ -42,7 +42,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
     }
 
     return (
-        <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-xl flex flex-col">
+        <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
 
             <div class="flex flex-col gap-2">
