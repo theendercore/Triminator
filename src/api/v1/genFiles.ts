@@ -101,15 +101,16 @@ function genArmorModel(material: string, part: string, name: string): ArmorModel
     }
 }
 
-function genVanillaModelOverride(namespace: string, names: string[], material: string, part: string, indexes: number[]): VanillaModelOverrideJSON {
+
+function genVanillaModelOverride(namespace: string, namedIndexesIn: NamedIndexes[], material: string, part: string): VanillaModelOverrideJSON {
     return {
         parent: "minecraft:item/generated",
         overrides:
-            names.reduce((arr: ModelOverrides[], name: string, i: number): ModelOverrides[] =>
+            namedIndexesIn.reduce((arr: ModelOverrides[], data: NamedIndexes): ModelOverrides[] =>
                     arr.concat({
-                        model: `${namespace}:item/${material}_${part}_${name}_trim`,
+                        model: `${namespace}:item/${material}_${part}_${data.name}_trim`,
                         predicate: {
-                            trim_type: indexes[i]
+                            trim_type: data.index
                         }
                     })
                 , genVanillaOverrides(material, part,))

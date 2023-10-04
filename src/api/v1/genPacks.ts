@@ -1,5 +1,5 @@
 import {BlobReader, BlobWriter, TextReader, ZipWriter} from "@zip.js/zip.js";
-import {format, genDescription, getDoof, resolveDataPackVersion} from "../Util";
+import {format, genDescription, getDoof, log, resolveDataPackVersion} from "../Util";
 import {
     genArmorModel,
     genLang,
@@ -110,9 +110,8 @@ async function genResourcePack(packData: PackContextData) {
             await zipWriter.add(`assets/${packData.namespace}/models/item/${matPart}_${mat.name}_trim.json`,
                 new TextReader(format(genArmorModel(material, part, mat.name)))
             )
-            await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
-                new TextReader(format(genVanillaModelOverride(packData.namespace, [mat.name], material, part, [mat.index])))
-            )
+            log(`${material}-${part}`)
+
         }
 
         Armor.materials.forEach(material => {
@@ -130,11 +129,22 @@ async function genResourcePack(packData: PackContextData) {
         Armor.parts.forEach(async part => {
             await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
                 new TextReader(format(
-                    genVanillaModelOverride(packData.namespace, packData.materials.map(({name}) => name), material, part, packData.materials.map(({index}) => index))
+                    genVanillaModelOverride(packData.namespace,
+                        packData.materials.map(({name, index}) => Object({name, index})),
+                        material, part)
                 ))
             )
         })
     })
+    for (const matPart of Armor.materialsWithParts) {
+        let [material, part] = matPart.split("_")
+        await zipWriter.add(`assets/minecraft/models/item/${material}_${part}.json`,
+            new TextReader(format(
+                genVanillaModelOverride(packData.namespace,
+                    packData.materials.map(({name, index}) => Object({name, index})),
+                    material, part)))
+        )
+    }
 
     return URL.createObjectURL(await zipWriter.close());
 }

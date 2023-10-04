@@ -104,3 +104,8 @@ type ModelOverrides = {
         trim_type: number;
     };
 }
+
+type NamedIndexes = {
+    name: string;
+    index: number
+}

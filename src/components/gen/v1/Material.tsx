@@ -26,8 +26,8 @@ export default function Material({material, remove, edit, isOpen, advanced}: Mat
                 <span class="hidden md:inline">|</span>
 
                   {material.palletTexture &&
-                      <img src={URL.createObjectURL(material.palletTexture)} alt={material.palletTexture!.name}
-                           class="pixel-art text-center" height={16} width={128}/>
+                      <img src={URL.createObjectURL(material.palletTexture)}
+                           class="pixel-art text-center" height={16} width={128} alt=""/>
                   }
             </span>
 
