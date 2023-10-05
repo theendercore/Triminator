@@ -120,7 +120,8 @@ function genVanillaModelOverride(namespace: string, namedIndexesIn: NamedIndexes
                 , genVanillaOverrides(material, part,))
                 .sort((a, b) => a.predicate.trim_type - b.predicate.trim_type),
         textures: {
-            layer0: `minecraft:item/${material}_${part}`
+            layer0: `minecraft:item/${material}_${part}`,
+            layer1: material === "leather" ? `minecraft:item/${material}_${part}_overlay` : undefined
         }
     }
 }

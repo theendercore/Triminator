@@ -89,6 +89,7 @@ type VanillaModelOverrideJSON = {
     overrides: ModelOverrides[];
     textures: {
         layer0: string;
+        layer1?: string;
     };
 }
 type ModelOverrides = {
