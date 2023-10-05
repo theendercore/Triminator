@@ -80,6 +80,7 @@ type ArmorModelJSON = {
     textures: {
         layer0: string;
         layer1: string;
+        layer2?: string;
     };
 }
 

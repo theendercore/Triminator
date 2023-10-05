@@ -93,11 +93,14 @@ function getBlockAtlas(namespace: string, materials: string[]): BlocksAtlasJSON 
 
 
 function genArmorModel(material: string, part: string, name: string): ArmorModelJSON {
+    let id = `minecraft:trims/items/${part}_trim_${name}`
+    let isLet = material === "leather"
     return {
         parent: "minecraft:item/generated",
         textures: {
             layer0: `minecraft:item/${material}_${part}`,
-            layer1: `minecraft:trims/items/${part}_trim_${name}`
+            layer1: isLet ? `minecraft:item/${material}_${part}_overlay` : id,
+            layer2: isLet ? id : undefined
         }
     }
 }
