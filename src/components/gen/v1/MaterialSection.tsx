@@ -47,7 +47,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
 
             <div class="flex flex-col gap-2">
                 {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen} advanced={advancedState}/>
+                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen}
+                              advanced={advancedState}/>
                 ))}
                 {isOpen && (
                     <form
@@ -68,37 +69,37 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
 
                         <h3 class="text-2xl italic font-semibold pb-1">Add Material</h3>
 
-                        { advancedState ?
-                        (
-                            <>
-                                <TextInput
-                                    title="Material id:"
-                                    name="m-name"
-                                    value={material.name}
-                                    placeholder="id..."
-                                    onChange={(e) =>
-                                        setMaterial({
-                                            ...material,
-                                            name: formatIdentifier(e.currentTarget.value),
-                                        })
-                                    }
-                                    required
+                        {advancedState ?
+                            (
+                                <>
+                                    <TextInput
+                                        title="Material id:"
+                                        name="m-name"
+                                        value={material.name}
+                                        placeholder="id..."
+                                        onChange={(e) =>
+                                            setMaterial({
+                                                ...material,
+                                                name: formatIdentifier(e.currentTarget.value),
+                                            })
+                                        }
+                                        required
 
-                                    hoverText="Identifier of the material. All lower cases no spaces or symbols!"
-                                />
-                                <TextInput
-                                    title="Translation:"
-                                    name="m-translation"
-                                    value={material.translation}
-                                    placeholder="Name..."
-                                    onChange={(e) =>
-                                        setMaterial({...material, translation: e.currentTarget.value})
-                                    }
-                                    required
-                                    hoverText="In game name of the material. This is how the material is gonna be called in game. No restrictions here."
-                                />
-                            </>)
-                        :
+                                        hoverText="Identifier of the material. All lower cases no spaces or symbols!"
+                                    />
+                                    <TextInput
+                                        title="Translation:"
+                                        name="m-translation"
+                                        value={material.translation}
+                                        placeholder="Name..."
+                                        onChange={(e) =>
+                                            setMaterial({...material, translation: e.currentTarget.value})
+                                        }
+                                        required
+                                        hoverText="In game name of the material. This is how the material is gonna be called in game. No restrictions here."
+                                    />
+                                </>)
+                            :
                             (
                                 <TextInput
                                     title="Material name:"
@@ -106,17 +107,17 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     value={material.translation}
                                     placeholder="Name..."
                                     onChange={(e) => setMaterial({
-                                            ...material,
-                                            translation: e.currentTarget.value,
-                                            name: formatIdentifier(e.currentTarget.value),
-                                       })}
+                                        ...material,
+                                        translation: e.currentTarget.value,
+                                        name: formatIdentifier(e.currentTarget.value),
+                                    })}
                                     required
                                     hoverText="Name of the material. This is how the material is gonna be called in game."
                                 />
                             )
 
 
-                                            }
+                        }
 
                         <ColorInput
                             title="Color:"
@@ -183,7 +184,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         >
                             {material.palletTexture &&
                                 <img src={URL.createObjectURL(material.palletTexture)}
-                                    alt={material.palletTexture!.name} height={16} width={128} class="pixel-art text-right"
+                                     alt={material.palletTexture!.name} height={16} width={128}
+                                     class="pixel-art text-right"
                                 />
                             }
                         </ImageInput>
@@ -198,17 +200,19 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                 )}
             </div>
             <div class="flex items-center gap-2 self-center p-3">
-                <PrimaryButton
-                    className={`p-1 h-min rounded-xl ${isOpen && "cursor-not-allowed hover:scale-100"}`}
-                    onClick={() => setMaterial({
-                        ...material,
-                        id: crypto.randomUUID(),
-                        index: genIndex(),
-                        color: "#ffffff"
-                    })}
-                    disabled={isOpen}
-                >
-                    <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
+                {!isOpen &&
+                    <PrimaryButton
+                        className={`p-1 h-min rounded-xl`}
+                        onClick={() => setMaterial({
+                            ...material,
+                            id: crypto.randomUUID(),
+                            index: genIndex(),
+                            color: "#ffffff"
+                        })}
+                        disabled={isOpen}
+                    >
+                        <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
+                }
             </div>
 
             {devMode &&

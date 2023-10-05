@@ -13,40 +13,53 @@ import SecondaryButton from "../components/generic/btn/SecondaryButton.tsx";
 import StyledSwitch from "../components/generic/StyledSwitch.tsx";
 import Dropdown from "../components/generic/input/Dropdown.tsx";
 import type {PackContextData, MCVersion} from "../api/v1/ExtraTypes";
+import CustomModal from "../components/gen/v1/CustomModal.tsx";
 
 export default function Generator({}: { path: string }) {
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());
     const [advancedState, setAdvancedState] = useState<boolean>(false);
     const [dpUrl, setDpUrl] = useState("");
     const [rpUrl, setRpUrl] = useState("");
+    const [isOpen, setIsOpen] = useState(false)
 
     const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH");
 
     const dpLink = useRef<HTMLAnchorElement>(null);
     const rpLink = useRef<HTMLAnchorElement>(null);
 
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    function openModal() {
+        setIsOpen(true)
+    }
+
     function generate(e: TargetedEvent<HTMLFormElement, Event>) {
         e.preventDefault();
+        openModal()
+
         if (downloadState === "DATA" || downloadState === "BOTH")
             genDatapack(packData).then((url) => {
                 setDpUrl(url);
-                sleep(1000).then(() => dpLink.current?.click());
+                sleep(1050).then(() => dpLink.current?.click());
             });
 
         if (downloadState === "RESOURCE" || downloadState === "BOTH")
             genResourcePack(packData).then((url) => {
                 setRpUrl(url);
-                sleep(1000).then(() => rpLink.current?.click());
+                sleep(1050).then(() => rpLink.current?.click());
             });
     }
 
+    // @ts-ignore
     return (
         <div class="container flex flex-col gap-5">
             <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col md:flex-row gap-6 md:pl-28">
                 <Dropdown
                     title="Version:"
                     selected={packData.version}
-                    setSelected={(e)=> setPackData({ ...packData, version: e as MCVersion})}
+                    setSelected={(e) => setPackData({...packData, version: e as MCVersion})}
                     list={Object(MCVersionList)}
                     hoverText="Minecraft version for the data & rec packs"
                 />
@@ -153,6 +166,7 @@ export default function Generator({}: { path: string }) {
                     </>
                 )}
             </div>
+            <CustomModal isOpen={isOpen} closeModal={closeModal}/>
         </div>
     );
 }

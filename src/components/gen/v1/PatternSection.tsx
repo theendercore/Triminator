@@ -233,10 +233,9 @@ export default function PatternSection({
                 )}
             </div>
             <div class="flex items-center gap-2 self-center p-3">
+                {!isOpen &&
                 <PrimaryButton
-                    className={`p-1 h-min rounded-xl ${
-                        isOpen && "cursor-not-allowed hover:scale-100"
-                    }`}
+                    className={`p-1 h-min rounded-xl`}
                     onClick={() =>
                         setPattern({...pattern, id: crypto.randomUUID()})
                     }
@@ -245,7 +244,7 @@ export default function PatternSection({
                     <Plus
                         className={isOpen ? "fill-background" : "fill-text"}
                     />
-                </PrimaryButton>
+                </PrimaryButton>}
             </div>
 
             {devMode && (
