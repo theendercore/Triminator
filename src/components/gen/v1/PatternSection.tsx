@@ -5,7 +5,7 @@ import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
-    formatIdentifier,
+    formatIdentifier, getBase64,
     getImgAlertMessage, resolveDataPackVersion,
     validateImg,
 } from "../../../api/Util";
@@ -103,7 +103,7 @@ export default function PatternSection({
                                         })
                                     }
                                     required
-                                    hoverText="Identifer of the patter. All lower cases no spaces or symbols!"
+                                    hoverText="Identifer of the pattern. All lower cases, no spaces or symbols!"
                                 />
                                 <TextInput
                                     title="Translation:"
@@ -117,7 +117,7 @@ export default function PatternSection({
                                         })
                                     }
                                     required
-                                    hoverText="In game name of the patter. This is how the pattern is gonna be called in game. No restrictions here."
+                                    hoverText="In game name of the pattern. This is how the pattern is gonna be called in game. No restrictions here."
                                 />
                             </>
                         ) : (
@@ -137,7 +137,7 @@ export default function PatternSection({
                                         });
                                     }}
                                     required
-                                    hoverText="Name of the patter. This is how the material is gonna be called in game."
+                                    hoverText="Name of the pattern. This is how the material is gonna be called in game."
                                 />
                             </>
                         )}
@@ -157,7 +157,7 @@ export default function PatternSection({
                             }
                             required
                             hoverText={
-                                'The item used to make the pattern. For vanilla patterns that is "coast_armor_trim", "sentry_armor_trim" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn\'t exits.'
+                                'The item used to make the pattern. For vanilla patterns, that is "coast_armor_trim", "sentry_armor_trim" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn\'t exist.'
                             }
                         >
                             <ItemRender
@@ -179,10 +179,13 @@ export default function PatternSection({
                                     alert(getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
-                                setPattern({
-                                    ...pattern,
-                                    baseTexture: e.currentTarget.files![0],
-                                });
+                                let name = e.currentTarget.files![0].name
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setPattern({...pattern, baseTexture: {
+                                        name: name,
+                                        data: it as string
+                                    }})
+                                )
                             }}
                             fileName={pattern.baseTexture?.name}
                             required
@@ -201,10 +204,13 @@ export default function PatternSection({
                                     alert(getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
-                                setPattern({
-                                    ...pattern,
-                                    leggingsTexture: e.currentTarget.files![0],
-                                });
+                                let name = e.currentTarget.files![0].name
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setPattern({...pattern, leggingsTexture: {
+                                            name: name,
+                                            data: it as string
+                                        }})
+                                )
                             }}
                             fileName={pattern.leggingsTexture?.name}
                             required
@@ -260,8 +266,8 @@ export default function PatternSection({
                                 translation: "qPattern",
                                 item: "ender_chest",
                                 decal: hasDecal ? false : undefined,
-                                baseTexture: new File([], "temp"),
-                                leggingsTexture: new File([], "temp"),
+                                baseTexture: { name:"base.png", data:"data"},
+                                leggingsTexture: { name:"legs.png", data:"data"},
                             });
                         }}
                     >

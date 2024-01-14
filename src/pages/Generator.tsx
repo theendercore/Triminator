@@ -1,7 +1,7 @@
-import {useRef, useState} from "preact/hooks";
+import {useState} from "preact/hooks";
 import {getEmptyPack, MCVersionList} from "../api/v1/consts";
 import CodePre from "../components/generic/CodePre";
-import {format, formatName, sleep} from "../api/Util";
+import {downloadBlob, format, formatName} from "../api/Util";
 import GenHeader from "../components/gen/v1/GenHeader";
 import PatternSection from "../components/gen/v1/PatternSection";
 import {devMode} from "../api/dev";
@@ -14,18 +14,14 @@ import StyledSwitch from "../components/generic/StyledSwitch.tsx";
 import Dropdown from "../components/generic/input/Dropdown.tsx";
 import type {PackContextData, MCVersion} from "../api/v1/ExtraTypes";
 import CustomModal from "../components/gen/v1/CustomModal.tsx";
+import FileInput from "../components/generic/input/FileInput.tsx";
 
 export default function Generator({}: { path: string }) {
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());
     const [advancedState, setAdvancedState] = useState<boolean>(false);
-    const [dpUrl, setDpUrl] = useState("");
-    const [rpUrl, setRpUrl] = useState("");
     const [isOpen, setIsOpen] = useState(false)
 
     const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH");
-
-    const dpLink = useRef<HTMLAnchorElement>(null);
-    const rpLink = useRef<HTMLAnchorElement>(null);
 
     function closeModal() {
         setIsOpen(false)
@@ -35,21 +31,22 @@ export default function Generator({}: { path: string }) {
         setIsOpen(true)
     }
 
+    function exportToFile() {
+        let blob = new Blob([JSON.stringify(packData, null, 2)], {type: "application/json;charset=utf-8"});
+        downloadBlob(blob, `${formatName(packData.name)}_export.json`)
+    }
+
     function generate(e: TargetedEvent<HTMLFormElement, Event>) {
         e.preventDefault();
         openModal()
 
         if (downloadState === "DATA" || downloadState === "BOTH")
-            genDatapack(packData).then((url) => {
-                setDpUrl(url);
-                sleep(1050).then(() => dpLink.current?.click());
-            });
+            genDatapack(packData)
+                .then(blob => downloadBlob(blob, `${formatName(packData.name)}Datapack.zip`))
 
         if (downloadState === "RESOURCE" || downloadState === "BOTH")
-            genResourcePack(packData).then((url) => {
-                setRpUrl(url);
-                sleep(1050).then(() => rpLink.current?.click());
-            });
+            genResourcePack(packData)
+                .then(blob => downloadBlob(blob, `${formatName(packData.name)}ResourcePack.zip`))
     }
 
     // @ts-ignore
@@ -61,15 +58,25 @@ export default function Generator({}: { path: string }) {
                     selected={packData.version}
                     setSelected={(e) => setPackData({...packData, version: e as MCVersion})}
                     list={Object(MCVersionList)}
-                    hoverText="Minecraft version for the data & rec packs"
+                    hoverText="Minecraft version for the data and resource packs"
                 />
                 DEV BRANCH
                 <StyledSwitch
                     title="Advanced Mode:"
                     state={advancedState}
                     onChange={setAdvancedState}
-                    hoverText="Advanced editing mode for people who know more about datapacks and want finer controles."
+                    hoverText="Advanced editing mode for people who know more about datapacks and want finer controle."
                 />
+
+                <FileInput
+                    title="Import From File"
+                    name="import-from-file"
+                    onChange={(e) =>
+                        e.currentTarget.files![0].text().then(e => setPackData(JSON.parse(e) as PackContextData))
+                    }
+                    hoverText="Import PackData from an exported file"
+                >
+                </FileInput>
             </div>
             <div
                 class="p-10 bg-text bg-opacity-5 rounded-3xl lg:grid lg:grid-cols-2 lg:gap-10 flex flex-col gap-5 w-full ">
@@ -133,20 +140,13 @@ export default function Generator({}: { path: string }) {
                     >
                         Download Both
                     </PrimaryButton>
+                    <SecondaryButton
+                        onClick={exportToFile}
+                        type="button"
+                    >
+                        Export to File
+                    </SecondaryButton>
                 </div>
-
-                <a
-                    class="hidden"
-                    download={`${formatName(packData.name)}Datapack.zip`}
-                    ref={dpLink}
-                    href={dpUrl}
-                ></a>
-                <a
-                    class="hidden"
-                    download={`${formatName(packData.name)}ResourcePack.zip`}
-                    ref={rpLink}
-                    href={rpUrl}
-                ></a>
 
                 {devMode && (
                     <>
@@ -158,7 +158,7 @@ export default function Generator({}: { path: string }) {
                                     ...packData,
                                     name: `Test-${crypto.randomUUID().slice(0, 5)}`,
                                     namespace: "test_ns",
-                                    version: "1.20",
+                                    version: "1.20.4",
                                 });
                             }}
                         >

@@ -108,6 +108,28 @@ const getDoof = () => fetch("./img/dr_doof.png").then(e => e.blob())
 const genDescription = (desc: string, type: string) =>
     desc.trim() !== "" ? `${desc}\nBy Triminator` : `${type} generated\nby Triminator`
 
+export function downloadBlob(blob: Blob, name: string) {
+    const aTag = window.document.createElement('a');
+    let link = URL.createObjectURL(blob);
+    aTag.href = link
+    aTag.download = name;
+    aTag.click();
+    URL.revokeObjectURL(link)
+}
+
+export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null) => void) {
+
+    let reader = new FileReader();
+    reader.onload = function () {
+        callback(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+    reader.readAsDataURL(file as Blob);
+}
+
+
 export {
     log,
     sleep,

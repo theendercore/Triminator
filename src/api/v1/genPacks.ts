@@ -47,7 +47,7 @@ async function genDatapack(packData: PackContextData) {
         )
     }
 
-    return URL.createObjectURL(await zipWriter.close());
+    return await zipWriter.close();
 }
 
 
@@ -148,7 +148,7 @@ async function genResourcePack(packData: PackContextData) {
         )
     }
 
-    return URL.createObjectURL(await zipWriter.close());
+    return await zipWriter.close();
 }
 
 

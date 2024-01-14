@@ -4,8 +4,8 @@ type PatternData = {
     translation: string;
     item: string;
     decal?: boolean;
-    baseTexture?: File;
-    leggingsTexture?: File;
+    baseTexture?: { name?: string; data: string };
+    leggingsTexture?:  { name?: string; data: string };
 };
 
 type MaterialData = {
@@ -14,10 +14,10 @@ type MaterialData = {
     translation: string;
     color: string;
     item: string;
-    palletTexture?: File;
+    palletTexture?: string;
+    fileName?: string
     index: number;
 };
-
 
 
 type PackMeta = {

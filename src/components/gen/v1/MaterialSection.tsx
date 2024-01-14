@@ -4,7 +4,7 @@ import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
-    formatIdentifier, genIndex,
+    formatIdentifier, genIndex, getBase64,
     getImgAlertMessage,
     validateImg,
 } from "../../../api/Util";
@@ -145,7 +145,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 })
                             }
                             required
-                            hoverText={"The item used to make the material. For vanilla materials that is \"iron_ingot\", \"amethyst_shard\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exits."}
+                            hoverText={"The item used to make the material. For vanilla materials, that is \"iron_ingot\", \"amethyst_shard\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exist."}
                         >
                             <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
@@ -173,18 +173,18 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     alert(getImgAlertMessage(image, 8, 1));
                                     return;
                                 }
-                                setMaterial({
-                                    ...material,
-                                    palletTexture: e.currentTarget.files![0],
-                                });
+                                setMaterial({...material, fileName: e.currentTarget.files![0].name})
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setMaterial({...material, palletTexture: it as string,})
+                                )
                             }}
-                            fileName={material.palletTexture?.name}
+                            fileName={material.fileName}
                             required
                             hoverText="Pallet texture. Size 8x1"
                         >
                             {material.palletTexture &&
-                                <img src={URL.createObjectURL(material.palletTexture)}
-                                     alt={material.palletTexture!.name} height={16} width={128}
+                                <img src={material.palletTexture}
+                                     alt={material.fileName} height={16} width={128}
                                      class="pixel-art text-right"
                                 />
                             }
@@ -227,7 +227,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 name: id.slice(0, 5),
                                 translation: "qMaterial",
                                 item: "chest",
-                                palletTexture: new File([], "temp"),
+                                palletTexture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAMAAADU3h9xAAAAAXNSR0IArs4c6QAAABhQTFRFl9FVjcJPeahCYJgWWZADU4IJRm0MPWMXzAAhkAAAABFJREFUCJljYGBkYmZhZWMHAABdAB2tV7ZvAAAAAElFTkSuQmCC",
+                                fileName: "cool_img.png",
                                 color: "#FFFFFF",
                                 index: genIndex()
                             });

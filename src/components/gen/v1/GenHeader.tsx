@@ -66,7 +66,7 @@ export default function GenHeader({className, packData, setPackData, onSubmit, a
                     })
                 }
                 value={packData.description}
-                hoverText="The Description of the packs. If left empty will auto generate one."
+                hoverText="The Description of the packs. Can be left empty."
             />
             <ImageInput
                 name="icon"
