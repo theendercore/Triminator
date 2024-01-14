@@ -83,7 +83,7 @@ const getVanillaPatterns = (): string[] =>
         "trims/models/armor/host_leggings"
     ]))
 
-const MCVersionList = ["1.20", "1.20.1", "1.20.2"] as const
+const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4"] as const
 
 
 export {

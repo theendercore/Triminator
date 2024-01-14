@@ -1,5 +1,5 @@
 import {BlobReader, BlobWriter, TextReader, ZipWriter} from "@zip.js/zip.js";
-import {format, genDescription, getDoof, log, resolveDataPackVersion} from "../Util";
+import {format, genDescription, getDoof, log, resolveDataPackVersion, resolveResourcePackVersion} from "../Util";
 import {
     genArmorModel,
     genLang,
@@ -58,7 +58,7 @@ async function genResourcePack(packData: PackContextData) {
 
         zipWriter.add(`pack.mcmeta`,
             new TextReader(format(genPackMeta(
-                resolveDataPackVersion(packData.version),
+                resolveResourcePackVersion(packData.version),
                 genDescription(packData.description, "Resource Pack")
             )))
         ),

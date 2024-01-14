@@ -81,6 +81,8 @@ const resolveDataPackVersion = (version: MCVersion) => {
             return 15;
         case "1.20.2":
             return 18;
+        case "1.20.4":
+            return 26;
         default:
             throw Error("Unhandled version!")
     }
@@ -94,6 +96,8 @@ const resolveResourcePackVersion = (version: MCVersion) => {
             return 15;
         case "1.20.2":
             return 18;
+        case "1.20.4":
+            return 22;
         default:
             throw Error("Unhandled version!")
     }
