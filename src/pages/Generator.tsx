@@ -63,6 +63,7 @@ export default function Generator({}: { path: string }) {
                     list={Object(MCVersionList)}
                     hoverText="Minecraft version for the data & rec packs"
                 />
+                DEV BRANCH
                 <StyledSwitch
                     title="Advanced Mode:"
                     state={advancedState}

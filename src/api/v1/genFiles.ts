@@ -32,11 +32,11 @@ function genMaterialTag(items: string[]): MaterialTag {
     return {values: items}
 }
 
-function genMaterialJSON(name: string, lang: string, color: string, item: string, index: number): MaterialJSON {
+function genMaterialJSON({ name, translation, color, item, index }: MaterialData): MaterialJSON {
     return {
         asset_name: name,
         description: {
-            translate: lang,
+            translate: translation,
             color,
         },
         ingredient: item,

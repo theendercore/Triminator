@@ -43,7 +43,7 @@ async function genDatapack(packData: PackContextData) {
 
     for (const mat of packData.materials) {
         await zipWriter.add(`data/${packData.namespace}/trim_material/${mat.name}.json`,
-            new TextReader(format(genMaterialJSON(mat.name, mat.translation, mat.color, mat.item, mat.index)))
+            new TextReader(format(genMaterialJSON(mat)))
         )
     }
 
