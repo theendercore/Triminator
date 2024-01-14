@@ -147,8 +147,9 @@ async function genResourcePack(packData: PackContextData) {
                     armorMaterial, armorPart)))
         )
     }
-
-    return await zipWriter.close();
+    let x = await zipWriter.close();
+    console.log("asda")
+    return x
 }
 
 
