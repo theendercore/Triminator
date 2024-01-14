@@ -92,17 +92,17 @@ async function genResourcePack(packData: PackContextData) {
 
     for (const pat of packData.patterns) {
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/models/armor/${pat.name}.png`,
-            new BlobReader(pat.baseTexture!)
+            new BlobReader(await fetch(pat.baseTexture!.data).then(e=> e.blob()))
         )
 
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/models/armor/${pat.name}_leggings.png`,
-            new BlobReader(pat.leggingsTexture!)
+            new BlobReader(await fetch(pat.leggingsTexture!.data).then(e=> e.blob()))
         )
     }
 
     for (const mat of packData.materials) {
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/color_palettes/${mat.name}.png`,
-            new BlobReader(mat.palletTexture!)
+            new BlobReader(await fetch(mat.palletTexture).then(e=> e.blob()))
         )
 
         for (const matPart of Armor.materialsWithParts) {
@@ -147,9 +147,7 @@ async function genResourcePack(packData: PackContextData) {
                     armorMaterial, armorPart)))
         )
     }
-    let x = await zipWriter.close();
-    console.log("asda")
-    return x
+    return await zipWriter.close();
 }
 
 
