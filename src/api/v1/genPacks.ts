@@ -117,6 +117,7 @@ async function genResourcePack(packData: PackContextData) {
 
         Armor.materials.forEach(material => {
             Armor.parts.forEach(async part => {
+            console.log(mat.name, material, part)
                 await zipWriter.add(`assets/${packData.namespace}/models/item/${material}_${part}_${mat.name}_trim.json`,
                     new TextReader(format(genArmorModel(material, part, mat.name)))
                 )
