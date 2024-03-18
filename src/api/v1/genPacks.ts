@@ -24,7 +24,7 @@ async function genDatapack(packData: PackContextData) {
             )))
         ),
         zipWriter.add(`pack.png`,
-            new BlobReader(packData.icon || await getDoof())
+            new BlobReader((packData.icon) ? await fetch(packData.icon.data!!).then(e => e.blob()) : await getDoof())
         ),
         zipWriter.add(`data/minecraft/tags/items/trim_materials.json`,
             new TextReader(format(genMaterialTag(packData.materials.map(m => m.item))))
@@ -64,8 +64,9 @@ async function genResourcePack(packData: PackContextData) {
         ),
 
         zipWriter.add(`pack.png`,
-            new BlobReader(packData.icon || await getDoof())
+            new BlobReader((packData.icon) ? await fetch(packData.icon.data!!).then(e => e.blob()) : await getDoof())
         ),
+
 
         zipWriter.add(`assets/${packData.namespace}/lang/en_us.json`,
             new TextReader(format(
@@ -92,17 +93,17 @@ async function genResourcePack(packData: PackContextData) {
 
     for (const pat of packData.patterns) {
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/models/armor/${pat.name}.png`,
-            new BlobReader(await fetch(pat.baseTexture!.data).then(e=> e.blob()))
+            new BlobReader(await fetch(pat.baseTexture!.data).then(e => e.blob()))
         )
 
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/models/armor/${pat.name}_leggings.png`,
-            new BlobReader(await fetch(pat.leggingsTexture!.data).then(e=> e.blob()))
+            new BlobReader(await fetch(pat.leggingsTexture!.data).then(e => e.blob()))
         )
     }
 
     for (const mat of packData.materials) {
         await zipWriter.add(`assets/${packData.namespace}/textures/trims/color_palettes/${mat.name}.png`,
-            new BlobReader(await fetch(mat.palletTexture).then(e=> e.blob()))
+            new BlobReader(await fetch(mat.palletTexture).then(e => e.blob()))
         )
 
         for (const matPart of Armor.materialsWithParts) {
