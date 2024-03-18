@@ -56,7 +56,9 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
 
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
-            <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
+            <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials
+                {(packData.materials.length > 1 && (<span className="italic opacity-60">{` (${packData.materials.length})`}</span>))}
+            </h3>
 
             <div class="flex flex-col gap-2">
                 {packData.materials.map((p, idx) => (
