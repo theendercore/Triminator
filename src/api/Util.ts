@@ -15,6 +15,7 @@ const formatName = (name: string) =>
         .replace(/[^A-z0-9:]/gm, "")
         .replace(/\^/gm, "");
 
+// noinspection JSSuspiciousNameCombination
 const validateImg = (
     file: File,
     x: number,
@@ -37,6 +38,7 @@ const validateImg = (
 };
 
 // Special Util
+// noinspection JSSuspiciousNameCombination
 const getImgAlertMessage = (
     code: "NoImage" | "WrongSize",
     x: number,
