@@ -150,7 +150,24 @@ export default function Generator({}: { path: string }) {
 
                 {devMode && (
                     <>
-                        <CodePre className="col-span-2">{format(packData)}</CodePre>
+                        <CodePre className="col-span-2">{
+                            format({
+                                ...packData, patterns: packData.patterns.map(e => {
+                                        return {
+                                            ...e,
+                                            baseTexture: {...e.baseTexture, data: e.baseTexture.data.slice(20, 30) + "..."},
+                                            leggingsTexture: {
+                                                ...e.leggingsTexture,
+                                                data: e.leggingsTexture.data.slice(22, 30) + "..."
+                                            }
+                                        }
+                                    }
+                                ),
+                                materials: packData.materials.map(e => {
+                                    return {...e, palletTexture: e.palletTexture.slice(22, 30) + "..."}
+                                })
+                            })
+                        }</CodePre>
                         <PrimaryButton
                             className=" top-32 fixed left-3"
                             onClick={() => {

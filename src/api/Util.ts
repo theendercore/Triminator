@@ -118,7 +118,6 @@ export function downloadBlob(blob: Blob, name: string) {
 }
 
 export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null) => void) {
-
     let reader = new FileReader();
     reader.onload = function () {
         callback(reader.result)
@@ -129,6 +128,11 @@ export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null
     reader.readAsDataURL(file as Blob);
 }
 
+export function setDragImageEmpty(e:DragEvent){
+    let img = document.createElement("img");
+    img.src = "https://raw.githubusercontent.com/theendercore/Triminator/dev/public/empty.png";
+    e.dataTransfer?.setDragImage(img, 0, 0)
+}
 
 export {
     log,
