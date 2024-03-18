@@ -66,6 +66,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 class="text-3xl font-semibold text-center w-full pb-4">
                 Patterns
+                {(packData.patterns.length > 1 && (<span className="italic opacity-60">{` (${packData.patterns.length})`}</span>))}
             </h3>
 
             <div class="flex flex-col gap-2">
