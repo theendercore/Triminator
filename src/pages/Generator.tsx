@@ -52,7 +52,8 @@ export default function Generator({}: { path: string }) {
     // @ts-ignore
     return (
         <div class="container flex flex-col gap-5">
-            <div class="flex items-center justify-center p-3 bg-white bg-opacity-5 rounded-3xl"><h1 class="text-2xl font-bold">DEV BRANCH</h1></div>
+            <div class="flex items-center justify-center p-3 bg-white bg-opacity-5 rounded-3xl"><h1
+                class="text-2xl font-bold">DEV BRANCH</h1></div>
             <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col lg:flex-row gap-6 lg:justify-around">
                 <Dropdown
                     title="Version:"
@@ -93,11 +94,7 @@ export default function Generator({}: { path: string }) {
 
                     <div class="min-w-[8rem] min-h-[8rem] rounded-3xl bg-background-2 grid items-center">
                         <img
-                            src={
-                                packData.icon !== null
-                                    ? URL.createObjectURL(packData?.icon)
-                                    : "/img/dr_doof.png"
-                            }
+                            src={packData.icon !== null ? packData?.icon.data : "/img/dr_doof.png"}
                             alt={packData.icon?.name}
                             height={128}
                             width={128}
@@ -152,10 +149,15 @@ export default function Generator({}: { path: string }) {
                     <>
                         <CodePre className="col-span-2">{
                             format({
-                                ...packData, patterns: packData.patterns.map(e => {
+                                ...packData,
+                                icon: packData.icon === null ? null : {
+                                    ...packData.icon,
+                                    data: packData.icon.data?.slice(22, 30) + "..."
+                                },
+                                patterns: packData.patterns.map(e => {
                                         return {
                                             ...e,
-                                            baseTexture: {...e.baseTexture, data: e.baseTexture.data.slice(20, 30) + "..."},
+                                            baseTexture: {...e.baseTexture, data: e.baseTexture.data.slice(22, 30) + "..."},
                                             leggingsTexture: {
                                                 ...e.leggingsTexture,
                                                 data: e.leggingsTexture.data.slice(22, 30) + "..."
