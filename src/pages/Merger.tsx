@@ -26,14 +26,15 @@ function TestingBlock() {
         {text: "No Leaf Clover", color: "#75da85"},
         {text: "Halo on Fire", color: "#9a6b00"},
     ]);
-    const handleDragStart = (e: DragEvent, index: number) => {
+
+    function handleDragStart(e: DragEvent, index: number) {
         let img = document.createElement("img");
         img.src = "https://raw.githubusercontent.com/theendercore/Triminator/dev/public/empty.png";
         e.dataTransfer?.setDragImage(img, 0, 0)
         setDragItem(index);
     }
 
-    const handleDragEnter = (index: number) => {
+    function handleDragEnter(index: number) {
         const newList = [...list];
         const item = newList[dragItem];
         newList.splice(dragItem, 1);
