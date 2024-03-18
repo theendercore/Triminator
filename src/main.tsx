@@ -5,7 +5,7 @@ import Generator from "./pages/Generator";
 import Error from "./pages/Error";
 import Home from "./pages/Home.tsx";
 import SecondaryButton from "./components/generic/btn/SecondaryButton.tsx";
-import Merger from "./components/gen/v1/Merger.tsx";
+import Merger from "./pages/Merger.tsx";
 
 
 const Header = () => (

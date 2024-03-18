@@ -2,7 +2,7 @@ import {PackContextData} from "./ExtraTypes";
 
 const getEmptyPack = (): PackContextData =>
     JSON.parse(JSON.stringify({
-        version: "1.20",
+        version: "1.20.4",
         name: "",
         namespace: "",
         description: "",

@@ -5,8 +5,8 @@ import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
-    formatIdentifier,
-    getImgAlertMessage, resolveDataPackVersion,
+    formatIdentifier, getBase64,
+    getImgAlertMessage, resolveDataPackVersion, setDragImageEmpty,
     validateImg,
 } from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
@@ -25,15 +25,14 @@ type PatternSectionProps = {
     advancedState: boolean;
 };
 
-export default function PatternSection({
-                                           packData,
-                                           setPackData,
-                                           advancedState,
-                                       }: PatternSectionProps) {
+export default function PatternSection({packData, setPackData, advancedState,}: PatternSectionProps) {
     const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
     const [decal, setDecal] = useState(false)
     const hasDecal = resolveDataPackVersion(packData.version) >= 18
     const isOpen = pattern.id !== "";
+
+    const [dragItem, setDragItem] = useState<number>(0);
+
 
     const removePat = (id: string) =>
         setPackData({
@@ -47,7 +46,21 @@ export default function PatternSection({
     const editPat = (id: string) => {
         setPattern(packData.patterns.find((pat) => pat.id === id)!);
         removePat(id);
-    };
+    }
+
+    function handleDragStart(e: DragEvent, index: number) {
+        setDragImageEmpty(e)
+        setDragItem(index);
+    }
+
+    function handleDragEnter(index: number) {
+        const newList = [...packData.patterns];
+        const item = newList[dragItem];
+        newList.splice(dragItem, 1);
+        newList.splice(index, 0, item);
+        setDragItem(index);
+        setPackData({...packData, patterns: newList});
+    }
 
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
@@ -56,8 +69,10 @@ export default function PatternSection({
             </h3>
 
             <div class="flex flex-col gap-2">
-                {packData.patterns.map((p) => (
+                {packData.patterns.map((p, idx) => (
                     <Pattern
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragEnter={() => handleDragEnter(idx)}
                         key={p.name}
                         pattern={p}
                         remove={removePat}
@@ -103,7 +118,7 @@ export default function PatternSection({
                                         })
                                     }
                                     required
-                                    hoverText="Identifer of the patter. All lower cases no spaces or symbols!"
+                                    hoverText="Identifer of the pattern. All lower cases, no spaces or symbols!"
                                 />
                                 <TextInput
                                     title="Translation:"
@@ -117,7 +132,7 @@ export default function PatternSection({
                                         })
                                     }
                                     required
-                                    hoverText="In game name of the patter. This is how the pattern is gonna be called in game. No restrictions here."
+                                    hoverText="In game name of the pattern. This is how the pattern is gonna be called in game. No restrictions here."
                                 />
                             </>
                         ) : (
@@ -137,7 +152,7 @@ export default function PatternSection({
                                         });
                                     }}
                                     required
-                                    hoverText="Name of the patter. This is how the material is gonna be called in game."
+                                    hoverText="Name of the pattern. This is how the material is gonna be called in game."
                                 />
                             </>
                         )}
@@ -157,7 +172,7 @@ export default function PatternSection({
                             }
                             required
                             hoverText={
-                                'The item used to make the pattern. For vanilla patterns that is "coast_armor_trim", "sentry_armor_trim" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn\'t exits.'
+                                'The item used to make the pattern. For vanilla patterns, that is "coast_armor_trim", "sentry_armor_trim" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn\'t exist.'
                             }
                         >
                             <ItemRender
@@ -179,10 +194,15 @@ export default function PatternSection({
                                     alert(getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
-                                setPattern({
-                                    ...pattern,
-                                    baseTexture: e.currentTarget.files![0],
-                                });
+                                let name = e.currentTarget.files![0].name
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setPattern({
+                                        ...pattern, baseTexture: {
+                                            name: name,
+                                            data: it as string
+                                        }
+                                    })
+                                )
                             }}
                             fileName={pattern.baseTexture?.name}
                             required
@@ -201,10 +221,15 @@ export default function PatternSection({
                                     alert(getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
-                                setPattern({
-                                    ...pattern,
-                                    leggingsTexture: e.currentTarget.files![0],
-                                });
+                                let name = e.currentTarget.files![0].name
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setPattern({
+                                        ...pattern, leggingsTexture: {
+                                            name: name,
+                                            data: it as string
+                                        }
+                                    })
+                                )
                             }}
                             fileName={pattern.leggingsTexture?.name}
                             required
@@ -234,17 +259,17 @@ export default function PatternSection({
             </div>
             <div class="flex items-center gap-2 self-center p-3">
                 {!isOpen &&
-                <PrimaryButton
-                    className={`p-1 h-min rounded-xl`}
-                    onClick={() =>
-                        setPattern({...pattern, id: crypto.randomUUID()})
-                    }
-                    disabled={isOpen}
-                >
-                    <Plus
-                        className={isOpen ? "fill-background" : "fill-text"}
-                    />
-                </PrimaryButton>}
+                    <PrimaryButton
+                        className={`p-1 h-min rounded-xl`}
+                        onClick={() =>
+                            setPattern({...pattern, id: crypto.randomUUID()})
+                        }
+                        disabled={isOpen}
+                    >
+                        <Plus
+                            className={isOpen ? "fill-background" : "fill-text"}
+                        />
+                    </PrimaryButton>}
             </div>
 
             {devMode && (
@@ -260,8 +285,8 @@ export default function PatternSection({
                                 translation: "qPattern",
                                 item: "ender_chest",
                                 decal: hasDecal ? false : undefined,
-                                baseTexture: new File([], "temp"),
-                                leggingsTexture: new File([], "temp"),
+                                baseTexture: {name: "base.png", data: "data"},
+                                leggingsTexture: {name: "legs.png", data: "data"},
                             });
                         }}
                     >

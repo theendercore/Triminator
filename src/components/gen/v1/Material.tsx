@@ -2,8 +2,11 @@ import ItemRender from "../../generic/ItemRender.tsx";
 import Trash from "../../icons/Trash.tsx";
 import Pencil from "../../icons/Pencil.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
+import DragArrow from "../../icons/DragArrow.tsx";
 
 type MaterialProps = {
+    onDragStart: (e: DragEvent) => void;
+    onDragEnter: () => void;
     material: MaterialData;
     remove: (id: string) => void;
     edit: (id: string) => void;
@@ -11,28 +14,42 @@ type MaterialProps = {
     advanced: boolean
 };
 
-export default function Material({material, remove, edit, isOpen, advanced}: MaterialProps) {
+export default function Material({onDragStart, onDragEnter, material, remove, edit, isOpen, advanced}: MaterialProps) {
 
     return (
-        <div class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
-            <span className="flex flex-col md:flex-row md:gap-3 items-center">
-                <span>
+        <div
+            draggable
+            onDragStart={(e) => onDragStart(e)}
+            onDragEnter={() => onDragEnter()}
+            onDragOver={(e) => e.preventDefault()}
+            className="grid columns-2 grid-flow-col-dense auto-cols-auto justify-end gap-4 md:gap-8 xl:gap-16 bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
+
+            <div className="flex absolute left-5 self-center">
+                <div className="h-6 w-6 rounded-full" style={`background:${material.color};`}></div>
+            </div>
+
+            <span className="justify-self-end flex flex-row md:gap-3 items-center re">
+                <span className="z-10">
                     {material.translation}
-                    <span className={`text-text opacity-50 ${ advanced ? "inline" : "hidden"}`}>{`(${material.name})`}</span>
+                    <span
+                        className={`text-text opacity-50 ${advanced ? "inline" : "hidden"}`}>{`(${material.name})`}</span>
                 </span>
 
-                <span class="hidden md:inline">|</span>
+                <span className="hidden md:inline">|</span>
                 <ItemRender item={`minecraft:${material.item}`} width={32} height={32}/>
-                <span class="hidden md:inline">|</span>
+                <span className="hidden md:inline">|</span>
 
-                  {material.palletTexture &&
-                      <img src={URL.createObjectURL(material.palletTexture)}
-                           class="pixel-art text-center" height={16} width={128} alt=""/>
-                  }
+                {material.palletTexture &&
+                    <img src={material.palletTexture}
+                         class="pixel-art text-center" height={16} width={128} alt=""/>
+                }
             </span>
 
-
-            <div class="flex gap-2 absolute right-3 ">
+            <div className="right-3 w-16"></div>
+            <div className="flex gap-2 absolute right-3 self-center ">
+                <SecondaryButton>
+                    <DragArrow className="fill-accent"></DragArrow>
+                </SecondaryButton>
                 <SecondaryButton
                     className={isOpen ? "cursor-not-allowed hover:scale-100" : " "}
                     onClick={() => (!isOpen) && edit(material.id)}

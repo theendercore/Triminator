@@ -32,11 +32,11 @@ function genMaterialTag(items: string[]): MaterialTag {
     return {values: items}
 }
 
-function genMaterialJSON(name: string, lang: string, color: string, item: string, index: number): MaterialJSON {
+function genMaterialJSON({name, translation, color, item, index}: MaterialData): MaterialJSON {
     return {
         asset_name: name,
         description: {
-            translate: lang,
+            translate: translation,
             color,
         },
         ingredient: item,
@@ -142,7 +142,7 @@ function genVanillaOverrides(material: string, part: string,): ModelOverrides[] 
     return vanilla.reduce((arr, data) =>
             arr.concat({
                 model: `minecraft:item/${material}_${part}_${
-                    (data.mat === material || data.mat === "gold") ? `${data.mat}_darker` : data.mat
+                    (data.mat === material || (material === "golden" && data.mat === "gold")) ? `${data.mat}_darker` : data.mat
                 }_trim`,
                 predicate: {
                     trim_type: data.index,

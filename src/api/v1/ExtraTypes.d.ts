@@ -8,7 +8,7 @@ export type PackContextData = {
     namespace: string;
     description: string;
     version: MCVersion;
-    icon: File | null;
+    icon: null | { name?: string, data?: string };
     patterns: PatternData[];
     materials: MaterialData[];
 };

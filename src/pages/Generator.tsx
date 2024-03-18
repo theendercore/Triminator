@@ -1,7 +1,7 @@
-import {useRef, useState} from "preact/hooks";
+import {useState} from "preact/hooks";
 import {getEmptyPack, MCVersionList} from "../api/v1/consts";
 import CodePre from "../components/generic/CodePre";
-import {format, formatName, sleep} from "../api/Util";
+import {downloadBlob, format, formatName} from "../api/Util";
 import GenHeader from "../components/gen/v1/GenHeader";
 import PatternSection from "../components/gen/v1/PatternSection";
 import {devMode} from "../api/dev";
@@ -14,18 +14,14 @@ import StyledSwitch from "../components/generic/StyledSwitch.tsx";
 import Dropdown from "../components/generic/input/Dropdown.tsx";
 import type {PackContextData, MCVersion} from "../api/v1/ExtraTypes";
 import CustomModal from "../components/gen/v1/CustomModal.tsx";
+import FileInput from "../components/generic/input/FileInput.tsx";
 
 export default function Generator({}: { path: string }) {
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());
     const [advancedState, setAdvancedState] = useState<boolean>(false);
-    const [dpUrl, setDpUrl] = useState("");
-    const [rpUrl, setRpUrl] = useState("");
     const [isOpen, setIsOpen] = useState(false)
 
     const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH");
-
-    const dpLink = useRef<HTMLAnchorElement>(null);
-    const rpLink = useRef<HTMLAnchorElement>(null);
 
     function closeModal() {
         setIsOpen(false)
@@ -35,40 +31,53 @@ export default function Generator({}: { path: string }) {
         setIsOpen(true)
     }
 
+    function exportToFile() {
+        let blob = new Blob([JSON.stringify(packData, null, 2)], {type: "application/json;charset=utf-8"});
+        downloadBlob(blob, `${formatName(packData.name)}_export.json`)
+    }
+
     function generate(e: TargetedEvent<HTMLFormElement, Event>) {
         e.preventDefault();
         openModal()
 
         if (downloadState === "DATA" || downloadState === "BOTH")
-            genDatapack(packData).then((url) => {
-                setDpUrl(url);
-                sleep(1050).then(() => dpLink.current?.click());
-            });
+            genDatapack(packData)
+                .then(blob => downloadBlob(blob, `${formatName(packData.name)}Datapack.zip`))
 
         if (downloadState === "RESOURCE" || downloadState === "BOTH")
-            genResourcePack(packData).then((url) => {
-                setRpUrl(url);
-                sleep(1050).then(() => rpLink.current?.click());
-            });
+            genResourcePack(packData)
+                .then(blob => downloadBlob(blob, `${formatName(packData.name)}ResourcePack.zip`))
     }
 
     // @ts-ignore
     return (
         <div class="container flex flex-col gap-5">
-            <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col md:flex-row gap-6 md:pl-28">
+            {/*<div class="flex items-center justify-center p-3 bg-white bg-opacity-5 rounded-3xl"><h1*/}
+            {/*    class="text-2xl font-bold">DEV BRANCH</h1></div>*/}
+            <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col lg:flex-row gap-6 lg:justify-around">
                 <Dropdown
                     title="Version:"
                     selected={packData.version}
                     setSelected={(e) => setPackData({...packData, version: e as MCVersion})}
                     list={Object(MCVersionList)}
-                    hoverText="Minecraft version for the data & rec packs"
+                    hoverText="Minecraft version for the data and resource packs"
                 />
                 <StyledSwitch
                     title="Advanced Mode:"
                     state={advancedState}
                     onChange={setAdvancedState}
-                    hoverText="Advanced editing mode for people who know more about datapacks and want finer controles."
+                    hoverText="Advanced editing mode for people who know more about datapacks and want finer controle."
                 />
+
+                <FileInput
+                    title="Import From File"
+                    name="import-from-file"
+                    onChange={(e) =>
+                        e.currentTarget.files![0].text().then(e => setPackData(JSON.parse(e) as PackContextData))
+                    }
+                    hoverText="Import PackData from an exported file"
+                >
+                </FileInput>
             </div>
             <div
                 class="p-10 bg-text bg-opacity-5 rounded-3xl lg:grid lg:grid-cols-2 lg:gap-10 flex flex-col gap-5 w-full ">
@@ -85,11 +94,7 @@ export default function Generator({}: { path: string }) {
 
                     <div class="min-w-[8rem] min-h-[8rem] rounded-3xl bg-background-2 grid items-center">
                         <img
-                            src={
-                                packData.icon !== null
-                                    ? URL.createObjectURL(packData?.icon)
-                                    : "/img/dr_doof.png"
-                            }
+                            src={packData.icon !== null ? packData?.icon.data : "/img/dr_doof.png"}
                             alt={packData.icon?.name}
                             height={128}
                             width={128}
@@ -132,24 +137,39 @@ export default function Generator({}: { path: string }) {
                     >
                         Download Both
                     </PrimaryButton>
+                    <SecondaryButton
+                        onClick={exportToFile}
+                        type="button"
+                    >
+                        Export to File
+                    </SecondaryButton>
                 </div>
-
-                <a
-                    class="hidden"
-                    download={`${formatName(packData.name)}Datapack.zip`}
-                    ref={dpLink}
-                    href={dpUrl}
-                ></a>
-                <a
-                    class="hidden"
-                    download={`${formatName(packData.name)}ResourcePack.zip`}
-                    ref={rpLink}
-                    href={rpUrl}
-                ></a>
 
                 {devMode && (
                     <>
-                        <CodePre className="col-span-2">{format(packData)}</CodePre>
+                        <CodePre className="col-span-2">{
+                            format({
+                                ...packData,
+                                icon: packData.icon === null ? null : {
+                                    ...packData.icon,
+                                    data: packData.icon.data?.slice(22, 30) + "..."
+                                },
+                                patterns: packData.patterns.map(e => {
+                                        return {
+                                            ...e,
+                                            baseTexture: {...e.baseTexture, data: e.baseTexture.data.slice(22, 30) + "..."},
+                                            leggingsTexture: {
+                                                ...e.leggingsTexture,
+                                                data: e.leggingsTexture.data.slice(22, 30) + "..."
+                                            }
+                                        }
+                                    }
+                                ),
+                                materials: packData.materials.map(e => {
+                                    return {...e, palletTexture: e.palletTexture.slice(22, 30) + "..."}
+                                })
+                            })
+                        }</CodePre>
                         <PrimaryButton
                             className=" top-32 fixed left-3"
                             onClick={() => {
@@ -157,7 +177,7 @@ export default function Generator({}: { path: string }) {
                                     ...packData,
                                     name: `Test-${crypto.randomUUID().slice(0, 5)}`,
                                     namespace: "test_ns",
-                                    version: "1.20",
+                                    version: "1.20.4",
                                 });
                             }}
                         >

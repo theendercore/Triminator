@@ -4,8 +4,8 @@ import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
-    formatIdentifier, genIndex,
-    getImgAlertMessage,
+    formatIdentifier, genIndex, getBase64,
+    getImgAlertMessage, setDragImageEmpty,
     validateImg,
 } from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
@@ -28,17 +28,30 @@ type MaterialSectionProps = {
 export default function MaterialSection({packData, setPackData, advancedState,}: MaterialSectionProps) {
     const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
     const isOpen = material.id !== "";
+    const [dragItem, setDragItem] = useState<number>(0);
 
     const removeMat = (id: string) =>
         setPackData({...packData, materials: packData.materials.filter(p => p.id !== id),});
 
     const addMat = (material: MaterialData) =>
         setPackData({...packData, materials: [...packData.materials, material]});
-
-
     const editMat = (id: string) => {
         setMaterial(packData.materials.find(mat => mat.id === id)!)
         removeMat(id)
+    }
+
+    function handleDragStart(e: DragEvent, index: number) {
+        setDragImageEmpty(e)
+        setDragItem(index);
+    }
+
+    function handleDragEnter(index: number) {
+        const newList = [...packData.materials];
+        const item = newList[dragItem];
+        newList.splice(dragItem, 1);
+        newList.splice(index, 0, item);
+        setDragItem(index);
+        setPackData({...packData, materials: newList});
     }
 
     return (
@@ -46,9 +59,17 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
             <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
 
             <div class="flex flex-col gap-2">
-                {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen}
-                              advanced={advancedState}/>
+                {packData.materials.map((p, idx) => (
+                    <Material
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragEnter={() => handleDragEnter(idx)}
+                        key={p.name}
+                        material={p}
+                        remove={removeMat}
+                        edit={editMat}
+                        isOpen={isOpen}
+                        advanced={advancedState}
+                    />
                 ))}
                 {isOpen && (
                     <form
@@ -145,7 +166,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 })
                             }
                             required
-                            hoverText={"The item used to make the material. For vanilla materials that is \"iron_ingot\", \"amethyst_shard\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exits."}
+                            hoverText={"The item used to make the material. For vanilla materials, that is \"iron_ingot\", \"amethyst_shard\" etc. MUST be a real item in the game, if you dont see a preview then it probably doesn't exist."}
                         >
                             <ItemRender item={`minecraft:${material.item}`} noAlt/>
                         </TextInput>
@@ -173,18 +194,18 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     alert(getImgAlertMessage(image, 8, 1));
                                     return;
                                 }
-                                setMaterial({
-                                    ...material,
-                                    palletTexture: e.currentTarget.files![0],
-                                });
+                                setMaterial({...material, fileName: e.currentTarget.files![0].name})
+                                getBase64(e.currentTarget.files![0], (it) =>
+                                    setMaterial({...material, palletTexture: it as string,})
+                                )
                             }}
-                            fileName={material.palletTexture?.name}
-                            required
+                            fileName={material.fileName}
+                            required={material.palletTexture === undefined || material.palletTexture === null}
                             hoverText="Pallet texture. Size 8x1"
                         >
                             {material.palletTexture &&
-                                <img src={URL.createObjectURL(material.palletTexture)}
-                                     alt={material.palletTexture!.name} height={16} width={128}
+                                <img src={material.palletTexture}
+                                     alt={material.fileName} height={16} width={128}
                                      class="pixel-art text-right"
                                 />
                             }
@@ -227,7 +248,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 name: id.slice(0, 5),
                                 translation: "qMaterial",
                                 item: "chest",
-                                palletTexture: new File([], "temp"),
+                                palletTexture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAMAAADU3h9xAAAAAXNSR0IArs4c6QAAABhQTFRFl9FVjcJPeahCYJgWWZADU4IJRm0MPWMXzAAhkAAAABFJREFUCJljYGBkYmZhZWMHAABdAB2tV7ZvAAAAAElFTkSuQmCC",
+                                fileName: "cool_img.png",
                                 color: "#FFFFFF",
                                 index: genIndex()
                             });

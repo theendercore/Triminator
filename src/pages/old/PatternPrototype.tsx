@@ -1,8 +1,8 @@
 import {useRef, useState} from "preact/hooks";
-import {genTrimDatapack, genTrimResourcepack} from "../api/original/genZip";
-import TextInput from "../components/TextInputOld";
-import {fetchMcData, sleep} from "../api/Util";
-import ImageInput from "../components/ImageInputOld";
+import {genTrimDatapack, genTrimResourcepack} from "../../api/original/genZip.ts";
+import TextInput from "../../components/TextInputOld.tsx";
+import {fetchMcData, sleep} from "../../api/Util.ts";
+import ImageInput from "../../components/ImageInputOld.tsx";
 import {Item} from "minecraft-textures";
 
 const nullObj = {

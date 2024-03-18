@@ -15,6 +15,7 @@ const formatName = (name: string) =>
         .replace(/[^A-z0-9:]/gm, "")
         .replace(/\^/gm, "");
 
+// noinspection JSSuspiciousNameCombination
 const validateImg = (
     file: File,
     x: number,
@@ -37,6 +38,7 @@ const validateImg = (
 };
 
 // Special Util
+// noinspection JSSuspiciousNameCombination
 const getImgAlertMessage = (
     code: "NoImage" | "WrongSize",
     x: number,
@@ -55,7 +57,7 @@ const genIndex = () => Number(`0.714${Math.floor(Math.random() * 10000)}`)
 let _cached: TexturesType;
 const fetchMcData = async (): Promise<TexturesType> => {
     if (_cached === null || _cached === undefined) {
-        log("new get data");
+        log("Getting new Data");
         _cached = await fetch(
             "https://unpkg.com/minecraft-textures@1.20.0/dist/textures/json/1.20.json"
         ).then((e) => e.json());
@@ -107,6 +109,32 @@ const getDoof = () => fetch("./img/dr_doof.png").then(e => e.blob())
 
 const genDescription = (desc: string, type: string) =>
     desc.trim() !== "" ? `${desc}\nBy Triminator` : `${type} generated\nby Triminator`
+
+export function downloadBlob(blob: Blob, name: string) {
+    const aTag = window.document.createElement('a');
+    let link = URL.createObjectURL(blob);
+    aTag.href = link
+    aTag.download = name;
+    aTag.click();
+    URL.revokeObjectURL(link)
+}
+
+export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null) => void) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        callback(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+    reader.readAsDataURL(file as Blob);
+}
+
+export function setDragImageEmpty(e:DragEvent){
+    let img = document.createElement("img");
+    img.src = "https://raw.githubusercontent.com/theendercore/Triminator/dev/public/empty.png";
+    e.dataTransfer?.setDragImage(img, 0, 0)
+}
 
 export {
     log,
