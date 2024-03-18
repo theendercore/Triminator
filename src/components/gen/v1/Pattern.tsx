@@ -2,8 +2,11 @@ import ItemRender from "../../generic/ItemRender.tsx";
 import Trash from "../../icons/Trash.tsx";
 import Pencil from "../../icons/Pencil.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
+import DragArrow from "../../icons/DragArrow.tsx";
 
 type PatternProps = {
+    onDragStart: (e: DragEvent) => void;
+    onDragEnter: () => void;
     pattern: PatternData;
     remove: (id: string) => void;
     edit: (id: string) => void;
@@ -11,13 +14,18 @@ type PatternProps = {
     advanced: boolean
 };
 
-export default function Pattern({pattern, remove, edit, isOpen, advanced}: PatternProps) {
+export default function Pattern({onDragStart, onDragEnter, pattern, remove, edit, isOpen, advanced}: PatternProps) {
     return (
-        <div class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
+        <div
+            draggable
+            onDragStart={(e) => onDragStart(e)}
+            onDragEnter={() => onDragEnter()}
+            onDragOver={(e) => e.preventDefault()}
+            class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
             <span class="flex flex-col md:flex-row md:gap-3 items-center">
                 <span>
                     {pattern.translation}
-                    <span class={`text-text opacity-50 ${ advanced ? "inline" : "hidden"}`}>{`(${pattern.name})`}</span>
+                    <span class={`text-text opacity-50 ${advanced ? "inline" : "hidden"}`}>{`(${pattern.name})`}</span>
                 </span>
 
                 <span class="hidden md:inline">|</span>
@@ -28,6 +36,9 @@ export default function Pattern({pattern, remove, edit, isOpen, advanced}: Patte
             </span>
 
             <div class="flex gap-2 absolute right-3 ">
+                <SecondaryButton>
+                    <DragArrow className="fill-accent"></DragArrow>
+                </SecondaryButton>
                 <SecondaryButton
                     className={isOpen ? "cursor-not-allowed hover:scale-100" : " "}
                     onClick={() => (!isOpen) && edit(pattern.id)}

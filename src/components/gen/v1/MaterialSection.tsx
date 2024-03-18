@@ -5,7 +5,7 @@ import ImageInput from "../../generic/input/ImageInput.tsx";
 import {
     format,
     formatIdentifier, genIndex, getBase64,
-    getImgAlertMessage,
+    getImgAlertMessage, setDragImageEmpty,
     validateImg,
 } from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
@@ -28,17 +28,30 @@ type MaterialSectionProps = {
 export default function MaterialSection({packData, setPackData, advancedState,}: MaterialSectionProps) {
     const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
     const isOpen = material.id !== "";
+    const [dragItem, setDragItem] = useState<number>(0);
 
     const removeMat = (id: string) =>
         setPackData({...packData, materials: packData.materials.filter(p => p.id !== id),});
 
     const addMat = (material: MaterialData) =>
         setPackData({...packData, materials: [...packData.materials, material]});
-
-
     const editMat = (id: string) => {
         setMaterial(packData.materials.find(mat => mat.id === id)!)
         removeMat(id)
+    }
+
+    function handleDragStart(e: DragEvent, index: number) {
+        setDragImageEmpty(e)
+        setDragItem(index);
+    }
+
+    function handleDragEnter(index: number) {
+        const newList = [...packData.materials];
+        const item = newList[dragItem];
+        newList.splice(dragItem, 1);
+        newList.splice(index, 0, item);
+        setDragItem(index);
+        setPackData({...packData, materials: newList});
     }
 
     return (
@@ -46,9 +59,17 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
             <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials</h3>
 
             <div class="flex flex-col gap-2">
-                {packData.materials.map((p) => (
-                    <Material key={p.name} material={p} remove={removeMat} edit={editMat} isOpen={isOpen}
-                              advanced={advancedState}/>
+                {packData.materials.map((p, idx) => (
+                    <Material
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragEnter={() => handleDragEnter(idx)}
+                        key={p.name}
+                        material={p}
+                        remove={removeMat}
+                        edit={editMat}
+                        isOpen={isOpen}
+                        advanced={advancedState}
+                    />
                 ))}
                 {isOpen && (
                     <form
