@@ -52,7 +52,8 @@ export default function Generator({}: { path: string }) {
     // @ts-ignore
     return (
         <div class="container flex flex-col gap-5">
-            <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col md:flex-row gap-6 md:pl-28">
+            <div class="flex items-center justify-center p-3 bg-white bg-opacity-5 rounded-3xl"><h1 class="text-2xl font-bold">DEV BRANCH</h1></div>
+            <div class="p-5 bg-opacity-5 bg-text rounded-3xl flex flex-col lg:flex-row gap-6 lg:justify-around">
                 <Dropdown
                     title="Version:"
                     selected={packData.version}
@@ -60,7 +61,6 @@ export default function Generator({}: { path: string }) {
                     list={Object(MCVersionList)}
                     hoverText="Minecraft version for the data and resource packs"
                 />
-                DEV BRANCH
                 <StyledSwitch
                     title="Advanced Mode:"
                     state={advancedState}

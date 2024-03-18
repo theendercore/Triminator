@@ -57,7 +57,7 @@ const genIndex = () => Number(`0.714${Math.floor(Math.random() * 10000)}`)
 let _cached: TexturesType;
 const fetchMcData = async (): Promise<TexturesType> => {
     if (_cached === null || _cached === undefined) {
-        log("new get data");
+        log("Getting new Data");
         _cached = await fetch(
             "https://unpkg.com/minecraft-textures@1.20.0/dist/textures/json/1.20.json"
         ).then((e) => e.json());

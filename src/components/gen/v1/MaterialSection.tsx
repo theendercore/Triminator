@@ -200,7 +200,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 )
                             }}
                             fileName={material.fileName}
-                            required
+                            required={material.palletTexture === undefined || material.palletTexture === null}
                             hoverText="Pallet texture. Size 8x1"
                         >
                             {material.palletTexture &&
