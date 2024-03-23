@@ -21,9 +21,10 @@ export default function PatternDisplay(
 
     useEffect(() => {
         const renderer = new THREE.WebGLRenderer({canvas: canvas.current, antialias: false, alpha: true})
-        renderer.setSize(512, 512)
-        const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 100)
-        camera.position.z = 7
+        renderer.setSize(256, 256)
+
+        const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
+        camera.position.z = 4.4
 
         const scene = new THREE.Scene()
         const controls = new OrbitControls(camera, renderer.domElement);
