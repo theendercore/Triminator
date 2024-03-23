@@ -18,6 +18,7 @@ import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import StyledSwitch from "../../generic/StyledSwitch.tsx";
 import type {PackContextData} from "../../../api/v1/ExtraTypes";
+import PatternDisplay from "../three/PatternDisplay.tsx";
 
 type PatternSectionProps = {
     packData: PackContextData;
@@ -248,6 +249,11 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                             />
                         }
 
+                        {(pattern.baseTexture?.data != null && pattern.leggingsTexture?.data != null) && (
+                            <PatternDisplay
+                                mainTexture={pattern.baseTexture.data}
+                                leggingsTexture={pattern.leggingsTexture.data}
+                            />)}
 
                         <PrimaryButton
                             className="self-center px-6 mt-4 bg-opacity-90"
