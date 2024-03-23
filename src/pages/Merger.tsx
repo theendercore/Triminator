@@ -1,6 +1,7 @@
 import {useRef} from "preact/hooks";
 
 import {IconCreator} from "../components/gen/three/IconCreator.tsx";
+import {MutableRefObject} from "preact/compat";
 
 export default function Merger({}: { path: string }) {
     return (
@@ -18,20 +19,27 @@ const armorImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACi
 const leggingsImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADCSURBVEhL7ZXtCoMwDEWT3N7U93/iJbXOQSfU/hrDA/HSag/2AxVRQ6HXbRHpucwjeATJI/gZAYPWWuAfBM5aNb6JmV6pvX8aIegq9ExS7gtMQYQh00TR+6cRmFpRsUyIlt4/TQjiv1AUmdByX0CkwGIeUbYg2FfvrN4/jVTGHn6UtJMhwZE72fqGVPc4AGeZ5uNqR7JYUC7fbDAbCeyDADIWJhqFl9s7CHJUM7TxgMc10vvtgUFwzOY9J29c/P637QUEpTtmZb8HMgAAAABJRU5ErkJggg=="
 
 function TestingBlock() {
-// const ref = useRef(null!)
     return (
         <div className="flex flex-col items-center">
-            <IconCreator size={512} texture={armorImg}/>
-            <IconCreator size={128} texture={armorImg}/>
-            {/*<ThreeScene />*/}
+            <DebuggerBoi />
         </div>
     )
 }
 
-function ThreeScene() {
+function DebuggerBoi() {
     const canvas = useRef<HTMLCanvasElement>(null!);
-    return (<div className="w-96 h-96">
+    const img = useRef<HTMLImageElement>(null!);
+    const saveCanvasAsImage = (ref: MutableRefObject<HTMLImageElement>) => {
+        if (canvas.current) {
+            canvas.current
+                .toBlob(it => it && (ref.current.src = URL.createObjectURL(it)), 'image/png');
+        }
+    };
 
+    return (<div className="">
+        <button onClick={()=> saveCanvasAsImage(img)}> Do things</button>
+        <IconCreator ref={canvas} size={128} texture={armorImg}/>
+        <img ref={img} alt="Export Testing" className="h-12"/>
     </div>)
 }
 
