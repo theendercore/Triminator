@@ -3,6 +3,7 @@ import {useEffect, useRef} from "preact/hooks";
 import * as THREE from "three";
 // @ts-ignore
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {radi} from "../../../api/three/ThreeHelper.ts";
 
 type PatternDisplayProps = {
     className?: string,
@@ -13,7 +14,7 @@ type PatternDisplayProps = {
 
 }
 export default function PatternDisplay(
-    {className, mainTexture, leggingsTexture, sliderClass, debug}: PatternDisplayProps
+    {className, mainTexture, leggingsTexture, sliderClass, debug = false}: PatternDisplayProps
 ) {
     const canvas = useRef<HTMLCanvasElement>(null!)
 
@@ -31,6 +32,9 @@ export default function PatternDisplay(
         const ambientLight = new THREE.AmbientLight(0xFFFFFF);
         scene.add(ambientLight)
 
+
+        fullArmorRenderer(mainTexture, leggingsTexture, sliderValue * radi, debug)
+
         function animate() {
             requestAnimationFrame(animate)
             controls.update()
@@ -43,7 +47,7 @@ export default function PatternDisplay(
     return (
         <div className="flex flex-col items-center">
             <div className={className || "w-64 h-64"}>
-                <canvas ref={canvas} className="w-full h-full bg-cyan-800 rounded-3xl"/>
+                <canvas ref={canvas} className="w-full h-full bg-red-300 bg-opacity-5 rounded-3xl"/>
             </div>
             <input type="range"
                    className={sliderClass}
@@ -51,8 +55,39 @@ export default function PatternDisplay(
                    max="360"
                    value={sliderValue}
                 //@ts-ignore
-                   onChange={(e) => setSliderValue(Number(e.target!.value))}
+                   onChange={(e) => setSliderValue(Number(e.target?.value))}
             />
         </div>
     )
+}
+
+function fullArmorRenderer(mainTexture: string, leggingsTexture: string, iRotation: number, _debug: boolean) {
+    const loader = new THREE.TextureLoader()
+
+    const mainTex = loader.load(mainTexture, tex => {
+        tex.magFilter = THREE.NearestFilter
+        tex.minFilter = THREE.NearestFilter
+        tex.colorSpace = THREE.SRGBColorSpace
+        tex.flipY = false
+    })
+
+    const legsTex = loader.load(leggingsTexture, tex => {
+        tex.magFilter = THREE.NearestFilter
+        tex.minFilter = THREE.NearestFilter
+        tex.colorSpace = THREE.SRGBColorSpace
+        tex.flipY = false
+    })
+
+    const core = {
+        map: mainTex,
+        side: THREE.DoubleSide,
+        normalScale: new THREE.Vector2(1, 1),
+        alphaTest: 0
+    }
+
+    const mainMat = new THREE.MeshStandardMaterial(core)
+    const mainSecondaryMat = new THREE.MeshStandardMaterial({...core, alphaTest: 0.05})
+    const legsMat = new THREE.MeshStandardMaterial({...core, map: legsTex})
+
+
 }
