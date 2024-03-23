@@ -1,12 +1,11 @@
 import {forwardRef} from "preact/compat";
-import * as THREE from "three";
 import {useEffect} from "preact/hooks";
-import {Vector3} from "three";
+import * as THREE from "three";
+import {mainArmorUrl, radi} from "../../../api/three/ThreeHelper.ts";
 // @ts-ignore
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 // @ts-ignore
 import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
-import {mainArmorUrl, radi} from "../../../api/ThreeHelper.ts";
 
 type IconCreatorProps = {
     size: number,
@@ -27,7 +26,7 @@ export const IconCreator = forwardRef<HTMLCanvasElement, IconCreatorProps>(({siz
         const scene = new THREE.Scene()
         const ambientLight = new THREE.AmbientLight(0xFFFFFF);
         scene.add(ambientLight)
-        chestplate(scene, new Vector3(0, -1.03, 0), texture)
+        chestplateRenderer(scene, new THREE.Vector3(0, -1.03, 0), texture)
         renderer.render(scene, camera)
         let renderTimes = [0.5, 1, 2, 3, 5, 10]
         renderTimes.forEach((time) => setTimeout(() => renderer.render(scene, camera), time * 1000))
@@ -38,7 +37,7 @@ export const IconCreator = forwardRef<HTMLCanvasElement, IconCreatorProps>(({siz
     </div>
 })
 
-function chestplate(scene: THREE.Scene, position: THREE.Vector3, mainTexture: string) {
+function chestplateRenderer(scene: THREE.Scene, position: THREE.Vector3, mainTexture: string) {
     const mainTex = new THREE.TextureLoader().load(mainTexture, tex => {
         tex.magFilter = THREE.NearestFilter
         tex.minFilter = THREE.NearestFilter
