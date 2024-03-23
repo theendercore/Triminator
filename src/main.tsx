@@ -23,15 +23,15 @@ const Header = () => (
 
 const Main = () => (
 //    <HoverTooltip.Provider value="false">
-        <div class="flex flex-col items-center justify-center">
-            <Header/>
-            <Router>
-                <Home path="/"/>
-                <Generator path="/gen"/>
-                <Merger path="/merge"/>
-                <Error type="404" default/>
-            </Router>
-        </div>
+    <div class="flex flex-col items-center justify-center">
+        <Header/>
+        <Router>
+            <Home path="/"/>
+            <Generator path="/gen"/>
+            <Merger path="/merge"/>
+            <Error type="404" default/>
+        </Router>
+    </div>
 //    </HoverTooltip.Provider>
 );
 
