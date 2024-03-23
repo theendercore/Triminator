@@ -1,3 +1,4 @@
+/*
 import * as THREE from 'three'
 import {useEffect, useRef} from "preact/hooks"
 // @ts-ignore
@@ -132,3 +133,5 @@ export function ChestplateRenderer({position, mainTexture}: ChestplateRendererPr
 //         </group>
 //     </group>
 // }
+
+ */

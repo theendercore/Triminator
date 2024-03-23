@@ -17,11 +17,11 @@ type PatternDisplayProps = {
 
 }
 export default function PatternDisplay(
-    {className, mainTexture, leggingsTexture, sliderClass, debug = false}: PatternDisplayProps
+    {className, mainTexture, leggingsTexture, debug = false}: PatternDisplayProps
 ) {
     const canvas = useRef<HTMLCanvasElement>(null!)
 
-    const [sliderValue, setSliderValue] = useState(0)
+    // const [sliderValue, setSliderValue] = useState(0)
     const [models, setModels] = useState<GLTF[]>([])
     const addMdl = (model: GLTF) => setModels([...models, model])
 

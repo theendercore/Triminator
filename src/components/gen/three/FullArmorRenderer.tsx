@@ -1,3 +1,4 @@
+/*
 import {useGLTF} from "@react-three/drei";
 import {DoubleSide, MeshStandardMaterial, NearestFilter, Texture, TextureLoader, Vector2, Vector3} from "three";
 import {useState, useEffect} from "preact/hooks";
@@ -181,3 +182,5 @@ function TextureDebuger({position, textures}: { position: Vector3 | number[], te
 
 useGLTF.preload('./models/main_armor.glb')
 useGLTF.preload('./models/leggings.glb')
+
+ */

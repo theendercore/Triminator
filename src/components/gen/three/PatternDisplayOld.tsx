@@ -1,3 +1,4 @@
+/*
 import {Canvas} from "@react-three/fiber";
 import FullArmorRenderer from "./FullArmorRenderer.tsx";
 import {useState} from "preact/compat";
@@ -38,3 +39,5 @@ export default function PatternDisplayOld({className, mainTexture, leggingsTextu
         </div>
     )
 }
+
+ */
