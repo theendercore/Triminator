@@ -1,6 +1,8 @@
-import {Canvas} from "@react-three/fiber";
-import FullArmorRenderer from "./FullArmorRenderer.tsx";
 import {useState} from "preact/compat";
+import {useEffect, useRef} from "preact/hooks";
+import * as THREE from "three";
+// @ts-ignore
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 type PatternDisplayProps = {
     className?: string,
@@ -10,30 +12,45 @@ type PatternDisplayProps = {
     debug?: boolean
 
 }
-export default function PatternDisplay({className, mainTexture, leggingsTexture, sliderClass, debug}: PatternDisplayProps) {
-    const radi = 0.01745329
+export default function PatternDisplay(
+    {className, mainTexture, leggingsTexture, sliderClass, debug}: PatternDisplayProps
+) {
+    const canvas = useRef<HTMLCanvasElement>(null!)
+
     const [sliderValue, setSliderValue] = useState(0)
+
+    useEffect(() => {
+        const renderer = new THREE.WebGLRenderer({canvas: canvas.current, antialias: false, alpha: true})
+        renderer.setSize(512, 512)
+        const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 100)
+        camera.position.z = 7
+
+        const scene = new THREE.Scene()
+        const controls = new OrbitControls(camera, renderer.domElement);
+        const ambientLight = new THREE.AmbientLight(0xFFFFFF);
+        scene.add(ambientLight)
+
+        function animate() {
+            requestAnimationFrame(animate)
+            controls.update()
+            renderer.render(scene, camera)
+        }
+
+        animate()
+    }, [])
+
     return (
         <div className="flex flex-col items-center">
             <div className={className || "w-64 h-64"}>
-                <Canvas
-                    gl={{antialias: false}}
-                    camera={{position: [0, 0, 4.4], fov: 30, aspect: 1,}}>
-                    <ambientLight intensity={Math.PI / 1.1}/>
-                    <FullArmorRenderer position={[0, -1, 0]}
-                                       mainTexture={mainTexture}
-                                       leggingsTexture={leggingsTexture}
-                                       iRotation={[0, sliderValue * radi, 0]}
-                                       debug={debug}
-                    />
-                </Canvas>
+                <canvas ref={canvas} className="w-full h-full bg-cyan-800 rounded-3xl"/>
             </div>
             <input type="range"
                    className={sliderClass}
                    min="0"
                    max="360"
                    value={sliderValue}
-                   onChange={(e) => setSliderValue(Number(e.target.value))}
+                //@ts-ignore
+                   onChange={(e) => setSliderValue(Number(e.target!.value))}
             />
         </div>
     )
