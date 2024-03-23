@@ -2,6 +2,7 @@ import {useRef} from "preact/hooks";
 
 import {IconCreator} from "../components/gen/three/IconCreator.tsx";
 import {MutableRefObject} from "preact/compat";
+import PatternDisplay from "../components/gen/three/PatternDisplay.tsx";
 
 export default function Merger({}: { path: string }) {
     return (
@@ -21,7 +22,7 @@ const leggingsImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAA
 function TestingBlock() {
     return (
         <div className="flex flex-col items-center">
-            <DebuggerBoi />
+            <DebuggerBoi/>
         </div>
     )
 }
@@ -31,13 +32,15 @@ function DebuggerBoi() {
     const img = useRef<HTMLImageElement>(null!);
     const saveCanvasAsImage = (ref: MutableRefObject<HTMLImageElement>) => {
         if (canvas.current) {
-            canvas.current
-                .toBlob(it => it && (ref.current.src = URL.createObjectURL(it)), 'image/png');
+            canvas.current.toBlob(it => it && (ref.current.src = URL.createObjectURL(it)), 'image/png')
         }
     };
 
     return (<div className="">
-        <button onClick={()=> saveCanvasAsImage(img)}> Do things</button>
+        <PatternDisplay mainTexture={armorImg} leggingsTexture={leggingsImg}/>
+
+        <button onClick={() => saveCanvasAsImage(img)} className="bg-secondary py-1 px-3 rounded-3xl"> Do things
+        </button>
         <IconCreator ref={canvas} size={128} texture={armorImg}/>
         <img ref={img} alt="Export Testing" className="h-12"/>
     </div>)
