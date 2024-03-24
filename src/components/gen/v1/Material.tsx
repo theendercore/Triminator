@@ -26,10 +26,6 @@ export default function Material({onDragStart, onDragEnter, material, remove, ed
             style={`border-color:${material.color};`}
         >
 
-            {/*<div className="flex absolute left-5 self-center">*/}
-            {/*    <div className="h-6 w-6 rounded-full" style={`background:${material.color};`}></div>*/}
-            {/*</div>*/}
-
             <span className="justify-self-end flex flex-row md:gap-3 items-center re">
                 <span className="z-10">
                     {material.translation}
