@@ -4,11 +4,12 @@ import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
 import {TargetedEvent} from "preact/compat";
 import {PackContextData} from "../../../api/v1/ExtraTypes";
+import {Dispatch} from "preact/hooks";
 
 type GenHeaderProps = {
     className?: string;
     packData: PackContextData;
-    setPackData: StateUpdater<PackContextData>;
+    setPackData: Dispatch<StateUpdater<PackContextData>>;
     onSubmit: (e: TargetedEvent<HTMLFormElement, Event>) => void;
     advancedState: boolean;
 };

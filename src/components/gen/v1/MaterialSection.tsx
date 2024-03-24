@@ -18,10 +18,11 @@ import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import type {PackContextData} from "../../../api/v1/ExtraTypes";
+import {Dispatch} from "preact/hooks";
 
 type MaterialSectionProps = {
     packData: PackContextData;
-    setPackData: StateUpdater<PackContextData>;
+    setPackData: Dispatch<StateUpdater<PackContextData>>;
     advancedState: boolean;
 };
 
