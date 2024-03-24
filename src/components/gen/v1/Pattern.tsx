@@ -21,7 +21,12 @@ export default function Pattern({onDragStart, onDragEnter, pattern, remove, edit
             onDragStart={(e) => onDragStart(e)}
             onDragEnter={() => onDragEnter()}
             onDragOver={(e) => e.preventDefault()}
-            class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
+            class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative"
+        >
+            <div className="flex absolute left-5 self-center">
+                <ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>
+            </div>
+
             <span class="flex flex-col md:flex-row md:gap-3 items-center">
                 <span>
                     {pattern.translation}
