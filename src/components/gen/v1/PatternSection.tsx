@@ -67,22 +67,25 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 class="text-3xl font-semibold text-center w-full pb-4">
                 Patterns
-                {(packData.patterns.length > 1 && (<span className="italic opacity-60">{` (${packData.patterns.length})`}</span>))}
+                {(packData.patterns.length > 1 && (
+                    <span className="italic opacity-60">{` (${packData.patterns.length})`}</span>))}
             </h3>
-
+            <div class="flex items-center gap-2 self-center p-3">
+                {!isOpen &&
+                    <PrimaryButton
+                        className={`p-1 h-min rounded-xl`}
+                        onClick={() =>
+                            setPattern({...pattern, id: crypto.randomUUID()})
+                        }
+                        disabled={isOpen}
+                    >
+                        <Plus
+                            className={isOpen ? "fill-background" : "fill-text"}
+                        />
+                    </PrimaryButton>}
+            </div>
             <div class="flex flex-col gap-2">
-                {packData.patterns.map((p, idx) => (
-                    <Pattern
-                        onDragStart={(e) => handleDragStart(e, idx)}
-                        onDragEnter={() => handleDragEnter(idx)}
-                        key={p.name}
-                        pattern={p}
-                        remove={removePat}
-                        edit={editPat}
-                        isOpen={isOpen}
-                        advanced={advancedState}
-                    />
-                ))}
+
                 {isOpen && (
                     <form
                         onSubmit={(e) => {
@@ -263,22 +266,19 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                         </PrimaryButton>
                     </form>
                 )}
+                {packData.patterns.map((p, idx) => (
+                    <Pattern
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragEnter={() => handleDragEnter(idx)}
+                        key={p.name}
+                        pattern={p}
+                        remove={removePat}
+                        edit={editPat}
+                        isOpen={isOpen}
+                        advanced={advancedState}
+                    />
+                ))}
             </div>
-            <div class="flex items-center gap-2 self-center p-3">
-                {!isOpen &&
-                    <PrimaryButton
-                        className={`p-1 h-min rounded-xl`}
-                        onClick={() =>
-                            setPattern({...pattern, id: crypto.randomUUID()})
-                        }
-                        disabled={isOpen}
-                    >
-                        <Plus
-                            className={isOpen ? "fill-background" : "fill-text"}
-                        />
-                    </PrimaryButton>}
-            </div>
-
             {devMode && (
                 <>
                     <CodePre>{format(pattern)}</CodePre>

@@ -1,4 +1,4 @@
-import {Fragment} from "preact";
+import {Fragment} from "preact/compat";
 import {Dialog, Transition} from "@headlessui/react";
 
 type CustomModalProps = {
@@ -7,7 +7,9 @@ type CustomModalProps = {
 }
 
 export default function CustomModal({isOpen, closeModal}:CustomModalProps){
+    // @ts-ignore
     return (
+        //@ts-ignore
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog className="relative z-10" onClose={closeModal}>
                 <Transition.Child
