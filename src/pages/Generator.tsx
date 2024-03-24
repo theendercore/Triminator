@@ -1,4 +1,4 @@
-import {useState} from "preact/hooks";
+import {useState, useRef, useEffect} from "preact/hooks";
 import {getEmptyPack, MCVersionList} from "../api/v1/consts";
 import CodePre from "../components/generic/CodePre";
 import {downloadBlob, format, formatName} from "../api/Util";
@@ -15,9 +15,14 @@ import Dropdown from "../components/generic/input/Dropdown.tsx";
 import type {PackContextData, MCVersion} from "../api/v1/ExtraTypes";
 import CustomModal from "../components/gen/v1/CustomModal.tsx";
 import FileInput from "../components/generic/input/FileInput.tsx";
+import {IconCreator} from "../components/gen/three/IconCreator.tsx";
+import * as utl from "../api/Util.ts";
 
 export default function Generator({}: { path: string }) {
+    const canvas = useRef<HTMLCanvasElement>(null!);
     const [packData, setPackData] = useState<PackContextData>(getEmptyPack());
+    const [currentTexture, setCurrentTexture] = useState("");
+    const [iconToUpdate, setIconToUpdate] = useState("");
     const [advancedState, setAdvancedState] = useState<boolean>(false);
     const [isOpen, setIsOpen] = useState(false)
 
@@ -30,6 +35,32 @@ export default function Generator({}: { path: string }) {
     function openModal() {
         setIsOpen(true)
     }
+
+    function updateIcon(id: string) {
+        setIconToUpdate(id)
+    }
+
+    useEffect(() => {
+        if (iconToUpdate.length == 0) return;
+        let pattern = packData.patterns.find(it => it.id === iconToUpdate) as PatternData
+        if (pattern == null) return
+        setCurrentTexture(pattern.baseTexture?.data!)
+        if (canvas.current && currentTexture.length > 10) {
+            setTimeout(() => {
+                canvas.current.toBlob(it => {
+                    if (it == null) return
+                    utl.getBase64(it, (img) => {
+                        pattern.icon = img?.toString()
+                        setPackData({
+                            ...packData,
+                            patterns: [...packData.patterns.filter(ft => ft.id != iconToUpdate), pattern]
+                        })
+                        setIconToUpdate("")
+                    })
+                }, 'image/png')
+            }, 1000)
+        }
+    }, [iconToUpdate])
 
     function exportToFile() {
         let blob = new Blob([JSON.stringify(packData, null, 2)], {type: "application/json;charset=utf-8"});
@@ -111,7 +142,8 @@ export default function Generator({}: { path: string }) {
                     advancedState={advancedState}
                 />
 
-                <PatternSection packData={packData} setPackData={setPackData} advancedState={advancedState}/>
+                <PatternSection packData={packData} setPackData={setPackData} updateIcon={updateIcon}
+                                advancedState={advancedState}/>
                 <MaterialSection packData={packData} setPackData={setPackData} advancedState={advancedState}/>
 
                 <div
@@ -187,6 +219,7 @@ export default function Generator({}: { path: string }) {
                 )}
             </div>
             <CustomModal isOpen={isOpen} closeModal={closeModal}/>
+            <IconCreator ref={canvas} size={128} texture={currentTexture}/>
         </div>
     );
 }

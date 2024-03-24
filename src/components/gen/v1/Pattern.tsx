@@ -29,7 +29,11 @@ export default function Pattern({onDragStart, onDragEnter, pattern, remove, edit
                 </span>
 
                 <span class="hidden md:inline">|</span>
-                <ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>
+                {pattern.icon != null ?
+                    (<img className="inline pixel-art" src={pattern.icon} alt={pattern.name} width={48} height={48}/>)
+                    :
+                    (<ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>)
+                }
                 <span class="hidden md:inline">|</span>
 
                 <span>{pattern.baseTexture?.name}</span>

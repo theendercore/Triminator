@@ -1,4 +1,4 @@
-import { useState} from "preact/hooks";
+import {useState} from "preact/hooks";
 import Pattern from "./Pattern";
 import {getEmptyPattern} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
@@ -18,10 +18,11 @@ import PatternDisplay from "../three/PatternDisplay.tsx";
 type PatternSectionProps = {
     packData: PackContextData;
     setPackData: (e: PackContextData) => void;
+    updateIcon: (id: string) => void;
     advancedState: boolean;
 };
 
-export default function PatternSection({packData, setPackData, advancedState,}: PatternSectionProps) {
+export default function PatternSection({packData, setPackData, updateIcon, advancedState,}: PatternSectionProps) {
     const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
     const [decal, setDecal] = useState(false)
     const hasDecal = utl.resolveDataPackVersion(packData.version) >= 18
@@ -84,9 +85,10 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                 {isOpen && (
                     <form
                         onSubmit={(e) => {
-                            e.preventDefault();
-                            addPat({...pattern, decal: hasDecal ? decal : undefined});
-                            setPattern(getEmptyPattern());
+                            e.preventDefault()
+                            addPat({...pattern, decal: hasDecal ? decal : undefined})
+                            setPattern(getEmptyPattern())
+                            updateIcon(pattern.id)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >

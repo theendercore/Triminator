@@ -104,7 +104,7 @@ function fullArmorRenderer(scene: Scene, position: TRE.Vector3, mainTexture: str
     const legsMat = new TRE.MeshStandardMaterial({...core, map: legsTex})
 
     loaderGLTF.load(mainArmorUrl, (model: GLTF) => {
-        console.log("Main Model Loaded")
+        // console.log("Main Model Loaded")
         scene.add(model.scene)
         model.scene.rotation.set(0, 180 * radi, 0)
         model.scene.position.copy(position)
@@ -119,7 +119,7 @@ function fullArmorRenderer(scene: Scene, position: TRE.Vector3, mainTexture: str
     }, undefined, (error: unknown) => console.error(error))
 
     loaderGLTF.load(leggingArmorUrl, (model: GLTF) => {
-        console.log("Legging Model Loaded")
+        // console.log("Legging Model Loaded")
         scene.add(model.scene)
         model.scene.rotation.set(0, 180 * radi, 0)
         model.scene.position.copy(position)

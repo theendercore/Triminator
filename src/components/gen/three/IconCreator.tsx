@@ -24,15 +24,15 @@ export const IconCreator = forwardRef<HTMLCanvasElement, IconCreatorProps>(({siz
         const camera = new THREE.OrthographicCamera(-frustum, frustum, frustum, -frustum)
         camera.position.z = 4
         const scene = new THREE.Scene()
-        const ambientLight = new THREE.AmbientLight(0xFFFFFF);
+        const ambientLight = new THREE.AmbientLight(0xFFFFFF, 2);
         scene.add(ambientLight)
         chestplateRenderer(scene, new THREE.Vector3(0, -1.03, 0), texture)
         renderer.render(scene, camera)
         let renderTimes = [0.5, 1, 2, 3, 5, 10]
         renderTimes.forEach((time) => setTimeout(() => renderer.render(scene, camera), time * 1000))
-    }, [])
+    }, [texture])
 
-    return <div style={{height: size + "px", width: size + "px"}} className="_invisible">
+    return <div style={{height: size + "px", width: size + "px"}} className="invisible">
         <canvas ref={ref} className="w-full h-full"/>
     </div>
 })
