@@ -1,6 +1,5 @@
 import { VNode } from "preact";
 import { Switch } from "@headlessui/react";
-import {StateUpdater} from "preact/hooks";
 import HoverComponent from "./HoverComponent";
 import QuestionMark from "../icons/QuestionMark";
 
@@ -8,7 +7,7 @@ type SwitchProps = {
   children?: VNode<any> | Element | string;
   className?: string;
   state: boolean;
-  onChange: StateUpdater<boolean>;
+  onChange: (e: boolean) => void;
   title?: string;
   label?: string
   hoverText?: string;
@@ -16,7 +15,6 @@ type SwitchProps = {
 
 export default function StyledSwitch({className, state, onChange, title, label, hoverText}: SwitchProps) {
   return (
-    
     <label class={`flex items-center justify-between gap-6 ${className}`}>
       <span class="text-lg font-semibold">{title}</span>
       

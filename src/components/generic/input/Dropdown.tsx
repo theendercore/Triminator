@@ -1,6 +1,6 @@
 import {Listbox} from '@headlessui/react'
-import {VNode} from "preact";
-import {StateUpdater, useState} from "preact/hooks";
+import { VNode} from "preact";
+import {Dispatch, StateUpdater, useState} from "preact/hooks";
 import HoverComponent from "../HoverComponent.tsx";
 import QuestionMark from "../../icons/QuestionMark.tsx";
 import CaretDown from "../../icons/CaretDown.tsx";
@@ -11,7 +11,7 @@ type dropdownProps = {
     title?: string;
     hoverText?: string;
     selected: string;
-    setSelected: StateUpdater<string>;
+    setSelected:  Dispatch<StateUpdater<string>>;
     list: string[];
 };
 

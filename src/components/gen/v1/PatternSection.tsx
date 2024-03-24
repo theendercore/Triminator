@@ -1,4 +1,4 @@
-import {StateUpdater, useState} from "preact/hooks";
+import {Dispatch, StateUpdater, useState} from "preact/hooks";
 import Pattern from "./Pattern";
 import {getEmptyPattern} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
@@ -22,7 +22,7 @@ import PatternDisplay from "../three/PatternDisplay.tsx";
 
 type PatternSectionProps = {
     packData: PackContextData;
-    setPackData: StateUpdater<PackContextData>;
+    setPackData:  Dispatch<StateUpdater<PackContextData>>;
     advancedState: boolean;
 };
 
@@ -246,7 +246,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                                 className="w-full"
                                 title="Decal:"
                                 label="decal"
-                                onChange={setDecal}
+                                onChange={(e) => {setDecal(e)}}
                                 state={decal}
                                 hoverText="Look this one up on the wiki, I dont know how to explain it."
                             />
