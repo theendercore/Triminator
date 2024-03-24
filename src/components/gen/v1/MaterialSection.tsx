@@ -1,13 +1,7 @@
-import {StateUpdater, useState} from "preact/hooks";
 import {getEmptyMaterial} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
-import {
-    format,
-    formatIdentifier, genIndex, getBase64,
-    getImgAlertMessage, setDragImageEmpty,
-    validateImg,
-} from "../../../api/Util";
+import * as utl from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
@@ -18,11 +12,11 @@ import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import type {PackContextData} from "../../../api/v1/ExtraTypes";
-import {Dispatch} from "preact/hooks";
+import {useState} from "preact/hooks";
 
 type MaterialSectionProps = {
     packData: PackContextData;
-    setPackData: Dispatch<StateUpdater<PackContextData>>;
+    setPackData: (e:PackContextData) => void;
     advancedState: boolean;
 };
 
@@ -42,7 +36,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
     }
 
     function handleDragStart(e: DragEvent, index: number) {
-        setDragImageEmpty(e)
+        utl.setDragImageEmpty(e)
         setDragItem(index);
     }
 
@@ -69,7 +63,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         onClick={() => setMaterial({
                             ...material,
                             id: crypto.randomUUID(),
-                            index: genIndex(),
+                            index: utl.genIndex(),
                             color: "#ffffff"
                         })}
                         disabled={isOpen}
@@ -109,7 +103,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                         onChange={(e) =>
                                             setMaterial({
                                                 ...material,
-                                                name: formatIdentifier(e.currentTarget.value),
+                                                name: utl.formatIdentifier(e.currentTarget.value),
                                             })
                                         }
                                         required
@@ -138,7 +132,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     onChange={(e) => setMaterial({
                                         ...material,
                                         translation: e.currentTarget.value,
-                                        name: formatIdentifier(e.currentTarget.value),
+                                        name: utl.formatIdentifier(e.currentTarget.value),
                                     })}
                                     required
                                     hoverText="Name of the material. This is how the material is gonna be called in game."
@@ -168,7 +162,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                             onChange={(e) =>
                                 setMaterial({
                                     ...material,
-                                    item: formatIdentifier(e.currentTarget.value),
+                                    item: utl.formatIdentifier(e.currentTarget.value),
                                 })
                             }
                             required
@@ -195,13 +189,13 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                             title="Pallet Texture:"
                             name="m-pallet-texture"
                             onChange={(e) => {
-                                let image = validateImg(e.currentTarget.files![0], 8, 1);
+                                let image = utl.validateImg(e.currentTarget.files![0], 8, 1);
                                 if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 8, 1));
+                                    alert(utl.getImgAlertMessage(image, 8, 1));
                                     return;
                                 }
                                 setMaterial({...material, fileName: e.currentTarget.files![0].name})
-                                getBase64(e.currentTarget.files![0], (it) =>
+                                utl.getBase64(e.currentTarget.files![0], (it) =>
                                     setMaterial({...material, palletTexture: it as string,})
                                 )
                             }}
@@ -241,7 +235,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
 
             {devMode &&
                 <>
-                    <CodePre>{format(material)}</CodePre>
+                    <CodePre>{utl.format(material)}</CodePre>
                     <SecondaryButton
                         className={`px-3 fixed left-3 top-56`}
                         onClick={() => {
@@ -254,7 +248,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 palletTexture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAMAAADU3h9xAAAAAXNSR0IArs4c6QAAABhQTFRFl9FVjcJPeahCYJgWWZADU4IJRm0MPWMXzAAhkAAAABFJREFUCJljYGBkYmZhZWMHAABdAB2tV7ZvAAAAAElFTkSuQmCC",
                                 fileName: "cool_img.png",
                                 color: "#FFFFFF",
-                                index: genIndex()
+                                index: utl.genIndex()
                             });
                         }}
                     >qMat

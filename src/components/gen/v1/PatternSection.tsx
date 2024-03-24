@@ -1,14 +1,9 @@
-import {Dispatch, StateUpdater, useState} from "preact/hooks";
+import { useState} from "preact/hooks";
 import Pattern from "./Pattern";
 import {getEmptyPattern} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
-import {
-    format,
-    formatIdentifier, getBase64,
-    getImgAlertMessage, resolveDataPackVersion, setDragImageEmpty,
-    validateImg,
-} from "../../../api/Util";
+import * as utl from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
@@ -22,14 +17,14 @@ import PatternDisplay from "../three/PatternDisplay.tsx";
 
 type PatternSectionProps = {
     packData: PackContextData;
-    setPackData:  Dispatch<StateUpdater<PackContextData>>;
+    setPackData: (e: PackContextData) => void;
     advancedState: boolean;
 };
 
 export default function PatternSection({packData, setPackData, advancedState,}: PatternSectionProps) {
     const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
     const [decal, setDecal] = useState(false)
-    const hasDecal = resolveDataPackVersion(packData.version) >= 18
+    const hasDecal = utl.resolveDataPackVersion(packData.version) >= 18
     const isOpen = pattern.id !== "";
 
     const [dragItem, setDragItem] = useState<number>(0);
@@ -50,7 +45,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
     }
 
     function handleDragStart(e: DragEvent, index: number) {
-        setDragImageEmpty(e)
+        utl.setDragImageEmpty(e)
         setDragItem(index);
     }
 
@@ -117,7 +112,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                                     onChange={(e) =>
                                         setPattern({
                                             ...pattern,
-                                            name: formatIdentifier(
+                                            name: utl.formatIdentifier(
                                                 e.currentTarget.value,
                                             ),
                                         })
@@ -151,7 +146,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                                         setPattern({
                                             ...pattern,
                                             translation: e.currentTarget.value,
-                                            name: formatIdentifier(
+                                            name: utl.formatIdentifier(
                                                 e.currentTarget.value,
                                             ),
                                         });
@@ -170,7 +165,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                             onChange={(e) =>
                                 setPattern({
                                     ...pattern,
-                                    item: formatIdentifier(
+                                    item: utl.formatIdentifier(
                                         e.currentTarget.value,
                                     ),
                                 })
@@ -190,17 +185,17 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                             title="Base Texture:"
                             name="p-base-texture"
                             onChange={(e) => {
-                                let image = validateImg(
+                                let image = utl.validateImg(
                                     e.currentTarget.files![0],
                                     64,
                                     32,
                                 );
                                 if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 64, 32));
+                                    alert(utl.getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
                                 let name = e.currentTarget.files![0].name
-                                getBase64(e.currentTarget.files![0], (it) =>
+                                utl.getBase64(e.currentTarget.files![0], (it) =>
                                     setPattern({
                                         ...pattern, baseTexture: {
                                             name: name,
@@ -217,17 +212,17 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                             title="Legging Texture:"
                             name="p-leggings-texture"
                             onChange={(e) => {
-                                let image = validateImg(
+                                let image = utl.validateImg(
                                     e.currentTarget.files![0],
                                     64,
                                     32,
                                 );
                                 if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 64, 32));
+                                    alert(utl.getImgAlertMessage(image, 64, 32));
                                     return;
                                 }
                                 let name = e.currentTarget.files![0].name
-                                getBase64(e.currentTarget.files![0], (it) =>
+                                utl.getBase64(e.currentTarget.files![0], (it) =>
                                     setPattern({
                                         ...pattern, leggingsTexture: {
                                             name: name,
@@ -246,7 +241,9 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
                                 className="w-full"
                                 title="Decal:"
                                 label="decal"
-                                onChange={(e) => {setDecal(e)}}
+                                onChange={(e) => {
+                                    setDecal(e)
+                                }}
                                 state={decal}
                                 hoverText="Look this one up on the wiki, I dont know how to explain it."
                             />
@@ -281,7 +278,7 @@ export default function PatternSection({packData, setPackData, advancedState,}: 
             </div>
             {devMode && (
                 <>
-                    <CodePre>{format(pattern)}</CodePre>
+                    <CodePre>{utl.format(pattern)}</CodePre>
                     <SecondaryButton
                         className={` fixed left-3 top-44 px-3`}
                         onClick={() => {
