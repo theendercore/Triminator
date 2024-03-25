@@ -24,7 +24,7 @@ export default function Material({onDragStart, onDragEnter, material, remove, ed
             className="grid columns-2 grid-flow-col-dense auto-cols-auto justify-end gap-4 md:gap-8 xl:gap-16 bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative border-2"
             style={`border-color:${material.color};`}
         >
-            <span className="justify-self-end flex flex-row md:gap-3 items-center re">
+            <span className="justify-self-end flex flex-row md:gap-3 items-center">
                 <span className="z-10">
                     {material.translation}
                     <span
