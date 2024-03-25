@@ -79,6 +79,11 @@ export default function PatternSection(
         window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
+    function sort(compareFn: (a: PatternData, b: PatternData) => number) {
+        let x = [...patterns].sort(compareFn)
+        setPatterns(x)
+    }
+
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 ref={nameRef} class="text-3xl font-semibold text-center w-full pb-4">
@@ -86,12 +91,12 @@ export default function PatternSection(
                 {(patterns.length > 1 && (
                     <span className="italic opacity-60">{` (${patterns.length})`}</span>))}
             </h3>
-            <div class="flex items-center gap-2 self-center p-3">
+            <div class="flex self-center p-3 w-full justify-center relative">
                 {!isOpen &&
                     <PrimaryButton
                         className={`p-1 h-min rounded-xl`}
                         onClick={() => {
-                            setPattern({...pattern, id: crypto.randomUUID()})
+                            setPattern({...pattern, id: window.crypto.randomUUID()})
                             setIndex(-1)
                         }}
                         disabled={isOpen}
@@ -100,6 +105,17 @@ export default function PatternSection(
                             className={isOpen ? "fill-background" : "fill-text"}
                         />
                     </PrimaryButton>}
+                {/*<div className="absolute right-2">*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => b.name.length - a.name.length)}>v</PrimaryButton>*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => a.name.length - b.name.length)}>^</PrimaryButton>*/}
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)}>^1</PrimaryButton>*/}
+
+
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => -1 * ((a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0))}>v1</PrimaryButton>*/}
+
+                {/*</div>*/}
             </div>
             <div class="flex flex-col gap-2">
 
@@ -306,7 +322,7 @@ export default function PatternSection(
                     <SecondaryButton
                         className={` fixed left-3 top-44 px-3`}
                         onClick={() => {
-                            let id = crypto.randomUUID();
+                            let id = window.crypto.randomUUID();
                             addPat({
                                 id: id,
                                 name: id.slice(0, 5),

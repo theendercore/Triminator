@@ -71,6 +71,34 @@ export default function MaterialSection({materials, setMaterials, advancedState,
         window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
+    function sort(compareFn: (a: MaterialData, b: MaterialData) => number) {
+        let newLs = [...materials].sort(compareFn)
+        setMaterials(newLs)
+    }
+
+    function hexToRGB(hex: string) {
+        hex = hex.replace('#', '');
+        const red = parseInt(hex.substring(0, 2), 16);
+        const green = parseInt(hex.substring(2, 4), 16);
+        const blue = parseInt(hex.substring(4, 6), 16);
+        return { r: red, g: green, b: blue };
+    }
+
+    function sortMaterialDataByColor(a:MaterialData, b:MaterialData) {
+        const rgbaA = hexToRGB(a.color);
+        const rgbaB = hexToRGB(b.color);
+
+        // Compare RGB values
+        if (rgbaA.r !== rgbaB.r) {
+            return rgbaA.r - rgbaB.r
+        } else if (rgbaA.g !== rgbaB.g) {
+            return rgbaA.g - rgbaB.g
+        } else {
+            return rgbaA.b - rgbaB.b
+        }
+    }
+
+
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
             <h3 ref={nameRef} class="text-3xl font-semibold text-center w-full pb-4">Materials
@@ -78,14 +106,14 @@ export default function MaterialSection({materials, setMaterials, advancedState,
                     <span className="italic opacity-60">{` (${materials.length})`}</span>))}
             </h3>
 
-            <div class="flex items-center gap-2 self-center p-3">
+            <div class="flex items-center gap-2 self-center p-3 w-full justify-center relative">
                 {!isOpen &&
                     <PrimaryButton
                         className={`p-1 h-min rounded-xl`}
                         onClick={() => {
                             setMaterial({
                                 ...material,
-                                id: crypto.randomUUID(),
+                                id: window.crypto.randomUUID(),
                                 index: utl.genIndex(),
                                 color: "#ffffff"
                             })
@@ -95,6 +123,17 @@ export default function MaterialSection({materials, setMaterials, advancedState,
                     >
                         <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
                 }
+                {/*<div className="absolute right-2">*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => b.name.length - a.name.length)}>v</PrimaryButton>*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => a.name.length - b.name.length)}>^</PrimaryButton>*/}
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)}>^1</PrimaryButton>*/}
+
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => -1 * ((a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0))}>v1</PrimaryButton>*/}
+                {/*    <PrimaryButton onClick={() => sort(sortMaterialDataByColor)}>^c</PrimaryButton>*/}
+
+                {/*</div>*/}
             </div>
 
             <div class="flex flex-col gap-2">
@@ -265,7 +304,7 @@ export default function MaterialSection({materials, setMaterials, advancedState,
                     <SecondaryButton
                         className={`px-3 fixed left-3 top-56`}
                         onClick={() => {
-                            let id = crypto.randomUUID();
+                            let id = window.crypto.randomUUID();
                             addMat({
                                 id: id,
                                 name: id.slice(0, 5),

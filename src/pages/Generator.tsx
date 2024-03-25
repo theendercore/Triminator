@@ -233,7 +233,7 @@ export default function Generator({}: { path: string }) {
                             onClick={() => {
                                 setPackInfo({
                                     ...packInfo,
-                                    name: `Test-${crypto.randomUUID().slice(0, 5)}`,
+                                    name: `Test-${window.crypto.randomUUID().slice(0, 5)}`,
                                     namespace: "test_ns",
                                     version: "1.20.4",
                                 });
