@@ -17,6 +17,7 @@ import CustomModal from "../components/gen/v1/CustomModal.tsx";
 import FileInput from "../components/generic/input/FileInput.tsx";
 import {IconCreator} from "../components/gen/three/IconCreator.tsx";
 import * as utl from "../api/Util.ts";
+import {v4 as uuid} from "uuid";
 
 export default function Generator({}: { path: string }) {
     const canvas = useRef<HTMLCanvasElement>(null!);
@@ -233,7 +234,7 @@ export default function Generator({}: { path: string }) {
                             onClick={() => {
                                 setPackInfo({
                                     ...packInfo,
-                                    name: `Test-${window.crypto.randomUUID().slice(0, 5)}`,
+                                    name: `Test-${uuid().slice(0, 5)}`,
                                     namespace: "test_ns",
                                     version: "1.20.4",
                                 });

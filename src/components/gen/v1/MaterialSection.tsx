@@ -12,6 +12,7 @@ import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import {useMemo, useState, useRef} from "preact/hooks";
+import { v4 as uuid} from "uuid";
 
 type MaterialSectionProps = {
     materials: MaterialData[]
@@ -115,7 +116,7 @@ export default function MaterialSection({materials, setMaterials, advancedState,
                         onClick={() => {
                             setMaterial({
                                 ...material,
-                                id: window.crypto.randomUUID(),
+                                id: uuid(),
                                 index: utl.genIndex(),
                                 color: "#ffffff"
                             })
@@ -306,7 +307,7 @@ export default function MaterialSection({materials, setMaterials, advancedState,
                     <SecondaryButton
                         className={`px-3 fixed left-3 top-56`}
                         onClick={() => {
-                            let id = window.crypto.randomUUID();
+                            let id = uuid();
                             addMat({
                                 id: id,
                                 name: id.slice(0, 5),

@@ -14,6 +14,7 @@ import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import StyledSwitch from "../../generic/StyledSwitch.tsx";
 import type {PackInfo} from "../../../api/v1/ExtraTypes";
 import PatternDisplay from "../three/PatternDisplay.tsx";
+import {v4 as uuid} from "uuid";
 
 type PatternSectionProps = {
     packInfo: PackInfo;
@@ -97,7 +98,7 @@ export default function PatternSection(
                     <PrimaryButton
                         className={`p-1 h-min rounded-xl`}
                         onClick={() => {
-                            setPattern({...pattern, id: window.crypto.randomUUID()})
+                            setPattern({...pattern, id: uuid()})
                             setIndex(-1)
                         }}
                         disabled={isOpen}
@@ -323,7 +324,7 @@ export default function PatternSection(
                     <SecondaryButton
                         className={` fixed left-3 top-44 px-3`}
                         onClick={() => {
-                            let id = window.crypto.randomUUID();
+                            let id = uuid();
                             addPat({
                                 id: id,
                                 name: id.slice(0, 5),
