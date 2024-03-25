@@ -71,6 +71,7 @@ export default function MaterialSection({materials, setMaterials, advancedState,
         window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
+    // @ts-ignore
     function sort(compareFn: (a: MaterialData, b: MaterialData) => number) {
         let newLs = [...materials].sort(compareFn)
         setMaterials(newLs)
@@ -84,6 +85,7 @@ export default function MaterialSection({materials, setMaterials, advancedState,
         return { r: red, g: green, b: blue };
     }
 
+    // @ts-ignore
     function sortMaterialDataByColor(a:MaterialData, b:MaterialData) {
         const rgbaA = hexToRGB(a.color);
         const rgbaB = hexToRGB(b.color);

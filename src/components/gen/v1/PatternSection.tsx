@@ -79,6 +79,7 @@ export default function PatternSection(
         window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
+    // @ts-ignore
     function sort(compareFn: (a: PatternData, b: PatternData) => number) {
         let x = [...patterns].sort(compareFn)
         setPatterns(x)
