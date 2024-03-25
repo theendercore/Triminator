@@ -1,14 +1,12 @@
-import {PackContextData} from "./ExtraTypes";
+import {PackInfo} from "./ExtraTypes";
 
-const getEmptyPack = (): PackContextData =>
+const getEmptyPackInfo = (): PackInfo =>
     JSON.parse(JSON.stringify({
         version: "1.20.4",
         name: "",
         namespace: "",
         description: "",
         icon: null,
-        patterns: [],
-        materials: []
     }));
 
 const getEmptyPattern = (): PatternData =>
@@ -87,7 +85,7 @@ const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4"] as const
 
 
 export {
-    getEmptyPack,
+    getEmptyPackInfo,
     getEmptyPattern,
     getEmptyMaterial,
     getVanillaMaterials,

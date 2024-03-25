@@ -11,61 +11,86 @@ import ColorInput from "../../generic/input/ColorInput.tsx";
 import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
-import type {PackContextData} from "../../../api/v1/ExtraTypes";
-import {useState} from "preact/hooks";
+import {useMemo, useState, useRef} from "preact/hooks";
 
 type MaterialSectionProps = {
-    packData: PackContextData;
-    setPackData: (e:PackContextData) => void;
+    materials: MaterialData[]
+    setMaterials: (e: MaterialData[]) => void;
     advancedState: boolean;
 };
 
-export default function MaterialSection({packData, setPackData, advancedState,}: MaterialSectionProps) {
+export default function MaterialSection({materials, setMaterials, advancedState,}: MaterialSectionProps) {
     const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
-    const isOpen = material.id !== "";
     const [dragItem, setDragItem] = useState<number>(0);
+    const [index, setIndex] = useState(-1)
+
+
+    const isOpen = useMemo(() => material.id !== "", [material])
+    const nameRef = useRef<HTMLHeadingElement>(null!)
+
 
     const removeMat = (id: string) =>
-        setPackData({...packData, materials: packData.materials.filter(p => p.id !== id),});
+        setMaterials(materials.filter(p => p.id !== id));
 
-    const addMat = (material: MaterialData) =>
-        setPackData({...packData, materials: [...packData.materials, material]});
+    const addMat = (material: MaterialData, idx: number) => {
+        if (idx >= 0) {
+            let newMaterials = [...materials]
+            newMaterials.splice(idx, 0, material)
+            setMaterials(newMaterials)
+        } else {
+            setMaterials([material, ...materials]);
+        }
+    }
     const editMat = (id: string) => {
-        setMaterial(packData.materials.find(mat => mat.id === id)!)
+        setMaterial(materials.find((pat, idx) => {
+            if (pat.id === id) {
+                setIndex(idx)
+                return true
+            }
+            return false
+        })!)
         removeMat(id)
+        scrollToName()
     }
 
-    function handleDragStart(e: DragEvent, index: number) {
+    function handleDragStart(e: DragEvent, idx: number) {
         utl.setDragImageEmpty(e)
-        setDragItem(index);
+        setDragItem(idx);
     }
 
-    function handleDragEnter(index: number) {
-        const newList = [...packData.materials];
+    function handleDragEnter(idx: number) {
+        const newList = [...materials];
         const item = newList[dragItem];
         newList.splice(dragItem, 1);
-        newList.splice(index, 0, item);
-        setDragItem(index);
-        setPackData({...packData, materials: newList});
+        newList.splice(idx, 0, item);
+        setDragItem(idx);
+        setMaterials(newList);
+    }
+
+    function scrollToName() {
+        window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
-            <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials
-                {(packData.materials.length > 1 && (
-                    <span className="italic opacity-60">{` (${packData.materials.length})`}</span>))}
+            <h3 ref={nameRef} class="text-3xl font-semibold text-center w-full pb-4">Materials
+                {(materials.length > 1 && (
+                    <span className="italic opacity-60">{` (${materials.length})`}</span>))}
             </h3>
 
             <div class="flex items-center gap-2 self-center p-3">
                 {!isOpen &&
                     <PrimaryButton
                         className={`p-1 h-min rounded-xl`}
-                        onClick={() => setMaterial({
-                            ...material,
-                            id: crypto.randomUUID(),
-                            index: utl.genIndex(),
-                            color: "#ffffff"
-                        })}
+                        onClick={() => {
+                            setMaterial({
+                                ...material,
+                                id: crypto.randomUUID(),
+                                index: utl.genIndex(),
+                                color: "#ffffff"
+                            })
+                            setIndex(-1)
+                        }}
                         disabled={isOpen}
                     >
                         <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
@@ -77,8 +102,9 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            addMat(material);
+                            addMat(material, index);
                             setMaterial(getEmptyMaterial());
+                            setIndex(-1)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >
@@ -219,7 +245,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         </PrimaryButton>
                     </form>
                 )}
-                {packData.materials.map((p, idx) => (
+                {materials.map((p, idx) => (
                     <Material
                         onDragStart={(e) => handleDragStart(e, idx)}
                         onDragEnter={() => handleDragEnter(idx)}
@@ -249,7 +275,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 fileName: "cool_img.png",
                                 color: "#FFFFFF",
                                 index: utl.genIndex()
-                            });
+                            }, -1);
                         }}
                     >qMat
                     </SecondaryButton>

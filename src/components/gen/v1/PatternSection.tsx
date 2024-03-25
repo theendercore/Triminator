@@ -1,4 +1,4 @@
-import {useState} from "preact/hooks";
+import {useMemo, useRef, useState} from "preact/hooks";
 import Pattern from "./Pattern";
 import {getEmptyPattern} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
@@ -12,67 +12,88 @@ import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
 import StyledSwitch from "../../generic/StyledSwitch.tsx";
-import type {PackContextData} from "../../../api/v1/ExtraTypes";
+import type {PackInfo} from "../../../api/v1/ExtraTypes";
 import PatternDisplay from "../three/PatternDisplay.tsx";
 
 type PatternSectionProps = {
-    packData: PackContextData;
-    setPackData: (e: PackContextData) => void;
+    packInfo: PackInfo;
+    patterns: PatternData[];
+    setPatterns: (e: PatternData[]) => void;
     updateIcon: (id: string) => void;
     advancedState: boolean;
 };
 
-export default function PatternSection({packData, setPackData, updateIcon, advancedState,}: PatternSectionProps) {
-    const [pattern, setPattern] = useState<PatternData>(getEmptyPattern);
+export default function PatternSection(
+    {packInfo, patterns, setPatterns, updateIcon, advancedState,}: PatternSectionProps
+) {
+    const [pattern, setPattern] = useState<PatternData>(getEmptyPattern());
     const [decal, setDecal] = useState(false)
-    const hasDecal = utl.resolveDataPackVersion(packData.version) >= 18
-    const isOpen = pattern.id !== "";
-
+    const [index, setIndex] = useState(-1)
     const [dragItem, setDragItem] = useState<number>(0);
+
+    const hasDecal = useMemo(() => utl.resolveDataPackVersion(packInfo.version) >= 18, [packInfo])
+    const isOpen = useMemo(() => pattern.id !== "", [pattern])
+    const nameRef = useRef<HTMLHeadingElement>(null!)
 
 
     const removePat = (id: string) =>
-        setPackData({
-            ...packData,
-            patterns: packData.patterns.filter((p) => p.id !== id),
-        });
+        setPatterns(patterns.filter((p) => p.id !== id))
 
-    const addPat = (pattern: PatternData) =>
-        setPackData({...packData, patterns: [...packData.patterns, pattern]});
+    function addPat(pattern: PatternData, index: number) {
+        if (index >= 0) {
+            let newPatterns = [...patterns]
+            newPatterns.splice(index, 0, pattern)
+            setPatterns(newPatterns)
+        } else {
+            setPatterns([pattern, ...patterns,])
+        }
+    }
 
     const editPat = (id: string) => {
-        setPattern(packData.patterns.find((pat) => pat.id === id)!);
+        setPattern(patterns.find((pat, idx) => {
+            if (pat.id === id) {
+                setIndex(idx)
+                return true
+            }
+            return false
+        })!);
         removePat(id);
+        scrollToName()
     }
 
-    function handleDragStart(e: DragEvent, index: number) {
+    function handleDragStart(e: DragEvent, idx: number) {
         utl.setDragImageEmpty(e)
-        setDragItem(index);
+        setDragItem(idx);
     }
 
-    function handleDragEnter(index: number) {
-        const newList = [...packData.patterns];
+    function handleDragEnter(idx: number) {
+        const newList = [...patterns];
         const item = newList[dragItem];
         newList.splice(dragItem, 1);
-        newList.splice(index, 0, item);
-        setDragItem(index);
-        setPackData({...packData, patterns: newList});
+        newList.splice(idx, 0, item);
+        setDragItem(idx);
+        setPatterns(newList);
+    }
+
+    function scrollToName() {
+        window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
     }
 
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
-            <h3 class="text-3xl font-semibold text-center w-full pb-4">
+            <h3 ref={nameRef} class="text-3xl font-semibold text-center w-full pb-4">
                 Patterns
-                {(packData.patterns.length > 1 && (
-                    <span className="italic opacity-60">{` (${packData.patterns.length})`}</span>))}
+                {(patterns.length > 1 && (
+                    <span className="italic opacity-60">{` (${patterns.length})`}</span>))}
             </h3>
             <div class="flex items-center gap-2 self-center p-3">
                 {!isOpen &&
                     <PrimaryButton
                         className={`p-1 h-min rounded-xl`}
-                        onClick={() =>
+                        onClick={() => {
                             setPattern({...pattern, id: crypto.randomUUID()})
-                        }
+                            setIndex(-1)
+                        }}
                         disabled={isOpen}
                     >
                         <Plus
@@ -86,8 +107,9 @@ export default function PatternSection({packData, setPackData, updateIcon, advan
                     <form
                         onSubmit={(e) => {
                             e.preventDefault()
-                            addPat({...pattern, decal: hasDecal ? decal : undefined})
+                            addPat({...pattern, decal: hasDecal ? decal : undefined}, index)
                             setPattern(getEmptyPattern())
+                            setIndex(-1)
                             updateIcon(pattern.id)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
@@ -265,11 +287,11 @@ export default function PatternSection({packData, setPackData, updateIcon, advan
                         </PrimaryButton>
                     </form>
                 )}
-                {packData.patterns.map((p, idx) => (
+                {patterns.map((p, idx) => (
                     <Pattern
                         onDragStart={(e) => handleDragStart(e, idx)}
                         onDragEnter={() => handleDragEnter(idx)}
-                        key={p.name}
+                        key={p.id}
                         pattern={p}
                         remove={removePat}
                         edit={editPat}
@@ -293,7 +315,7 @@ export default function PatternSection({packData, setPackData, updateIcon, advan
                                 decal: hasDecal ? false : undefined,
                                 baseTexture: {name: "base.png", data: "data"},
                                 leggingsTexture: {name: "legs.png", data: "data"},
-                            });
+                            }, -1)
                         }}
                     >
                         qPat

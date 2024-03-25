@@ -1,3 +1,4 @@
+import "preact/debug"
 import {render} from "preact";
 import "./index.css";
 import Router from "preact-router";

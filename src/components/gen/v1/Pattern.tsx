@@ -23,9 +23,9 @@ export default function Pattern({onDragStart, onDragEnter, pattern, remove, edit
             onDragOver={(e) => e.preventDefault()}
             class="grid place-items-center bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative"
         >
-            <div className="flex absolute left-5 self-center">
-                <ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>
-            </div>
+            {/*<div className="flex absolute left-5 self-center">*/}
+            {/*    <ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>*/}
+            {/*</div>*/}
 
             <span class="flex flex-col md:flex-row md:gap-3 items-center">
                 <span>
@@ -34,14 +34,12 @@ export default function Pattern({onDragStart, onDragEnter, pattern, remove, edit
                 </span>
 
                 <span class="hidden md:inline">|</span>
-                {pattern.icon != null ?
-                    (<img className="inline pixel-art" src={pattern.icon} alt={pattern.name} width={48} height={48}/>)
-                    :
-                    (<ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/>)
-                }
+
+                <img className="inline pixel-art before:flex before:justify-center before:items-center before:pt-3" src={pattern.icon} alt={pattern.name} width={48} height={48}/>
+
                 <span class="hidden md:inline">|</span>
 
-                <span>{pattern.baseTexture?.name}</span>
+                <span><ItemRender item={`minecraft:${pattern.item}`} width={32} height={32}/></span>
             </span>
 
             <div class="flex gap-2 absolute right-3 ">
