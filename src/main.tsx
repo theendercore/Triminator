@@ -10,7 +10,7 @@ import Merger from "./pages/Merger.tsx";
 
 
 const Header = () => {
-    return <>{getCurrentUrl() !== "/emeded" &&
+    return <>{getCurrentUrl() !== "/embeded" &&
         <header class="p-5 md:px-20 mb-8 bg-accent bg-opacity-10 w-full drop-shadow">
             <nav class="flex gap-8 items-center justify-between flex-col md:flex-row">
                 <h1 className="text-5xl">Triminator</h1>
@@ -31,7 +31,7 @@ const Main = () => (
         <Router>
             <Home path="/"/>
             <Generator path="/gen"/>
-            <Generator path="/emeded"/>
+            <Generator path="/embeded"/>
             <Merger path="/merge"/>
             <Error type="404" default/>
         </Router>
