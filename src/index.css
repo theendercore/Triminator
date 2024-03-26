@@ -9,3 +9,29 @@
         image-rendering: pixelated;
     }
 }
+
+@layer components {
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        background-color: rgb(233 229 246 / 0.8);
+        cursor: pointer;
+        border-radius: 50%;
+        border: 0;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        background-color: rgb(233 229 246 / 0.8);
+        cursor: pointer;
+        border-radius: 50%;
+        border: 0;
+
+    }
+    .slider::-moz-range-thumb::after {
+        padding-left: 20px;
+    }
+}

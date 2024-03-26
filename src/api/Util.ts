@@ -125,7 +125,7 @@ export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null
         callback(reader.result)
     };
     reader.onerror = function (error) {
-        console.log('Error: ', error);
+        console.error('Error: ', error);
     };
     reader.readAsDataURL(file as Blob);
 }

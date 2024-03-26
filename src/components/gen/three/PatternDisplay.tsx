@@ -7,12 +7,12 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 // @ts-ignore
 import {GLTF} from "three/examples/jsm/loaders/GLTFLoader";
 import {Scene} from "three";
+import {getRot, setRot} from "../../../api/Rotator.ts";
 
 type PatternDisplayProps = {
     className?: string,
     mainTexture: string,
     leggingsTexture: string,
-    sliderClass?: string,
     debug?: boolean
 
 }
@@ -21,35 +21,36 @@ export default function PatternDisplay(
 ) {
     const canvas = useRef<HTMLCanvasElement>(null!)
 
-    // const [sliderValue, setSliderValue] = useState(0)
-    const [models, setModels] = useState<GLTF[]>([])
-    const addMdl = (model: GLTF) => setModels([...models, model])
+    const [sliderValue, setSv] = useState(0)
+
+    function setSliderValue(i: number) {
+        setSv(i)
+        setRot(i)
+    }
 
 
     useEffect(() => {
+        if (canvas.current == null) return
         const renderer = new TRE.WebGLRenderer({canvas: canvas.current, antialias: false, alpha: true})
         renderer.setSize(256, 256)
 
-        const camera = new TRE.PerspectiveCamera(30, 1, 0.1, 100)
+        let camera = new TRE.PerspectiveCamera(30, 1, 0.1, 100)
         camera.position.z = 4.4
 
         const scene = new TRE.Scene()
-        // const controls = new OrbitControls(camera, renderer.domElement);
         const ambientLight = new TRE.AmbientLight(0xFFFFFF);
         scene.add(ambientLight)
 
-
-        // if (models == null || !(models.length > 0)) {
-        fullArmorRenderer(scene, new TRE.Vector3(0, -1, 0), mainTexture, leggingsTexture, addMdl, debug)
-        // }
-
-        // models && models.forEach(e => {
-        //     scene.add(e.scene)
-        //     e.scene.rotation.set(0, 180 * radi + sliderValue * radi, 0)
-        // })
+        const models: GLTF[] = []
+        const add = (model: GLTF) => models.push(model)
+        fullArmorRenderer(scene, new TRE.Vector3(0, -1, 0), mainTexture, leggingsTexture, add, debug)
 
         function animate() {
             requestAnimationFrame(animate)
+            models.forEach((e: GLTF) => {
+                scene.add(e.scene)
+                e.scene.rotation.set(0, 180 * radi + getRot() * radi, 0)
+            })
             renderer.render(scene, camera)
         }
 
@@ -62,14 +63,16 @@ export default function PatternDisplay(
                 <canvas ref={canvas} className="w-full h-full">
                 </canvas>
             </div>
-            {/*<input type="range"*/}
-            {/*       className={sliderClass}*/}
-            {/*       min="0"*/}
-            {/*       max="360"*/}
-            {/*       value={sliderValue}*/}
-            {/*    //@ts-ignore*/}
-            {/*       onChange={(e) => setSliderValue(Number(e.target?.value))}*/}
-            {/*/>*/}
+            <div className="py-2 w-full">
+                <input type="range"
+                       className="w-full h-3 rounded-full slider bg-accent bg-opacity-20"
+                       min="0"
+                       max="360"
+                       value={sliderValue}
+                    //@ts-ignore
+                       onChange={(e) => setSliderValue(Number(e.target?.value))}
+                />
+            </div>
         </div>
     )
 }
@@ -113,6 +116,7 @@ function fullArmorRenderer(scene: Scene, position: TRE.Vector3, mainTexture: str
             if (part instanceof TRE.Mesh) {
                 part.material = mainMat
                 if (part.name === 'Hat_Layer') part.material = mainSecondaryMat
+                if (part.name === 'Left_Boot') part.position.z -= 0.0002
             }
         })
         addMdl(model)

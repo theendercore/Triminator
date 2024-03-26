@@ -15,6 +15,7 @@ import StyledSwitch from "../../generic/StyledSwitch.tsx";
 import type {PackInfo} from "../../../api/v1/ExtraTypes";
 import PatternDisplay from "../three/PatternDisplay.tsx";
 import {v4 as uuid} from "uuid";
+import {resetRot} from "../../../api/Rotator.ts";
 
 type PatternSectionProps = {
     packInfo: PackInfo;
@@ -128,6 +129,7 @@ export default function PatternSection(
                             addPat({...pattern, decal: hasDecal ? decal : undefined}, index)
                             setPattern(getEmptyPattern())
                             setIndex(-1)
+                            resetRot()
                             updateIcon(pattern.id)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"

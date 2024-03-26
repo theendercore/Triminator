@@ -17,7 +17,6 @@ export default function StyledSwitch({className, state, onChange, title, label, 
   return (
     <label class={`flex items-center justify-between gap-6 ${className}`}>
       <span class="text-lg font-semibold">{title}</span>
-      
         <Switch
           checked={state}
           onChange={onChange}
