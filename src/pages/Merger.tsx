@@ -1,6 +1,5 @@
 import {useRef} from "preact/hooks";
 
-import {IconCreator} from "../components/gen/three/IconCreator.tsx";
 import {MutableRefObject} from "preact/compat";
 import PatternDisplay from "../components/gen/three/PatternDisplay.tsx";
 
@@ -41,7 +40,7 @@ function DebuggerBoi() {
 
         <button onClick={() => saveCanvasAsImage(img)} className="bg-secondary py-1 px-3 rounded-3xl"> Do things
         </button>
-        <IconCreator ref={canvas} size={128} texture={armorImg}/>
+        {/*<IconCreator ref={canvas} size={128} texture={armorImg}/>*/}
         <img ref={img} alt="Export Testing" className="h-12"/>
     </div>)
 }
