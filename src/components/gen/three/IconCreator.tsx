@@ -1,24 +1,24 @@
-import {forwardRef} from "preact/compat";
-import {useEffect} from "preact/hooks";
+import {useEffect, useRef} from "preact/hooks";
 import * as THREE from "three";
-import {mainArmorUrl, radi} from "../../../api/three/ThreeHelper.ts";
-// @ts-ignore
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-// @ts-ignore
+import {mainArmorUrl, radi} from "../../../api/three/ThreeHelper.ts";   // @ts-ignore
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";    // @ts-ignore
 import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import * as utl from "../../../api/Util.ts";
 
 type IconCreatorProps = {
-    size: number,
-    texture: string
+    size: number;
+    texture: IdentifiableTexture | null;
+    postRender: (id: string, icon: string | undefined) => void;
 }
 
-export const IconCreator = forwardRef<HTMLCanvasElement, IconCreatorProps>(({size, texture}, ref) => {
+export function IconCreator({size, texture, postRender}: IconCreatorProps) {
+    const canvas = useRef<HTMLCanvasElement>(null!)
     const frustum = 0.58
 
     useEffect(() => {
+        if (canvas == null || texture == null) return
         const renderer = new THREE.WebGLRenderer(
-            // @ts-ignore
-            {canvas: ref?.current, preserveDrawingBuffer: true, antialias: false, alpha: true}
+            {canvas: canvas.current, preserveDrawingBuffer: true, antialias: false, alpha: true}
         )
         renderer.setSize(size, size)
         const camera = new THREE.OrthographicCamera(-frustum, frustum, frustum, -frustum)
@@ -26,16 +26,22 @@ export const IconCreator = forwardRef<HTMLCanvasElement, IconCreatorProps>(({siz
         const scene = new THREE.Scene()
         const ambientLight = new THREE.AmbientLight(0xFFFFFF, 2);
         scene.add(ambientLight)
-        chestplateRenderer(scene, new THREE.Vector3(0, -1.03, 0), texture)
+        chestplateRenderer(scene, new THREE.Vector3(0, -1.03, 0), texture.texture)
         renderer.render(scene, camera)
-        let renderTimes = [0.5, 1, 2, 3, 5, 10]
-        renderTimes.forEach((time) => setTimeout(() => renderer.render(scene, camera), time * 1000))
+        let renderTimes = [0.5, 1, 2, 3, 5]
+        renderTimes.forEach((time) => setTimeout(() => renderer.render(scene, camera), time * 1_000))
+        setTimeout(() => {
+            canvas.current.toBlob((it: Blob | null) => {
+                if (it == null) return
+                utl.getBase64(it, (img) => postRender(texture.id, img?.toString()))
+            }, 'image/png')
+        }, 5_100)
     }, [texture])
 
     return <div style={{height: size + "px", width: size + "px"}} className="invisible">
-        <canvas ref={ref} className="w-full h-full"/>
+        <canvas ref={canvas} className="w-full h-full"/>
     </div>
-})
+}
 
 function chestplateRenderer(scene: THREE.Scene, position: THREE.Vector3, mainTexture: string) {
     const mainTex = new THREE.TextureLoader().load(mainTexture, tex => {

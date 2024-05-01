@@ -104,3 +104,5 @@ type NamedIndexes = {
     name: string;
     index: number
 }
+
+type IdentifiableTexture = { id: string, texture: string }

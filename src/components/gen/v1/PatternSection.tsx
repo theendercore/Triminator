@@ -21,12 +21,12 @@ type PatternSectionProps = {
     packInfo: PackInfo;
     patterns: PatternData[];
     setPatterns: (e: PatternData[]) => void;
-    updateIcon: (id: string) => void;
+    renderIcon: (id: string, texture: string) => void;
     advancedState: boolean;
 };
 
 export default function PatternSection(
-    {packInfo, patterns, setPatterns, updateIcon, advancedState,}: PatternSectionProps
+    {packInfo, patterns, setPatterns, renderIcon, advancedState,}: PatternSectionProps
 ) {
     const [pattern, setPattern] = useState<PatternData>(getEmptyPattern());
     const [decal, setDecal] = useState(false)
@@ -126,11 +126,13 @@ export default function PatternSection(
                     <form
                         onSubmit={(e) => {
                             e.preventDefault()
+                            let tex = (pattern.baseTexture?.data || "") + ""
+                            let id = pattern.id + ""
                             addPat({...pattern, decal: hasDecal ? decal : undefined}, index)
                             setPattern(getEmptyPattern())
                             setIndex(-1)
                             resetRot()
-                            updateIcon(pattern.id)
+                            renderIcon(id,tex)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >

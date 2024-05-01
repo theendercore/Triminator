@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect, useMemo} from "preact/hooks";
+import {useState, useEffect, useMemo} from "preact/hooks";
 import {getEmptyPackInfo, MCVersionList} from "../api/v1/consts";
 import CodePre from "../components/generic/CodePre";
 import {downloadBlob, fetchMcData, format, formatName} from "../api/Util";
@@ -16,21 +16,23 @@ import {PackContextData, MCVersion, PackInfo} from "../api/v1/ExtraTypes";
 import CustomModal from "../components/gen/v1/CustomModal.tsx";
 import FileInput from "../components/generic/input/FileInput.tsx";
 import {IconCreator} from "../components/gen/three/IconCreator.tsx";
-import * as utl from "../api/Util.ts";
 import {v4 as uuid} from "uuid";
 
 export default function Generator({}: { path: string }) {
-    const canvas = useRef<HTMLCanvasElement>(null!);
-    const [packInfo, setPackInfo] = useState<PackInfo>(getEmptyPackInfo());
-    const [patterns, setPatterns] = useState<PatternData[]>([]);
-    const [materials, setMaterials] = useState<MaterialData[]>([]);
-    const [currentTexture, setCurrentTexture] = useState("");
-    const [iconToUpdate, setIconToUpdate] = useState("");
-    const [advancedState, setAdvancedState] = useState<boolean>(false);
+    const [packInfo, setPackInfo] = useState<PackInfo>(getEmptyPackInfo())
+    const [patterns, setPatterns] = useState<PatternData[]>([])
+    const [materials, setMaterials] = useState<MaterialData[]>([])
+
+    const [iconRenderArray, setIconRenderArray] = useState<IdentifiableTexture[]>([])
+    const [processing, setProcessing] = useState<IdentifiableTexture | null>(null)
+    const [importTime, setImportTime] = useState(false)
+
+    const [advancedState, setAdvancedState] = useState<boolean>(false)
     const [isOpen, setIsOpen] = useState(false)
 
-    const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH");
+    const [downloadState, setDownloadState] = useState<"BOTH" | "DATA" | "RESOURCE">("BOTH")
 
+    // noinspection JSIgnoredPromiseFromCall
     useMemo(() => fetchMcData(), undefined)
 
     function closeModal() {
@@ -41,39 +43,56 @@ export default function Generator({}: { path: string }) {
         setIsOpen(true)
     }
 
-    function updateIcon(id: string) {
-        setIconToUpdate(id)
+    function addIconToRender(id: string, texture: string) {
+        if (id === null || texture === null) return
+        if (iconRenderArray.find(e => e.id === id) !== undefined) return
+
+        setIconRenderArray([...iconRenderArray, {id, texture}])
+    }
+
+    function processIcon(id: string, icon: string | undefined) {
+        if (icon == null) return
+        let pattern = patterns.find(it => it.id === id)
+        if (pattern === null || pattern === undefined) return
+
+        pattern.icon = icon
+        let newPatterns = [...patterns]
+        let idx = newPatterns.findIndex(e => e.id === pattern.id)
+        newPatterns.splice(idx, 1, pattern)
+        setPatterns(newPatterns)
+        setProcessing(null)
+
+        console.log("Finished processing -", patterns.find(e => e.id === id)?.translation)
     }
 
     useEffect(() => {
-        if (iconToUpdate.length == 0) return;
-        let pattern = patterns.find(it => it.id === iconToUpdate) as PatternData
-        if (pattern == null) return
-        setCurrentTexture(pattern.baseTexture?.data!)
-        if (canvas.current && currentTexture.length > 10) {
-            setTimeout(() => {
-                canvas.current.toBlob(it => {
-                    if (it == null) return
-                    utl.getBase64(it, (img) => {
-                        pattern.icon = img?.toString()
-                        let newPatterns = [...patterns]
-                        let idx = newPatterns.findIndex(e => e.id === pattern.id);
-                        newPatterns.splice(idx, 1, pattern)
-                        setPatterns(newPatterns)
-                        setIconToUpdate("")
-                    })
-                }, 'image/png')
-            }, 1000)
-        }
-    }, [iconToUpdate])
+
+        if (iconRenderArray.length <= 0) return
+        if (processing !== null) return
+
+        setProcessing(iconRenderArray[0])
+        let x = iconRenderArray[0]
+        setIconRenderArray([...iconRenderArray.slice(1, iconRenderArray.length)])
+
+        console.log("Started processing -", patterns.find(e => e.id === x.id)?.translation)
+    }, [iconRenderArray, processing])
+
+    useEffect(() => {
+        if (!importTime) return
+        setIconRenderArray([...patterns.map(p => {
+            return {id: p.id, texture: p.baseTexture?.data!!}
+        })])
+
+        setImportTime(false)
+    }, [importTime])
 
     function exportToFile() {
-        let blob = new Blob([JSON.stringify(packInfo, null, 2)], {type: "application/json;charset=utf-8"});
+        let blob = new Blob([JSON.stringify(packInfo, null, 2)], {type: "application/json;charset=utf-8"})
         downloadBlob(blob, `${formatName(packInfo.name)}_export.json`)
     }
 
     function generate(e: TargetedEvent<HTMLFormElement, Event>) {
-        e.preventDefault();
+        e.preventDefault()
         openModal()
 
         if (downloadState === "DATA" || downloadState === "BOTH")
@@ -89,7 +108,6 @@ export default function Generator({}: { path: string }) {
         return {...packInfo, patterns: patterns, materials: materials}
     }
 
-    // @ts-ignore
     return (
         <div class="container flex flex-col gap-5">
             <div class="flex items-center justify-center p-3 bg-white bg-opacity-5 rounded-3xl"><h1
@@ -114,10 +132,15 @@ export default function Generator({}: { path: string }) {
                     name="import-from-file"
                     onChange={(e) =>
                         e.currentTarget.files![0].text().then(e => {
-                                let importData = JSON.parse(e) as PackContextData
-                                setPackInfo({...importData})
-                                setMaterials(importData.materials)
-                                setPatterns(importData.patterns)
+                                try {
+                                    let importData = JSON.parse(e) as PackContextData
+                                    setPackInfo({...importData})
+                                    setMaterials(importData.materials)
+                                    setPatterns(importData.patterns)
+                                    setImportTime(true)
+                                } catch (e) {
+                                    console.error("Error happened during 'import-from-file' !", e)
+                                }
                             }
                         )
                     }
@@ -160,7 +183,7 @@ export default function Generator({}: { path: string }) {
                     packInfo={packInfo}
                     patterns={patterns}
                     setPatterns={setPatterns}
-                    updateIcon={updateIcon}
+                    renderIcon={addIconToRender}
                     advancedState={advancedState}
                 />
                 <MaterialSection
@@ -202,6 +225,10 @@ export default function Generator({}: { path: string }) {
 
                 {devMode && (
                     <>
+                        <CodePre className="col-span-2">{format(iconRenderArray.map(e => {
+                            return {id: e.id, tex: e.texture.slice(22, 30) + "..."}
+                        }))}</CodePre>
+
                         <CodePre className="col-span-2">{
                             format({
                                 ...packInfo,
@@ -209,21 +236,20 @@ export default function Generator({}: { path: string }) {
                                     ...packInfo.icon,
                                     data: packInfo.icon.data?.slice(22, 30) + "..."
                                 },
-                                patterns: [],
-                                // patterns.map(e => {
-                                //         return {
-                                //             ...e,
-                                //             baseTexture: {
-                                //                 ...e.baseTexture,
-                                //                 data: e.baseTexture!.data.slice(22, 30) + "..."
-                                //             },
-                                //             leggingsTexture: {
-                                //                 ...e.leggingsTexture,
-                                //                 data: e.leggingsTexture!.data.slice(22, 30) + "..."
-                                //             }
-                                //         }
-                                //     }
-                                // ),
+                                patterns: patterns.map(e => {
+                                        return {
+                                            ...e,
+                                            baseTexture: {
+                                                ...e.baseTexture,
+                                                data: e.baseTexture!.data.slice(22, 30) + "..."
+                                            },
+                                            leggingsTexture: {
+                                                ...e.leggingsTexture,
+                                                data: e.leggingsTexture!.data.slice(22, 30) + "..."
+                                            }
+                                        }
+                                    }
+                                ),
                                 materials: materials.map(e => {
                                     return {...e, palletTexture: e.palletTexture!.slice(22, 30) + "..."}
                                 })
@@ -237,7 +263,7 @@ export default function Generator({}: { path: string }) {
                                     name: `Test-${uuid().slice(0, 5)}`,
                                     namespace: "test_ns",
                                     version: "1.20.4",
-                                });
+                                })
                             }}
                         >
                             qFill
@@ -246,7 +272,7 @@ export default function Generator({}: { path: string }) {
                 )}
             </div>
             <CustomModal isOpen={isOpen} closeModal={closeModal}/>
-            <IconCreator ref={canvas} size={128} texture={currentTexture}/>
+            <IconCreator size={128} texture={processing} postRender={processIcon}/>
         </div>
-    );
+    )
 }
