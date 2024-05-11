@@ -1,0 +1,720 @@
+{
+  "version": "1.20.4",
+  "name": "Armor Trims",
+  "namespace": "armor_trims",
+  "description": "Adds a miniscule bit more armor trims",
+  "icon": null,
+  "patterns": [
+    {
+      "id": "19669edb-e93f-4a19-bc97-4f60af8957ef",
+      "name": "mythland",
+      "translation": "Mythland",
+      "item": "sculk_catalyst",
+      "leggingsTexture": {
+        "name": "mythland_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAB+SURBVGhD7dPhDUARDEbRepMYxShGMYpRjGITT6XEDHpP0uBnv5YAAAAAAAAA8Ke1NrTs6cpnp/Te7ebLCeCWcx4pJRcbsQLQ6e8N0OZLKaIVY3w+hBPAtsO4Q3nenPaotZ5p2+T9fAE1m7bb2oIwD63nrQDu5r1xHwDgmsgP1D4xZya+GZIAAAAASUVORK5CYII="
+      },
+      "baseTexture": {
+        "name": "mythland.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURcDAwICAgKCgoGBgYEBAQODg4CAgIAAAAAAAAD4n50QAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAADBSURBVEhL5ZSBDoMgDETbq3P8/xevQJfVAaGyxC3ZiyanpucVrJReEJs4gzcATJzhkODrBvh0DX6gBX8RxdfIZsLgSCJiKER6yI12AhjMeoo+IMh0XV2CjXA3eQLfwr5QfzBY4g8Nmm293KD5OC83KC34PpYSSJGVJYNIgvfRflIM/EIMDPJomzTyyOuoVwMV5abSMYCgjnYWU/oJkEc7UK20BhB9cQ5c1YxugloHv1tDqP8zLwlCUPBFQwbbGCWlB9EEPQ8E1XQlAAAAAElFTkSuQmCC"
+      },
+      "decal": false
+    },
+    {
+      "id": "252c591b-dbfd-46a6-9a0e-36afeecd3ad2",
+      "name": "netherite",
+      "translation": "Netherite",
+      "item": "netherite_scrap",
+      "baseTexture": {
+        "name": "netherite_armor.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAA05JREFUaIHdWduR2zAMXOVcgEpACVcCS2EpTAdXAktQCSjBJbAEdcB8RKtAMGnpckps385oLJHgA0+C8FBKqaUU9J4QAgBARJBSgqpCVVFKAQCo6oAXxkVE9hioIgIRQSkFfAewCuGVcdkjsExSCPZ5dfw4SmiZ/Q6ME7sCCCEghLDRvois7a+OXRcgrO/z9ztg1wJUFcCWab6z75WxK4Be1Lftr4whxlgtg2TMapcxgHGAtJ7GxogWTUoJIoIY49pWSnloHjHknKvXZE/jFq0+fzpQAAyapLXHaErpoQJ4m+c5lVIwjiOmacI4jgCAeZ5RSsHHx8e62ff3dwBAzhmqimmaVuZJzzmmaYKqYp5nAMA4jhjHcaVj3/V6/fkQzhcMIYSmCzhTH5b3uqTHAwDYsf6Y5Fj22d/W3I/CxWd03BCZs6bvfdoylHMelrbayh6tUDnmGXDpBSFVHVJK1bZR8wQFQOaBZlCraOBpBHCvk7dBVa2eeVWt3iI6c3Bc7bQ/FHcFkHPunvV0nZzzoYWehWGP3U2JyFNpTlUr8Fs5McYbt/wsDt0FfDR/JM6+jxy+DD0L7rnl3+CQAJ5B8wQzyrMuYkcqQnd9LKVUbRKkqgghbI5GAIgxVlVFjHGTE+ScNzWHZc219kiNM6X28DEq57zGB+D26PY4XBHqgckSn+XYvKGjYCztssGbPttms0ai1Xakr4UvxwC7IPOGRcOVVsAbp0+xSU9GrQWklDZrtMbe29N/F4D9NiWzCtzeAD291bSdw1uSncMKzIJr9VzG41QB8N2as4X9P8GPtfVFKzDGDEvfY57IOa80e4nalwVgC6aE9WlumNr8LL0Pmq3LFQO1iFRPv4eNAEIIlZPbSe5dWa2peZ8m2M7I7ulbN0VDM4hI5cmy3DbXX7sXKwjf18NaEmuZI48g39/65sYJb7rWFFv01mVsrPDH6dm4+IWtRvyRZdv8Ru34ZeObhTjGBjZL7+c6EsDOwIUmyQ1YX2Qktv3WIpbH1wiqLIVP79OlUQEivf+TxQvkX+ENQOIH63W29mc3Mc/zWuMz35ua3lLjSwDWGiB9f5qmG3MmPWuGwB+BtejPxiAulQT6Vd4WesHG1xr3an+fpT8LvwAcukAX5uHdVQAAAA5lWElmTU0AKgAAAAgAAAAAAAAA0lOTAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "netherite_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADCSURBVEhL7ZXtCoMwDEWT3N7U93/iJbXOQSfU/hrDA/HSag/2AxVRQ6HXbRHpucwjeATJI/gZAYPWWuAfBM5aNb6JmV6pvX8aIegq9ExS7gtMQYQh00TR+6cRmFpRsUyIlt4/TQjiv1AUmdByX0CkwGIeUbYg2FfvrN4/jVTGHn6UtJMhwZE72fqGVPc4AGeZ5uNqR7JYUC7fbDAbCeyDADIWJhqFl9s7CHJUM7TxgMc10vvtgUFwzOY9J29c/P637QUEpTtmZb8HMgAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "530502df-b78a-47fb-8e19-9e3fbfd6697e",
+      "name": "depths",
+      "translation": "Depths",
+      "item": "repeating_command_block",
+      "baseTexture": {
+        "name": "depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAC2SURBVEhL7ZXdDoMgDEb7O/v+Tzx0lSGjxLpkF4vnxprI4QspFQCJRR+LXQT8eZlb8CcCQC8b8Ly3fCm9AkG8OsGaQHqBJBPoMQKCphKUCEr+tkGaCLAKTPhV73AiwCb4ilvwGwHT4LZUIgHX3iIsk9vrAYGAAXYDU7ktXg8IBGVRbU9GVi8HRAmQ6q46be34DN67yiSARQfUXrDZegPux4kzXdUA1o2TLOXnfBwnWeBjnKQwewIy4j25rA+blQAAAABJRU5ErkJggg=="
+      },
+      "leggingsTexture": {
+        "name": "depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAD2SURBVEhL7ZXbEoMgDEQhF8r/f3E3IWLAtg++1jNjMYy7bFJnLKUSi7ZXv0mJ9TaPwWNgPAZ/a1Cz6I6BaPXFtbdaEMJP0WHAVgQqvacyIMJe3q6mlaHvBZqJSPeSqmcccCcmjsJBCwXCMMjmosjAdiBwE4KUeZEDG0LoYZTCKS4/jDyBqZFAWHBrGxNUoV+H2FTh4T0f4KMBC9kznMDgnEJzeTxcYTMKjOY7xc6cwMHlY4aeBBFgcLheKdDnCFsLHkH0VwuumTSlOfN6tCP5iR3MwDo/SWcNOT69aCzNdWX5Fz5gJng7ku3G1SAdFqPT5ssnen8DI0c8YaIq0lMAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "d382058a-463a-4176-9c53-92a7b9a20d7d",
+      "name": "fiery_depths",
+      "translation": "Fiery Depths",
+      "item": "fire_coral_block",
+      "baseTexture": {
+        "name": "fiery_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAOI/NsYqN3kaJqQiL4wdKgAAALjp1BQAAAAOdFJOU/////////////////8ARcDcyAAAAAlwSFlzAAAOvwAADr8BOAVTJAAAAV1JREFUSEvtVdt2xCAIxFsroP//ux0MTbLnRHc3+9KHTh6CxhkRgRCFmHL5+u43Qf6+jX+BPytQ/f0cFQIUfLCh4uFw6K7EbC1Jz2cJZa1Bs48A9vcVqnInJs1nH4RZ5fAAA7cuIJWZsKI8nEIwsXugKz7WipIiCCX6BKAi5XBgzQeEBEFIPgJYIXuE4BnfrlHUzQHw3XoRx31Je5O64Xza5uZb2AVwkg894Fv8Uwxu4gWBFMOiIGYCac8t0MmqZoKJQCIyBaOlaDUzramJQKRg6Wk71xRQMw/ZdsaFgN1GCtHyWRl7F6T2lN/xZ3LLofAW/qZYMBAosOayqClKD91gcBT75TQ4qFebWqQI9VJNYQRpWzd6ABfG+RXphaE949MF8G9lxFu3a8J26Ae22BxBr9kcqG0RRM0saKONB7ttdINW8M0YTW5MXYGatIY9UIqCHvd7DIOzENU5v/cfgItiJGj6YMQAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "fiery_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAOI/NqQiL8YqN3kaJowdKgAAAE+Ih80AAAAOdFJOU/////////////////8ARcDcyAAAAAlwSFlzAAAOwQAADsEBuJFr7QAAAQlJREFUSEvtlc2CgyAMhCEkLAJ5/9fdIUSLXbcHr/U7NIQ6kx8PhhApseQfvUnweJvH4DEYPAZfaxBX0R0DlmjBtLdGYMJPkGmQRuIIqy6pQ4S79ToOLU+9BmgOCqulFK3HSVJKlDwxMEKA0A1W8yKwSKMgMBOCNKWTHIwluB5GS3NbrdWKkXUw1OiAE+M4Lg6Qud5imUfVttVt6Jan8dGABb/38CK0wnW3yK33WRZE2MyE1z29E7ZS69Y8g4PJ5w6tE7QAg931L6Gj7V3fc5PzCNYCy6cRcu9+xA5aFjp2Hn0CGFh+DZaYT/8vtaYcn17Bu7WbC/a38R/DRD6O4PHFWmweJVu4QvUX/aFg2X+8ZKgAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "f53b221a-b4e1-4086-b051-336c7a0c273e",
+      "name": "horned_depths",
+      "translation": "Horned Depths",
+      "item": "horn_coral_block",
+      "baseTexture": {
+        "name": "horned_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAANXLPuTaSu3sTLaJMNGzQb6gNQAAAD2WaHkAAAAPdFJOU///////////////////ANTcmKEAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAFcSURBVEhLzZTZYoUgDESDS5sF+f/P7aDRghe0+tTzQgAZBiQhCsM4zV/f6SXk7Wv+mwCzBx0a87WA6LWCqAe/nI7Q+OKG8x2It3/mLMBPPVCikNtjZ1URDmfdPvhygkR5e6I6edhGS5PZwRSKMUSmfOkA8x6B7GCmYOJjqvBvtnUarDuV8xCgMA8pugWxNMyNKyjma/Kn0wjR3QIYG1dQzlcce1l5Mw1684XZ/sGvKE+7ePuIQ2DhFD18ROHglYHqCD16P2DlXkAk51dX40PAs2octhbrFZW7ev4VHQcjkSuIDsiWfpJ3BCIFPM+MqYYRGb71PmkJ4HfEIPt7hoJy/5nifB4dRF5gPM7ezQoXhY4E1aAAVvN2ESnvtkWlKgAnSLjwwGx4kBpzhYKJbQx6FwpkC6rBjomgWDDHiPXlGusegixXA/ztrctba7iINbiH1gwwX5iX1u0NKf0AX/ppsV4b1cUAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "horned_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAANGzQeTaSu3sTL6gNdXLPraJMAAAAHT2npkAAAAPdFJOU///////////////////ANTcmKEAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAD5SURBVEhL7ZXJDoMwDEQTL2kCqf//czsOZlFbOPTUA09qsygz9gQkUsrEouVhP5Ji/Jnb4DZwboPbwPkDA6aYARWzwzIgwt7ndpCgqTE3EcMSp3Me6wEbMXEsPkGENq0OouiBvSAYJgQp87ncO2hTi7kpfqMYjQ5cjQ6EBVPf+Eay1ubVoajCY2RemOGHnkQuI8jWQRnyOJxhU2df4GrOSV5zAw7cEWm5Q6JavQUYnN9ign4vgAyI9Nwi9OpK0asIrtkp2p/r4Wx1eT5yPPEO7sCT70x9ihn0Hf/49CLYxVN4Z9Nbhd4j4O24iBDjzqHYvLxhWsbwDbMX80JpmXQryMoAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "018756d4-2879-461f-a9db-f635d5c38332",
+      "name": "tubed_depths",
+      "translation": "Tubed Depths",
+      "item": "tube_coral_block",
+      "baseTexture": {
+        "name": "tubed_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAD9s5SFDpBw3iEBc4jyF5TFP3QAAAA5iNFUAAAAPdFJOU///////////////////ANTcmKEAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAF3SURBVEhLrZULdoQgDEUDSEsgYf/L7eMzVCvo2PaOBxgjzxBCJDLWbf7jM2TOV6zs1Psce79iZR8Cv+X/BFLogwUr+xAQvVaQOLcPgXAjEO4Efr2EurtJU9L6f48y/Lqw44msFMhgk/VoN3As4KeKBvy0N6oJT26QiLpLFEMbWtH29srB3oC9dJTJbMWHerOBG3ScP0vEbi8e+LKKbwx5eMAqN2GV2kKAjLd13LG+hODmbA3Ko5tr4xeuhOBdisCfeCSgIqdgPhJAWE+BfSSAzEp9OHgWg3BOyAcCWk48BF594w0BZ3ueYSYaXPtArATcyC2r2jM19te++spCwBHZchaBcOSLzFoIWDIOM5WxWpHk++0JKw+M3TATLw8oBae924EvUx8dcdZzggOiPC0mA3KoBpNziwNWylBCrQ186UH21AvfESyblRMLc9m9Jfi2egRr+khMkAgi53K2g+Bs4FZcTmAXyjqu5rddCNitKTHiuipNOX8B0g5pVJIaFHQAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "tubed_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAACFDpDFP3Rw3iEBc4j9s5QAAAIpdisoAAAAOdFJOU/////////////////8ARcDcyAAAAAlwSFlzAAAOwAAADsABataJCQAAAPZJREFUSEvtldsOhCAMRKEXF9T+/+/uUEDNennwaR84yUZKnKFT3RhCJBadPvaS0K6vGQbDoDAMhkHhDwyY2gqomB3KBhH2ztuNAM2GiHlJMXrtsBETt+IMIuzmouiBy4HATQhS5ns5DFKe57Y2xc8PI++gqNGBsGBZNq4Iac7LkmoxqcLDM3fw0YCFPERAAwldeDG5vN0cYVMLjOYeRMi5G8AhubzO0DtBCzDormfCAnmPAINcdHsEb0H0McKyrr0BOCTaZh57HCnDvSMgweE5WI1QqXJ8ehXP1ncuwAxS6gkuKCZ4Ow62P5z/C8fD6lInv1xh9gVeR2HXo01SHgAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "7570929d-1858-4d2b-9c0c-579e349c35b7",
+      "name": "bubbling_depths",
+      "translation": "Bubbling Depths",
+      "item": "bubble_coral_block",
+      "baseTexture": {
+        "name": "bubbling_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAH4Jh6UdpWcFcM1Fv8gZupEWkQAAAFC2/FYAAAAPdFJOU///////////////////ANTcmKEAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAF9SURBVEhL3ZTdYsMgCIVR4wZKff/H7ZHRxDU2P7vcuWjRNh8EORKFmJb89d1eYilFavHVqci/N4lwhXx1qj2gcWu1f1zTBGAI8fBUU8Ad/UMAXx4AFzUKHnaxGCF8LEzezxf/XDYERgjPB1p8vdN+wHoFywDoCbBhFUxmwX7/pV5BXkuwBIFynyTp/TifJwAo5OgrU8xSpQn8wK3sMg5SUQO0Jf1svJQYboQjUcOhqUSrAoA0vrEJh4HnGfkPT1W9ApMip4e3NADk8h0wagVU7i25rxVQcJN5eEsr4K+6AEhxdMu7PgHSOlsx4ObugTxs/aYdwM6yMNGLkCLc0gPVGWEGYBiBwjqeKaSMgbK522sECAzUug0whSGuls4JoeCYdO9FAIYbghW5KwiwUYrZd7tdwW3tUWfvQMzeY/OvWaDbaDSYo8q0i8SqwUpXVhCKGQlVbQUci6RqYbwfzI3IpvHWxUoK14JQpYAhfHSBTIUmai0iMCMaoHcBrT0B6ORoPZooQboAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "bubbling_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAKUdpX4Jh2cFcM1FvwAAANkkPJ8AAAANdFJOU////////////////wA96CKGAAAACXBIWXMAAA6/AAAOvwE4BVMkAAABH0lEQVRIS+2VyW7DMAxEtZAKtfz/93ZE0Q7tuG2aUw9+QCJRwAwXy3AIMWXi8hgfEmz9mNvgNpjcBv/MQKpt/oSv4F2D6EV+L7b+BnHURbXe4G0o4S/wMsgzMJjGcKGREs78cZxaWvoRoNkhGhqmqDUu8kg5ZQsUtBAgNANvTowa8kwI1CRBmvNBDuYQTA8jVxzjp8mSVjDVqIAyYTsPdhCZ/jjEwgwP7XkDHw1Y0LmGJzB4TqGwtJUWRNisAKP5njBzKoJrULuofM1QK0EJMNhcXwksshJAPKSfWtASiH9qofXtBkvvvXLaZx6tAxhofE2QWvYmem3V5VpyfHoZz1ZPLgj+BRCp5xdqmuB2ONsTh8c4Wm2HZGvLRZcrxvgChlNZOIZBOVcAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "65432ad2-db46-4ff6-ac22-f6c09c1675f8",
+      "name": "conscious_depths",
+      "translation": "Conscious Depths",
+      "item": "brain_coral_block",
+      "baseTexture": {
+        "name": "conscious_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAwUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAL9GktZUm+R+udlio50vd+iOwawzggAAAJ57fNYAAAAQdFJOU////////////////////wDgI10ZAAAACXBIWXMAAA6/AAAOvwE4BVMkAAAB3ElEQVRIS52Vi7ajIAxFg+BMQsD8/9/OiUVB5fa2s5erKppjXqREYYlp/fOXxViyiH0JtbPBXLPYO4HSzhe6gEnO7+x/eHQKuANqmdvtjGyTp6eAsHHWdxFUKDzpIcAWIm9Bjh50D/yYpmlg4sKQRITQLn4i13YxQBWxNU579YrkXKF4Cepmv9+Skdvl/e6lgGBQEGb0FavhuIHn9fWm/1KxRMGkDj2kKAeXsm3oLHhwOnYg4xI8CCkUq1BowDxz2XhjVtna4shFEUlMKwUpfbXwqm7NvIn+Uhd1AQrr4hk53l1WJt1YWEb7/nwA+fEypogfj7alPKaSZWPF3hi4l9BriheOPkAOy/iJrDf7Cfvzs5Ee1fqQU8C0nHX4hi6AkfQ/DALt/CVd4MBn411uT9A8Sw+BiloUHgsSqzJKps9d4TwExPZtweitF4tS2Xxi69SHpwdS0BKR5FCIgk5HVDlLb4weIUH2KgxvMSOIvT0djiGuWovP3ONN7sMNHmgeI94DkCJLagu2xoRFxsTW88PdgojvoxxDBJ9d1nbr29Wd8uHSFkD3gMulgyDtr8m+wRq71OD1BUJ+w2zXdAde+P9Gu7xAIfs0+IAxUQNkCV0zb7KPIChf+u47zP4BMg9u6dSMQO8AAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "conscious_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAJ0vd79GktZUm+iOweR+udliowAAANEFnc0AAAAPdFJOU///////////////////ANTcmKEAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAEWSURBVEhL7ZLrkoMgDIUhgEsSzfs/7iYB29jqzI5/12+mjSDn5IIpZSi1LT9ykzTjbR6Dx8B4DP6tQY6iOwa1ZQ+u/ZNBn3Gngv6lNgwKWhg06mTvDnQAIonb2bR16CWRh0GtWC1C9hodQsFCMY21kCSNDqyFt3llYikwNtwEAFcqBWMad5gTUIMeimM9B0UfwCsAf8at4DZNd3Q19cchLkjNdOE0YF1xW5Hn+gs18LadpQmPtEpWG130jani5z28SU1zvlAHl48ZWiUEK2/raOyUpPpYwkcLOkTGjnSpl+SaF0uDsh/O1oGgOrBcjsBmoHUHQq5RN3Vm/cB854TDLZwAxNoBx+/oyLdBiZeov45tudSL/AK00WiWcCuYWAAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "19994d07-6e73-4e8e-8aeb-64ed9600959c",
+      "name": "dead_fiery_depths",
+      "translation": "Dead Fiery Depths",
+      "item": "dead_fire_coral_block",
+      "baseTexture": {
+        "name": "dead_fiery_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAEhSURBVEhL7VXRYsMgCARkm///xbtD6tQ0Ns1e9rDrQ9BwBxihImrFPz6/6k1IPm/jX+DPClxXlaMvtzRtYidGX/FcJExNquWCGMVWiGkVndxrdVUbRKfFChdVtMLi4eOG7fjwdZM5Pig+UvZ8wGXyZ8qQTRt4xedB+pQD+GldxM9X8vImtaELoNqS5lvoAqjklxnoLf5wBjdxTWDjdUUgeibtA/YC7S175rSnXglEbPTMeuM7nggMX8OUsbFxyj8KGBg9X4cCg2966iAAjkW84KBfubW5IqyQzwja/GIGMA2MJlwvLPmLV08ANrmYY0RkG+3MRDBrWgJSNoeImh1jtMRowx91nwaYNc1ehtwCKV4KYqAVHePlUQaRLEQ459f6De4/O0KGB4JwAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "dead_fiery_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsAAAA7AAWrWiQkAAABsSURBVEhL7dFBDoAgDETRmbZq739iJalEXJVuTAx/Q1n0hQSAorbthxdDnOUWsIDWAhbQ+htQ0V7APDFsCMkY0zWgIyaUGNPB4OyEqcaUDgJSLG6XEEM66PXse1+9S+ngj1fb/P74C5W+BtxPbZw+/LT52MMAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "e60ff4eb-e564-4472-87ba-505283b7db48",
+      "name": "dead_horned_depths",
+      "translation": "Dead Horned Depths",
+      "item": "dead_horn_coral_block",
+      "baseTexture": {
+        "name": "dead_horned_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAEXSURBVEhLzVVJAsMgCGSR1v+/uBgxESva5NS5QESGccEAIHGS1zs/BJh9jH8jIDInwCTuCRDWDPgteBiZzNhgTECzP2MkoLsa2vSzst4s3GylgxH0u4ewEeHi5l9j6snmLFzcEqXJhhIUqR8THJX6eKvM5mCQG8YbwSkhQBhvBLowcwJE8W44XvgKPW8yewsnQaLM5t5Cp+CRALeECMsD2hMglv4KOb4Ixn4+0v31d9gqqO0dN3kQuA5ESvFFh88I9Dj4WooyAIUCZgRMSSU7DYuHboyp1FKOtatNNgKuHgj9NZpXQCR6IbW6vlBNROFbMID0F1AQ9bEgYtb8PkfCRUDtQbQJVK3oRhzOHnAIEEssqd5ukPMH1M87c+m8u2cAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "dead_horned_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAB5SURBVEhL7ZFLCsAwCAX9pc39T1xDpQmk+WB3xdnkIThEBUBiSceZnYC9bkIQgkIIQlD4iYDv6EMFCF8MoP1o2YUKUIYGsXdC2cH4B7w29FegZiReb6cXICZLKnMIqLZn3rhPJwB6SgxkaUI/Qq3wRv+LoEGWE+R8AaCdPuY/qxz4AAAAAElFTkSuQmCC"
+      },
+      "decal": false
+    },
+    {
+      "id": "c39fea53-8ea9-4c74-b9f6-ffeb73f77ca7",
+      "name": "dead_tubed_depths",
+      "translation": "Dead Tubed Depths",
+      "item": "dead_tube_coral_block",
+      "baseTexture": {
+        "name": "dead_tubed_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAEkSURBVEhLvZWLDsMgCEVBYPP/v3hXykw3xT6y7KwpNpRbRWREXETt8eSqdUXmp7DVwmZk/i5wl98JFI5BQubvAiRrBbK5vwvwgQAfCdxegu9ukVLEn/eIYl4LP96oQi5sMvoZPxHcwMzf3gCxBJOhUEi2rztzvxt/mBTaR/zEj9m5vyfxG43V5WyhqcDB2erkAif5r4AQjckOewqkdUjsJQFUVolh51oO0P5i1LkgIO3EQ+BtN67MAJG44don4oTAVvPAYvC2zkogTovaqigXAogUxWqJhtTvWAggEh9ntIKbAoq/LCbRaTPpuMD83LY2VNBrWY9mEI1vQEWLkmrbvZQmgGRNX7ECCSYa29kOn4EmmcAutHWs4iMH2K0pZrhWVVDrCz1QO0b75hORAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "dead_tubed_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAACiSURBVGhD7dnBDYQgEIVhoBJKoRRKsxRKoROWR4BwMcvedPm/ZJCgl5khmqDNOZca5i4qqwEAAAAAAAAAgPezMcbivTcppbZQr0cdg7cC6Pw/hGBUCFExrus6ohBuTXqE1mpBSrvx59zo/roDdmn39OlrOSUu/TdYK4TmO++CXwv2RG0HKJHazZn8KMY3u889mdPQOz7jJPMzuHbzlC8AjDEflP9dbmhMNhgAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "7d1c9230-6b4d-47e1-836b-fe36d88ec13f",
+      "name": "dead_bubbling_depths",
+      "translation": "Dead Bubbling Depths",
+      "item": "dead_bubble_coral_block",
+      "baseTexture": {
+        "name": "dead_bubbling_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAEuSURBVEhL3ZXRloMgDESTMdn1/794JxxUhCjahz7sPactKkxCyFgRxWL+87tuGNwhXq+mSP09AExIvZqSTLS4y69npJG4GnU45XGqV/xDAXvcAJVOwDBRQH++ZwG20P36scF6gTZA0gun54WzwBYgOglRj3k/DSkFEPAjDOdDxAaFXggY3UhHModbU0FFKcAw9cYBD4PrjfFva6ptBsqYdfiKRgB36V6yLxKLkrxnF3C+yerwFR+l3fJNASx1cGIQKGeZNqBqppAJWBihg7aIvhtpBRDrwgbRxR3gMenoxZh/3DRlbOHisFEHAy2S7UFsm1v8WyyQJBB4WkUxOqKkrqZU8GKkrIYXCETduD+am6PSja9erPxzZlhzgVMD+4Yewy2rOEAzsgD6VmBd/wDtATq4pH9USAAAAABJRU5ErkJggg=="
+      },
+      "leggingsTexture": {
+        "name": "dead_bubbling_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABuSURBVEhL7ZNBEoAgDANjbJX/v1jRqngjeGEc9tJeukMhABNn82VNjSBqM0MwBJkh6ExAi0aiPMFnAaNKdHWJbfxPQI+mmkfAPQYGOQs4BjN5mPpGcFwJJnD39aD4QoS5bHgtTZouiHriJr5CShvd4z7+MVNOzQAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "0bf14805-d46a-4f22-80f0-c8551a64d2bf",
+      "name": "dead_conscious_depths",
+      "translation": "Dead Conscious Depths",
+      "item": "dead_brain_coral_block",
+      "baseTexture": {
+        "name": "dead_conscious_depths.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAGiSURBVEhLnZWLksMgCEXlIev/f/FeEiMYTbfZM50mUbgFJLQUYtFqPypNhUTaS0q/NrgzSfskYP06EQJNiD75P2wNAQ+AG2l/3EFtszsERJuiHP1pR4HCSqQAX4h8BDVaiAj8sy1TYhNCKiJS6DdPULbulBIaw5/9RIgKFKekbv7HI77cj46nUwHJ4EBU0VfKDZ8b2C+npX+XM20pqYcYx6FmtaKzEMEI7ELy0hmVIZXhD3dSq1pVWWpfzEyKPS2xWDVFDPBWrcJ/nAtfAq4UtlCoKirZP+8PUJ8h4NmOkhtJVca7kRiWHT9TGFzLqKHlnyC++W849ofuclpfEoGxjXN4QwhgJP2HJNCvLwmBC5+Nd7mjQPsqLQLe26bTmRdWmPH6VjiLgLTjtUgRcLPqE5u3MawRiKElXOgCd+jKRiTRGKFfIDsLQ9JnxDA5briYz9zLUmO4eXKUMz4SkFtPYFExsXmohgd+6j7KMURSiB3Y+fogIlCbOgjSbjYH4KSoJ6A8DZhH/H+j307s/y12TK0RoIjomn2TfYUPmrnvXtHaL49PObuVcLRDAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "dead_conscious_depths_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADr8AAA6/ATgFUyQAAACkSURBVEhL7ZJLDsMgDAWf8Sv1/U9co1htCDiJsuiKUSS+HmwCIEX5qm97CKJ9zBIsQWMJlqDxH0GNdgaM0Wto1ej98GgdZ7+gX9vbNpQ+qZOFoC8BOpRE8SOYp4B9fYd0Nljal9KfODmJJizC9LKPC8PGWjwv5v8hNQdqgiIxmHElMIL15A5vCNyAk22XAn9cwOyBBZcChVeA9B3dyKB6cBpv9gFjNj5KjE8D4AAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "18e0e274-460d-4def-80e2-a005b3a69342",
+      "name": "blast",
+      "translation": "Blast",
+      "item": "tnt",
+      "baseTexture": {
+        "name": "blast.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAMAAACVQ462AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExUReDg4MDAwKCgoICAgGBgYEBAQCAgIAAAAAAAAGcUVLcAAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVEhL7ZTJDoMwDES90JL//2LG9nByKyDqqcqTkIOXQQjGImq+vd77mEQYp1kC/yGgakAFf1SccKhYeVP2fUU8+zBYQu6cr7xeCzBOswSWQLAEPgjAlbB2ejOsjRvYE+ZmudEEMElr48ArAsuNJpDdOWNcFQXLjSbgVjvFE4Qcd2e5IbnNuI4iMn8brLTzldXjwczf5vef8RljHHI9OxUlT73tAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "blast_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABCSURBVGhD7dOxDcAwCEVBnEkZjU2Tht5SrBQRdw1/AF4AAAAAAMAcq6ru3q9k5ur5S1dfpjp+39OEdr5OTALAYBEPwA8IB8DMbeoAAAAASUVORK5CYII="
+      },
+      "decal": false
+    },
+    {
+      "id": "8d7d8bc7-0efa-4b0a-afbe-c75eb7e4839c",
+      "name": "wanderer",
+      "translation": "Wanderer",
+      "item": "wandering_trader_spawn_egg",
+      "baseTexture": {
+        "name": "wanderer.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAz5JREFUaEPtWT2LFEEQnQETEQ4RM0FaED8SBRHEbBUTQQwuEUFwNJYL/AEy+AMMxMREVxBEEAMRTMSbTAQRNPEDwUUwE5EDM2HkDb6hpra7a9bZ3VucnWRuu6tnqt68qnrdlybGlWVZGTMZDoep9YxFnjedJwCDwaARR1EU1e9eAKCDJxIAYQlAH1JgyQCV/71LAQTc6yL4X7fBPM/L0WjkjdE5V43Pcj7Pc7MVz1JHpOzzDJYv00FPMu8DLLR+s9toDYCFsnbUUojW8zgPYEIMgw3m9365U5kfOLytun94+6u6f95z2VxrMbgVAKGvNA0QYmkmg79w72sjVe5f3F1J9BAIVvryA5gAWBSdBgiaLTJdzqw8TI5efe+tE69vHCyfbpyrl8dqlS+lMbZQAMjA6fDN7GOyMnjpBWCjOF6uDfdXAPjWcjwGzEICIB1uC4AEQa4PpQLHFwoA/cXgZJsUYMBWQfUV5k3twW07hbSDbpF0z7KsUwydFv9LAF3XoOhKWb4EoG8MkCkwjQOZzimg9xKnyheJFi2kPcTL8/RknQUUOlB4utejx0Px/T5xvdHnY6qRhpOkyFQBYHGCdPUpNwSDAGTVxlfEOrQ7eaG/wy7LsmqYdhgL7St0ywMQVo2YCgA8IMUL4cSW9WtRAKQ9AeFaancGLPcMEiBfrydQeBbnLSXbGQBUZb5sUgBC6k2KGklnvsfabQI8gjA3ABAMhYivDjD/aUMqw1EyQrdIzhEEyQpru04mzQUATdNQDUAB1GpNAiADDR3EWiwgsLjPpQbI3SAp7ZOvYAC2rnp/7guUFCawsmYwz2MbHfqB+8yLoAYAyPtSAG3t1rtjXgbE1KEOXoJinSXAl7mlgHTmyqFXY31d1gDJghDVGeiquz2Gz6c3P+sxng5JI54c7TuyPbiVpj26QP3PT+YnnWKLiu2y8jxvCBX8/v74tFfY7Fx9lmBeVn/d032FUI+1EUNMEedctNMFJ51zaG9mmyyKogJQBrJjdH4MeRxe/HAPGmDpPNaU/ttZTB9iKWTNpQjUMorNP1rbWh1Snr20KwE1QTtc+hQHAGCcNk/ufqsPOTFOKoO+8u/QcVgXn+XaP+cJYxnz+iIZAAAADmVYSWZNTQAqAAAACAAAAAAAAADSU5MAAAAASUVORK5CYII="
+      },
+      "leggingsTexture": {
+        "name": "wanderer_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAuxJREFUaEPtWEto1UAUnYiKIPijFETQp2h9bhSkpRvhxeKidOFORBAcpUJRERGEbmynunElIv4WRUZw5VKKK9E8EUQUQRdaxU8U3RT81ar1R+RcesMkL+8xtYlomsB7k2TuzNx77rknwzi+7we+74v4TwghPM9D4+Avr5fTX6kECG6gWs11oPUS6FQq/QRAtTowPQHIK7Vt45qWWTfBKQCwpUpe7QoG5DWztnEVDLBFKq92BQPymlnbuAoG2CKVV7uCAWln9uKOpcH2C68SgW3Ul7YftvOlzoACgIIB/1kJ7O5oDT59+UolU+7cQu3KF+dFvI6VUnRy9ObGENlgDOxxloirVCrVHcv1iPJ4unwXPfK4TcE1UV43V7QefBQpx7vH1wTD9z/X+GFb27Z2juu6FBgCwA+O7Vt7u8YhAMBBcgA4NOV3Zjvzel+N4wj+58YjYeAMAFqMPSkfR3zer1eTred5qetU5EBEShkCwIElAaC1JjvzMk+S8V5KSd2NAEC/1jrCGszjum4I5kTg9Ky1zhYAprZJS1sAMAYs4Gz+KQDm2gwwMypzAJDZifN/WlspJRb528Q891YE+SQGmAAgg2ZdxzUEJXDV6Qgzz+WDceb6JsPQJ6XMlgGe50VKAA4kAQA7zoopfACMNYQzCWGrB0B8DhMA3DOofJ85AKy2m3cuEU/ufRAt6xeQE3EGIIN4D8WGOvP9qQftEQDwkPQV4S8A+swvAQdqZh6M+GsARGVt8k9xEU0DANOLzBkw+ZCjI3q72okZ/rsxMafcRsrdiAHIbvey5yELYG9mfPjSWVoA83X2HMpeA6YKQMvipmBv72Fx+thR0bxwPk3X0/YjUQPO3ZlF/Se6Z4sDg9/DpWHPfSPvPwpzvpsPn2UrglMFAAx4O/6LdoavR8fDAOM7O2gAB3nlTLPo2jOSCMCGUpMw5/vnAbDdSkNsh0a3hip/WX0j0YWgDr5cQaKHUlg1Y4xseKutlMqUAb8BfvTHMMQIQiIAAAAOZVhJZk1NACoAAAAIAAAAAAAAANJTkwAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "bbaf8f90-3c1b-4353-984f-fbb26b7b9eba",
+      "name": "caravan",
+      "translation": "Caravan",
+      "item": "trader_llama_spawn_egg",
+      "baseTexture": {
+        "name": "caravan.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAtxJREFUaEPtWT1oFEEYne0liK0gWykJIpJoIYi3xr9GLAS1EV0LEUEsbCxvrxG0SCdilRXS2FhISgmrCCJoUBAjVotoKxLUduTN5Vtm5zI3f3uYXbKQ3F7mffPNe/Pmy8xuVJYlL8uS6X4YYxHr8BX1ez0+5JeI34OXg04TVucy6vX6QoAh/VEB0jTlcRyLNvqEW3DhM8/zVgsWXZyZEQIsH/8sSP192G3Ljzjg1IUTQoDDp+dE273rD1o9o67lyki280vAVbGu4Y0O6BrhkRpAf4DVqaLL97YChMbb5mkaVzkgy7KN/cAwRZZlTu4IjW+amG1/NZJ8hfH3H6bZoTtrTuQpWWi87aCbxNWIYhax2UnT1EuA0Pgmidn2VSP6bmGazx1cY9G832YoNN520E3iagLQwShJEi8HhMY3Scy2r+0aICtVFIWoAXEcezkgNN521prEeRFtcgC+fa0XR/iz8oZ3waa8rRSAyIOE73+sbQE2FGilAzD2LbMEMJCp5I0Qcpw18zwXW+3z8WPmgtdZXCcA8sg5TDUm2AE6AeT1SeTHCaDDt1qAzdTXOUA3U1teAGx/6fCE+0+77o513f6f96vDlg1eJ4AcSxhympxj4ktAFWB5/VL19FhNjqfIZ6ee1gQw4XXHcuRF/xBcFgDkcdmeaINrwNLVPfzyk2+iH9yfu7abLRRnxCDUx+gg/+XjH+aCH0cEIkBAEgmnUVlg0+yjPVgA1QG/Zx/hXcGICzD7aZqyHas3aw4w4X0PZjbkGxFAdcDRwSvxwuT74hX2IpoX47h14C0DUTjidf9YzQEmvO+55L8JgMQgtdkF8rjkJWDCE9aWkCuuWgLyTKqdqG2w/d7ZnWJDg4ehmGF8v53vYyf5ighHLXi++KPqir7DFS74iQtA1dRUNQkHRiD7dfVXRY5isSmCCDJBWgIkENpc8JN+9xhcBFW3qDtDtMtbX7qnOFe8q8VN+H/DICI/651aKAAAAA5lWElmTU0AKgAAAAgAAAAAAAAA0lOTAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "caravan_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAATBJREFUaEPtmUEOgjAQRac36Zadie7beBLO4AUoF/AMnMTgXhN3bHuTmg66GdE2oS46DAkkwwyk/89LaYry3gfvPXw7AUAB40N1xoRZn8Vrf+1ZC6a9VMZ0aMAsf4MGMKY7S9qmcF9yRAzI4oRxkRDAuLlZ0oSALJsYFwkBjJubJU0IyLKJcZEQwLi5WdKEgCybGBcJAbG5bdvirtAwDGgIjSkAqXxNwKDgcIFwfzRwOE2LMRVE62sS/LEnGG8454LWOnYeDaAxfSiVr8kQFHw7N2G/m0Ad5y1wGlNBqXx1Brz/DVhr0QAaU0GpfHUGbH4OGMcR5wCtNRJAY9rRVL46AmoacOmxykKotKO1vW81AXFNEP8sxyPOI6+vSLHYObd6jL+aUuTlqaX02vw/qXoCEtC1ISXmETMAAAAOZVhJZk1NACoAAAAIAAAAAAAAANJTkwAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "20a70a00-b55f-4474-a565-ed5878ecd99e",
+      "name": "shackled",
+      "translation": "Shackled",
+      "item": "chain",
+      "baseTexture": {
+        "name": "chain.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAZlJREFUaEPtWEFuxCAMtB/RUy95Sp7CK3rm3FfwlDyFWw99Q8UukUApimOnhgpoV1ohsB2Y8cR4F733wXsP1BcAMPosy0KOMPAHwxsEeAeALwB8DfDygfCJgAnTzOAjxj2rZfadc5mA6JRIKBNNrY8kiG9Azw4+M/hdAZJszUwCS8DM4G8rgCqIEhX16iNWwIzgRQpwzgVjDKYxBp2t9Zph7ly7AkpA5dwYE8qr8WyN26xHe84sRcIV0Ghb1xWOCuHI7E09IgVwmbsLuicSWAXMDD4XQSqDHPhkH1oB6R2nRo4ELp6zc89vbd9rQO2KzoGuvZ+GJLYR0jy8Rey2bfHmwTRq9xiOgAi4JgnDEVATvKgV1kqsRXxNEoZTQG1CqxAg7ezu9hva/uL4A44iTk2AtTZYazGN1KZpXetfxnNzTjFqAuIGFCgKNOcvjePAJ/sVCWoCqKZHejjOT9pU/bSTVRNw7CS1h20Vf6mA8kq5O2916N9ql0X/B3DVeGQScvXm3kXKPjL43AlqQXBXTc92/Mvg/xXwZOABp9KVXcwiGC4AAAAOZVhJZk1NACoAAAAIAAAAAAAAANJTkwAAAABJRU5ErkJggg=="
+      },
+      "leggingsTexture": {
+        "name": "chain_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAO5JREFUaEPtmdEJg0AQRGeLyFeauVK2ihSRKq6UK+X+8pEawgYDSgIRB0/w2FtB7mcOnZm3Kii1Vqu1Yu0EIHB8iN1guAN4AXI1XB6Cp/g2/d2n/CMg5+y69Z8AHNNNWRum6bU0IgCKE8eiIMBxuZS1IICKybEoCHBcLmUtCKBiciwKAhyXS1kLAqiYHIuCAMflUtYk52yqKqUUSynR67yPukrHos8IzGb2rh3727y1hYARzU/pBAF7m49ngOoyPpuD1rFAVNWmHyF71469UbfW/CHUOkJb+ykXDaLmAI54jZ4ZwiEBNBRw+tbhA3gDoPVtMG6ygHcAAAAOZVhJZk1NACoAAAAIAAAAAAAAANJTkwAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    },
+    {
+      "id": "f91b9daa-c48a-45ac-a236-6096b1ebd873",
+      "name": "leathered",
+      "translation": "Leathered",
+      "item": "leather",
+      "baseTexture": {
+        "name": "leathered.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAX1JREFUaEPtmVFqwzAMhpWb5HW3EOwift4uoaP4FHs27AqD7dEPha6Msa6sLOkCKUrnUrqN2DN2bScG0zStK+vTb9lRq8fb6/7tfQNPr1t42XzBsm1h3Xbwsetgtd3B/WJdwXdDxJ4vlVLHe+azXF8rrXWvtYa/OgAcnSWiAQARlQOAHbrBq77pPqHp4NCbBu4enn84WSwAW/lKKQcFCCHKUoAtAKXUAAARZwC20FL/nlMkJ6+AyecAXwBCiCGHSCmdlBdyGTlNxHcb9AUYAoQTAD4JIuK/D0Ip5hAnAL4RYAXUdZ3UNhoVACuAj9wpHaSiAsg+B/guAd8k6mv/t/FRFRDCAd/fHAVgagDGUEm1APbJCgARcRHE9NExvlGJOX7UGbP38/YlpSyqGmStgNOITG4JxJTjJWyNLoFLTCqmzRlATNop2gqqgBQffs6DEBRAihGPCmBWQAYSCLoEZgVMXQEZ+A+VkSlPlstV3PjBx1wbJ87v8Xtuuf9NtgdXyroh9Atl+gAAAA5lWElmTU0AKgAAAAgAAAAAAAAA0lOTAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "leathered_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAUpJREFUaEPtmEFqxDAMRZWbZNtbGLrpMbzvci6go/gUXQd6hUK79KLQGUrpdOgwzjTgIlPBkEmCIJtUkSGE4B+T//SlRarn+9v8+XWAl48jvB9+4K1tYd928H3uYHc8w+PrvgLFq4ox5hgjjF0AoBvA5u4mnxJA6k6QOroDpJTg4Wmr2jiHehUmpzrYACiebyJrlgARJsUiS4Di4oqsWQJEmBSLLAGKiyuyZgkQYVIssgQoLq7ImiVAhEmxyBKguLgia4MJQMRMbyOi+oRcGSTz3vvyl7hpGvUQBgE450p8VgngL/rrbQHR5FAkmj3kvPclLbxodtR1PYiovzel5QNCCLO/capesw8nADQ0aYUQyp2f+2BopvA+D9kxPZ+3eADOuUxDk6reN9gnz/ukvwSAiOV5SL94AJctwCbGWmAsilMts3gA/30e/gLRep4h/+lyAgAAAA5lWElmTU0AKgAAAAgAAAAAAAAA0lOTAAAAAElFTkSuQmCC"
+      },
+      "decal": false
+    },
+    {
+      "id": "f7b6f3d1-5f3c-4053-b077-f6485da0958c",
+      "name": "hive",
+      "translation": "Hive",
+      "item": "bee_nest",
+      "baseTexture": {
+        "name": "hive.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAblJREFUaEPtWe2VhCAMXDuhFEqhFEuhFEqhE+8N77Ivx6FBgy4u+scPEkiGSYA4vYTLWrsYY5JUjDHd+XsIYZL66LldNN45t3jvi3IAZxgAcibA8aEA4Eyg5y129Ex7bpsYAjTLwwJAjpdCYCgGlCg9RA6Ak/nSR2BgOVxbIb4mB9zFkaN2iknwaMd30UtrOac0N5x2fvwb7QLpW0kmd35L59MbqYcBd6HqWXY+DDgL2bv0+zDgLjNFdpa25BofqhhgjElLZYyxSl5jkKRbOpRJOlvtVQ4ND4AG4da6HwmB1k701F9VCPRkcGtb1AAgKW2dB9BG7c65VwjhXVXGGYHauJy1NsnwKjQfg58t8kp1fkaRzhpqAIQZWeA0L6Ov1A+SHC5y/Ko6w6kAIGHRbMI57z0Y8G9MLgcA5nkuyrWmP/o7HQDOAGvt6v8FkgMAxphT7eJAqgeiZWmtdkDURjsYwGsPeYxj5nHRHc9SDGtZMZWSWMsk87uDxO81NdhaZ0v6lxjlvUeSu2SsvSB1adReJzTybwCoNriWpffGYp4bJH1efkdukOQ1Tv9JgrwoeqTTqww9YluNzg/UvyAwcI0T+AAAAA5lWElmTU0AKgAAAAgAAAAAAAAA0lOTAAAAAElFTkSuQmCC"
+      },
+      "leggingsTexture": {
+        "name": "hive_leggings.png",
+        "data": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAAXNSR0IArs4c6QAAAKZJREFUaEPtlcENgCAQBKUTSqEUSqMUSqETDI9LwMhLfFx2/Bg9UJjscOESv4L4/i8AkABxAiggHgAOQRRAAXECKCAeALoACqCAOAEUEA8AXQAFUECcQEgp9cEgxrigaK0tz6M+3tnd5pRSXGvkevEnwguAExQ9fyPknPub77Ypq+3OiFqr6xS5XvyJ5AHgK8XRRk2PXeu0f8wazWOfrXWu/a2YfAJuqB4tIc8cpoYAAAAOZVhJZk1NACoAAAAIAAAAAAAAANJTkwAAAABJRU5ErkJggg=="
+      },
+      "decal": false
+    }
+  ],
+  "materials": [
+    {
+      "id": "c5c4a5e5-ba21-4172-81a9-891c38db2d80",
+      "name": "trim_pallete",
+      "translation": "Trim Pallete",
+      "color": "#ffffff",
+      "item": "barrier",
+      "index": 0.714663,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAABGdBTUEAALGPC/xhBQAAAAxJREFUCFtjfIADAAAGwRUCNQb+9wAAAABJRU5ErkJggg==",
+      "fileName": "trim_palette.png"
+    },
+    {
+      "id": "53b0151d-bd4f-4be9-bb07-f9331c0ff395",
+      "name": "ancient_debris",
+      "translation": "Ancient Debris",
+      "color": "#c08a63",
+      "item": "ancient_debris",
+      "index": 0.714769,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8BlYZ+6drb5+fn+O3s7fj39/Ly+f3++f39+dUVXRsXy2wAAAAASUVORK5CYII="
+    },
+    {
+      "id": "e11b3d20-5175-49fe-b4d7-72a1f77aa150",
+      "name": "bamboo",
+      "translation": "Bamboo",
+      "color": "#88dc2c",
+      "item": "bamboo",
+      "index": 0.7146905,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bl9FV9vH67Obz5/DU+fjt+vIG8+sD9/YL9cUSub1emOIAAAAASUVORK5CYII="
+    },
+    {
+      "id": "ac339a30-90d6-4b27-814e-418246161041",
+      "name": "blaze_rod",
+      "translation": "Blaze Rod",
+      "color": "#eac01a",
+      "item": "blaze_rod",
+      "index": 0.7144985,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAiSURBVBhXY/z/o47hZNOWVZJfmZg+v3yjwvLz/SOG598ZALAcDcq2nXRdAAAAAElFTkSuQmCC"
+    },
+    {
+      "id": "17c579e8-e5bb-4dfd-8234-9dd9c5a2cbde",
+      "name": "bread",
+      "translation": "Bread",
+      "color": "#a57745",
+      "item": "bread",
+      "index": 0.7143946,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BvIkn5vD96u365u378/j+8vb99ff98/b9/DwVfUDRS+4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "1e345832-e15a-4270-8610-228bc570c81c",
+      "name": "brick",
+      "translation": "Brick",
+      "color": "#cd765c",
+      "item": "brick",
+      "index": 0.7146235,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bx2JF8Pj71+zx8fj74vH26PT37/j79fv8+tYVVbNDGKUAAAAASUVORK5CYII="
+    },
+    {
+      "id": "a06c458f-5ba4-48b4-855a-6ffe1d608dae",
+      "name": "chain",
+      "translation": "Chain",
+      "color": "#5a6d7c",
+      "item": "chain",
+      "index": 0.7141201,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAhSURBVBhXY/QMSP3z++fPn1///f33+es3IPj08d3PH98A9yUVSGh6MJEAAAAASUVORK5CYII="
+    },
+    {
+      "id": "4cee477d-8aad-4fab-88f5-652613a9f14a",
+      "name": "charcoal",
+      "translation": "Charcoal",
+      "color": "#60552d",
+      "item": "charcoal",
+      "index": 0.714228,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BYFVD7vDz9Pb57/Dz+vv7+Pn7+vv89vf585QVM/rPWeEAAAAASUVORK5CYII="
+    },
+    {
+      "id": "c5166537-03bf-4181-b1cb-f318d25bbbc9",
+      "name": "chorus",
+      "translation": "Chorus",
+      "color": "#ffffff",
+      "item": "popped_chorus_fruit",
+      "index": 0.7146914,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bj3GP7ert5+rl+O/6+/r78fPx+fn5+vr6/SoVimDp7LAAAAAASUVORK5CYII="
+    },
+    {
+      "id": "a9ed9f8e-ac55-454e-a768-3fa5731246e4",
+      "name": "clay",
+      "translation": "Clay",
+      "color": "#cee2e3",
+      "item": "clay_ball",
+      "index": 0.7148938,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Br7nW/fXn9fn08/Lz4eTs6e/94tjN9/XqDB4VtqUNfqEAAAAASUVORK5CYII="
+    },
+    {
+      "id": "c1d2750f-eeef-4127-a0bd-81adc2ef2dcc",
+      "name": "coal",
+      "translation": "Coal",
+      "color": "#3e3e3e",
+      "item": "coal",
+      "index": 0.714731,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAcSURBVBhXY7S0c/v748MfMPgOAj+ZfzN//PkFAOhoEzdULSCbAAAAAElFTkSuQmCC"
+    },
+    {
+      "id": "d69aec39-fed7-4e9e-924b-a110ef78e81c",
+      "name": "dragons_breath",
+      "translation": "Dragons Breath",
+      "color": "#da89d1",
+      "item": "dragon_breath",
+      "index": 0.7145465,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B9uru+Oj49Nzu/O/x79jf+dzu//fx5+T4F70WVUSlVZ0AAAAASUVORK5CYII="
+    },
+    {
+      "id": "28898616-f5ee-4bac-ad44-d4183c0bfffc",
+      "name": "dripstone",
+      "translation": "Dripstone",
+      "color": "#b8985c",
+      "item": "dripstone_block",
+      "index": 0.7148593,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BoI1x8uz08erx8PH68Pb38/n69vr69vr7AIQVsRYm0HIAAAAASUVORK5CYII="
+    },
+    {
+      "id": "dae791af-1446-4159-a545-a76654b5bf69",
+      "name": "echo",
+      "translation": "Echo",
+      "color": "#386178",
+      "item": "echo_shard",
+      "index": 0.7142055,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAMAAADU3h9xAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAYUExURSnf6wCSlQpQYANBUAUqMhEbIQ0SFwgMD2YPuqMAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAARSURBVBhXY2BgZGJmYWVjBwAAXQAd6AfCtwAAAABJRU5ErkJggg=="
+    },
+    {
+      "id": "120e14d2-b754-48ee-83a6-f13496eaea6b",
+      "name": "experience",
+      "translation": "Experience",
+      "color": "#e4ecb0",
+      "item": "experience_bottle",
+      "index": 0.7147016,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B9f+P1AAC8/rp6+/iy8ja5wAh4OD17uXv2RUR2Vn6f9AAAAAASUVORK5CYII="
+    },
+    {
+      "id": "668b42bf-752b-4039-a7e9-9ada0074a45d",
+      "name": "ender_pearl",
+      "translation": "Ender Pearl",
+      "color": "#549474",
+      "item": "ender_pearl",
+      "index": 0.7148522,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BTK2b6Ozt8evs9vf39ePm++/xAeru9+/w9iAUSz6l5n4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "b7dcb39e-ea72-4c32-a908-76be4d73b75c",
+      "name": "ender_eye",
+      "translation": "Ender Eye",
+      "color": "#35a467",
+      "item": "ender_eye",
+      "index": 0.7149305,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BGysQ9QEhu9Cs6uh9098Az87p9/JD4+DenXIO+ptXgk8AAAAASUVORK5CYII="
+    },
+    {
+      "id": "d7d51c8b-b777-4a9c-bcf3-a7c9800f50a5",
+      "name": "flint",
+      "translation": "Flint",
+      "color": "#828282",
+      "item": "flint",
+      "index": 0.714579,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAhSURBVBhXY16xYoW2tra4uLiQoKAAPz83FxcrGxszMzMAQogDXWyiFO4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "2a05f4b0-4263-4717-ae33-db50405f6f57",
+      "name": "glowstone",
+      "translation": "Glowstone",
+      "color": "#f7e466",
+      "item": "glowstone",
+      "index": 0.7149859,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8B////APHb/Oqa0azgucrVAxgQ6+bt/Pf84nQR2EijMmwAAAAASUVORK5CYII="
+    },
+    {
+      "id": "72bbc468-669e-4e3c-acb8-ec670d498a09",
+      "name": "leather",
+      "translation": "Leather",
+      "color": "#e4853f",
+      "item": "leather",
+      "index": 0.7143329,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B12tD7/Hy2O316/L75/n58Pn89Pr86fX6/KEVa9Mup1EAAAAASUVORK5CYII="
+    },
+    {
+      "id": "6076e701-95d7-4385-8690-a8cd3d4807ae",
+      "name": "rabbit_hide",
+      "translation": "Rabbit Hide",
+      "color": "#c49f5b",
+      "item": "rabbit_hide",
+      "index": 0.7144384,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bx55n7e309PX52uDt9fj67/P48/f59fj7AvQVsdHt/9MAAAAASUVORK5CYII="
+    },
+    {
+      "id": "6358172b-bc55-45fe-b299-1b436df496d9",
+      "name": "nautilus_shell",
+      "translation": "Nautilus Shell",
+      "color": "#c9c1a7",
+      "item": "nautilus_shell",
+      "index": 0.7143889,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B1MzD5uHT7NfUJPHe5NHt3CQe4+ns1Onu61gSrBvNIckAAAAASUVORK5CYII="
+    },
+    {
+      "id": "820f3627-059e-4b55-826d-8a28a90d3134",
+      "name": "nether_brick",
+      "translation": "Nether Brick",
+      "color": "#6c394b",
+      "item": "nether_brick",
+      "index": 0.714216,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BVS409vz6/vr8+///+vv7+fv8+f/87vj38z4VQ64JwN8AAAAASUVORK5CYII="
+    },
+    {
+      "id": "78d8bf2e-1c7f-415b-a4e0-b8a6a6254f09",
+      "name": "nether_wart",
+      "translation": "Nether Wart",
+      "color": "#c4405a",
+      "item": "nether_wart",
+      "index": 0.7149382,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bvj9K6Obm4/r65/r47Pz48vz85fr45vr59q8VJ2vrXeEAAAAASUVORK5CYII="
+    },
+    {
+      "id": "2c7f2d27-6581-4795-9bc4-540fabc1d5c8",
+      "name": "obsidian",
+      "translation": "Obsidian",
+      "color": "#583e8e",
+      "item": "obsidian",
+      "index": 0.7148668,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAhSURBVBhXY7ZWDxEVkOLjleZg52Jm5Pj39y8jA+s/hj8ANsEGTHxCvQ4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "eb68dbb7-9005-47f0-85c9-f8ea6d4e10a6",
+      "name": "crying_obsidian",
+      "translation": "Crying Obsidian",
+      "color": "#b564b3",
+      "item": "crying_obsidian",
+      "index": 0.7148719,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAiSURBVBhXY7ZWDxEVkHL/2hnM2v/qL9tH5vOMDKz/GP4AAGgiCVVBk8SXAAAAAElFTkSuQmCC"
+    },
+    {
+      "id": "197083be-8033-4176-8f1f-e4f1245e8a72",
+      "name": "prismarine",
+      "translation": "Prismarine",
+      "color": "#9ed6d2",
+      "item": "prismarine_shard",
+      "index": 0.7146925,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BpNHC7fHq6/H42efm7ubk8Ont/fv7/vz9CJoV4+FcBBsAAAAASUVORK5CYII="
+    },
+    {
+      "id": "a4b1f269-3656-4262-a894-efe1fd713c0e",
+      "name": "prismarine_crystal",
+      "translation": "Prismarine Crystal",
+      "color": "#e4f2f3",
+      "item": "prismarine_crystals",
+      "index": 0.7142993,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B3+nc+f/39P3y3fH/8fj13tXf4dfY8OrsFlUWC/TeiNMAAAAASUVORK5CYII="
+    },
+    {
+      "id": "dd11417b-5db3-44c9-85e6-fa2c774aa15d",
+      "name": "shulker_shell",
+      "translation": "Shulker Shell",
+      "color": "#b575ca",
+      "item": "shulker_shell",
+      "index": 0.714747,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8Bq4Sq7OXt+Pr49e/66Pbi8vgC9PTz8fLw/bcUu8ivJkwAAAAASUVORK5CYII="
+    },
+    {
+      "id": "d85630c9-56ad-4f89-a3f9-302f40e45928",
+      "name": "snow",
+      "translation": "Snow",
+      "color": "#ebf0f1",
+      "item": "snowball",
+      "index": 0.7143448,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B////6fn56Pn58unp7fDwzNzc6uvr7PHxG2QWV90cGZUAAAAASUVORK5CYII="
+    },
+    {
+      "id": "cb1b19c2-25b5-4975-8ac9-a70d176dfebe",
+      "name": "soul_soil",
+      "translation": "Soul Soil",
+      "color": "#805f4a",
+      "item": "soul_soil",
+      "index": 0.7144358,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BalJE8fP07vL09Pf5+Pv99vn7+Pv8+fr89M4VSkxv2fAAAAAASUVORK5CYII="
+    },
+    {
+      "id": "9e1dc312-7a9d-4fee-a3b6-ef5c1d18130f",
+      "name": "turtle_scute",
+      "translation": "Turtle Scute",
+      "color": "#30a53f",
+      "item": "scute",
+      "index": 0.7148018,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8BR79K+OX4+en48fAPB/X29fL09vf+9vH04xcThD7/SekAAAAASUVORK5CYII="
+    },
+    {
+      "id": "122254e2-465b-4a32-930c-5d64adcf0a4d",
+      "name": "dead_coral",
+      "translation": "Dead Coral",
+      "color": "#aba89c",
+      "item": "dead_bubble_coral",
+      "index": 0.7145613,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8BpKCc9fPx8e3u/Pv89ff3+fj49Pr99fb2CJEWErjvkAUAAAAASUVORK5CYII="
+    },
+    {
+      "id": "bacc2d7d-46c6-4801-8fdd-97523e35b9b6",
+      "name": "heart_of_the_sea",
+      "translation": "Heart of the Sea",
+      "color": "#3175db",
+      "item": "heart_of_the_sea",
+      "index": 0.7141079,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BHcLRAtTgAurw/O3s8uvo/vDq/vLu/eYH1pESfj9rBiMAAAAASUVORK5CYII="
+    },
+    {
+      "id": "32dc5a7b-0a3f-4481-949a-612cdf9f21fc",
+      "name": "fire_coral",
+      "translation": "Fire Coral",
+      "color": "#df4d4d",
+      "item": "fire_coral",
+      "index": 0.7149032,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B4j825OsB3vj46Pv77f386vv68f377vz653EUZwfoE4sAAAAASUVORK5CYII="
+    },
+    {
+      "id": "6a480d12-a72d-47a7-8d96-63a8deaa8202",
+      "name": "horn_coral",
+      "translation": "Horn Coral",
+      "color": "#e8d133",
+      "item": "horn_coral",
+      "index": 0.7146981,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B7exM9+7+8fH0/OgD7e30+On79PX89Pb7AZwVOxhtqW4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "50a2f08d-99a9-4370-8f3f-f7678946d64c",
+      "name": "tube_coral",
+      "translation": "Tube Coral",
+      "color": "#4e71e9",
+      "item": "tube_coral",
+      "index": 0.7141032,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8BPIXlA+cAAfD98fP78PTH+/Tk/Pjt/PrzyDgSp5wMhW4AAAAASUVORK5CYII="
+    },
+    {
+      "id": "ac650c57-640f-4daf-a997-afecfbdbe52c",
+      "name": "bubble_coral",
+      "translation": "Bubble Coral",
+      "color": "#d753c2",
+      "item": "bubble_coral",
+      "index": 0.714588,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8BzUW/+9T73QTr2ezi6fzp8//z9ADz6//p6pQTfTVxB54AAAAASUVORK5CYII="
+    },
+    {
+      "id": "5baa672d-a39e-4ea6-a9a6-41357032749a",
+      "name": "brain_coral",
+      "translation": "Brain Coral",
+      "color": "#e796c9",
+      "item": "brain_coral",
+      "index": 0.7145256,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B6I7B/PD49eTq/fL46fL33unl7Pfx6fjuDNsV6MYs4BoAAAAASUVORK5CYII="
+    },
+    {
+      "id": "483bee0d-799b-42be-82fe-42a9f0bde97b",
+      "name": "ochre",
+      "translation": "Ochre",
+      "color": "#fcf5d1",
+      "item": "ochre_froglight",
+      "index": 0.7142823,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B/v/s/vvh/vXl/fDg8u/08Oro9fPz9vXxHW4WuFAVnKsAAAAASUVORK5CYII="
+    },
+    {
+      "id": "9a9e8812-c4c2-41b0-8ecb-9dbdb3579dff",
+      "name": "pearlescent",
+      "translation": "Pearlescent",
+      "color": "#fbe3f3",
+      "item": "pearlescent_froglight",
+      "index": 0.714678,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B//79+vb29vLu8+3y8uz17uX77+7v8/DzH4kWzTMPSewAAAAASUVORK5CYII="
+    },
+    {
+      "id": "41358a7d-8ae9-4afb-83fb-93cb6a06ea59",
+      "name": "verdant",
+      "translation": "Verdant",
+      "color": "#eef8e9",
+      "item": "verdant_froglight",
+      "index": 0.7148914,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B+P348/z07PXp5vPi4/Lk8/Lp6uXr7OnuGoMWWxSV3cEAAAAASUVORK5CYII="
+    },
+    {
+      "id": "72059868-439e-4d32-99e0-cb7a6c7e1c33",
+      "name": "nether_star",
+      "translation": "Nether Star",
+      "color": "#d7dee1",
+      "item": "nether_star",
+      "index": 0.7148301,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8B2uLi8fT07vPzRDbf4+PP8vCJkr6Q8dvb9qETLQTjaZwAAAAASUVORK5CYII="
+    },
+    {
+      "id": "1dab17b6-c9c9-473f-bd12-94c657f2ecb0",
+      "name": "magma_block",
+      "translation": "Magma Block",
+      "color": "#e89626",
+      "item": "magma_block",
+      "index": 0.7143534,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAkSURBVBhXARkA5v8BcjIy8/b26/PzpGoHAff18ej55Or2d8gQyDsQb0ae1vAAAAAASUVORK5CYII="
+    },
+    {
+      "id": "783f7fb2-e369-437b-af2b-775ad542be48",
+      "name": "flame",
+      "translation": "Flame",
+      "color": "#ffc753",
+      "item": "lantern",
+      "index": 0.7146919,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B/////fnf/vnl+/HJ+uzN+OnY8tzf68/yGxYWKveTAuIAAAAASUVORK5CYII="
+    },
+    {
+      "id": "1d1159a9-cb84-442c-9523-312ab9e97a43",
+      "name": "soul_flame",
+      "translation": "Soul Flame",
+      "color": "#c1f9ff",
+      "item": "soul_lantern",
+      "index": 0.7147449,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAkSURBVBhXARkA5v8B////3P8A4/8Avv3/3vn60/P04Orq9ODg+TkUaQCexm8AAAAASUVORK5CYII="
+    },
+    {
+      "id": "84b6e7b0-3f1a-4470-9bfe-ed8c5bb0c8c7",
+      "name": "redstone_flame",
+      "translation": "Redstone Flame",
+      "color": "#df2920",
+      "item": "redstone_torch",
+      "index": 0.7148386,
+      "palletTexture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAIAAABsYngUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAiSURBVBhXY/wPBC/uMrx+/P/q0b8XT/2+dvXzuXuvn/wHAAOaFNWbLKOdAAAAAElFTkSuQmCC"
+    }
+  ]
+}

@@ -12,3 +12,11 @@ export type PackContextData = {
     patterns: PatternData[];
     materials: MaterialData[];
 };
+
+export type PackInfo = {
+    name: string;
+    namespace: string;
+    description: string;
+    version: MCVersion;
+    icon: null | { name?: string, data?: string };
+};

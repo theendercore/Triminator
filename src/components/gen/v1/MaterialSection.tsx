@@ -1,13 +1,7 @@
-import {StateUpdater, useState} from "preact/hooks";
 import {getEmptyMaterial} from "../../../api/v1/consts";
 import TextInput from "../../generic/input/TextInput.tsx";
 import ImageInput from "../../generic/input/ImageInput.tsx";
-import {
-    format,
-    formatIdentifier, genIndex, getBase64,
-    getImgAlertMessage, setDragImageEmpty,
-    validateImg,
-} from "../../../api/Util";
+import * as utl from "../../../api/Util";
 import ItemRender from "../../generic/ItemRender.tsx";
 import CodePre from "../../generic/CodePre";
 import {devMode} from "../../../api/dev";
@@ -17,68 +11,142 @@ import ColorInput from "../../generic/input/ColorInput.tsx";
 import PrimaryButton from "../../generic/btn/PrimaryButton.tsx";
 import Plus from "../../icons/Plus.tsx";
 import SecondaryButton from "../../generic/btn/SecondaryButton.tsx";
-import type {PackContextData} from "../../../api/v1/ExtraTypes";
+import {useMemo, useState, useRef} from "preact/hooks";
+import { v4 as uuid} from "uuid";
 
 type MaterialSectionProps = {
-    packData: PackContextData;
-    setPackData: StateUpdater<PackContextData>;
+    materials: MaterialData[]
+    setMaterials: (e: MaterialData[]) => void;
     advancedState: boolean;
 };
 
-export default function MaterialSection({packData, setPackData, advancedState,}: MaterialSectionProps) {
+export default function MaterialSection({materials, setMaterials, advancedState,}: MaterialSectionProps) {
     const [material, setMaterial] = useState<MaterialData>(getEmptyMaterial());
-    const isOpen = material.id !== "";
     const [dragItem, setDragItem] = useState<number>(0);
+    const [index, setIndex] = useState(-1)
+
+
+    const isOpen = useMemo(() => material.id !== "", [material])
+    const nameRef = useRef<HTMLHeadingElement>(null!)
+
 
     const removeMat = (id: string) =>
-        setPackData({...packData, materials: packData.materials.filter(p => p.id !== id),});
+        setMaterials(materials.filter(p => p.id !== id));
 
-    const addMat = (material: MaterialData) =>
-        setPackData({...packData, materials: [...packData.materials, material]});
+    const addMat = (material: MaterialData, idx: number) => {
+        if (idx >= 0) {
+            let newMaterials = [...materials]
+            newMaterials.splice(idx, 0, material)
+            setMaterials(newMaterials)
+        } else {
+            setMaterials([material, ...materials]);
+        }
+    }
     const editMat = (id: string) => {
-        setMaterial(packData.materials.find(mat => mat.id === id)!)
+        setMaterial(materials.find((pat, idx) => {
+            if (pat.id === id) {
+                setIndex(idx)
+                return true
+            }
+            return false
+        })!)
         removeMat(id)
+        scrollToName()
     }
 
-    function handleDragStart(e: DragEvent, index: number) {
-        setDragImageEmpty(e)
-        setDragItem(index);
+    function handleDragStart(e: DragEvent, idx: number) {
+        utl.setDragImageEmpty(e)
+        setDragItem(idx);
     }
 
-    function handleDragEnter(index: number) {
-        const newList = [...packData.materials];
+    function handleDragEnter(idx: number) {
+        const newList = [...materials];
         const item = newList[dragItem];
         newList.splice(dragItem, 1);
-        newList.splice(index, 0, item);
-        setDragItem(index);
-        setPackData({...packData, materials: newList});
+        newList.splice(idx, 0, item);
+        setDragItem(idx);
+        setMaterials(newList);
     }
+
+    function scrollToName() {
+        window.scrollTo({top: nameRef.current.offsetTop, behavior: 'smooth'})
+    }
+
+    // @ts-ignore
+    function sort(compareFn: (a: MaterialData, b: MaterialData) => number) {
+        let newLs = [...materials].sort(compareFn)
+        setMaterials(newLs)
+    }
+
+    function hexToRGB(hex: string) {
+        hex = hex.replace('#', '');
+        const red = parseInt(hex.substring(0, 2), 16);
+        const green = parseInt(hex.substring(2, 4), 16);
+        const blue = parseInt(hex.substring(4, 6), 16);
+        return { r: red, g: green, b: blue };
+    }
+
+    // @ts-ignore
+    function sortMaterialDataByColor(a:MaterialData, b:MaterialData) {
+        const rgbaA = hexToRGB(a.color);
+        const rgbaB = hexToRGB(b.color);
+
+        // Compare RGB values
+        if (rgbaA.r !== rgbaB.r) {
+            return rgbaA.r - rgbaB.r
+        } else if (rgbaA.g !== rgbaB.g) {
+            return rgbaA.g - rgbaB.g
+        } else {
+            return rgbaA.b - rgbaB.b
+        }
+    }
+
 
     return (
         <div class="px-6 xl:px-12 py-6 bg-secondary bg-opacity-40 rounded-3xl flex flex-col">
-            <h3 class="text-3xl font-semibold text-center w-full pb-4">Materials
-                {(packData.materials.length > 1 && (<span className="italic opacity-60">{` (${packData.materials.length})`}</span>))}
+            <h3 ref={nameRef} class="text-3xl font-semibold text-center w-full pb-4">Materials
+                {(materials.length > 1 && (
+                    <span className="italic opacity-60">{` (${materials.length})`}</span>))}
             </h3>
 
+            <div class="flex items-center gap-2 self-center p-3 w-full justify-center relative">
+                {!isOpen &&
+                    <PrimaryButton
+                        className={`p-1 h-min rounded-xl`}
+                        onClick={() => {
+                            setMaterial({
+                                ...material,
+                                id: uuid(),
+                                index: utl.genIndex(),
+                                color: "#ffffff"
+                            })
+                            setIndex(-1)
+                        }}
+                        disabled={isOpen}
+                    >
+                        <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
+                }
+                {/*<div className="absolute right-2">*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => b.name.length - a.name.length)}>v</PrimaryButton>*/}
+                {/*    <PrimaryButton onClick={() => sort((a, b) => a.name.length - b.name.length)}>^</PrimaryButton>*/}
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)}>^1</PrimaryButton>*/}
+
+                {/*    <PrimaryButton*/}
+                {/*        onClick={() => sort((a, b) => -1 * ((a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0))}>v1</PrimaryButton>*/}
+                {/*    <PrimaryButton onClick={() => sort(sortMaterialDataByColor)}>^c</PrimaryButton>*/}
+
+                {/*</div>*/}
+            </div>
+
             <div class="flex flex-col gap-2">
-                {packData.materials.map((p, idx) => (
-                    <Material
-                        onDragStart={(e) => handleDragStart(e, idx)}
-                        onDragEnter={() => handleDragEnter(idx)}
-                        key={p.name}
-                        material={p}
-                        remove={removeMat}
-                        edit={editMat}
-                        isOpen={isOpen}
-                        advanced={advancedState}
-                    />
-                ))}
                 {isOpen && (
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            addMat(material);
+                            addMat(material, index);
                             setMaterial(getEmptyMaterial());
+                            setIndex(-1)
                         }}
                         class="flex flex-col gap-3 relative bg-secondary bg-opacity-40 p-4 rounded-3xl"
                     >
@@ -103,7 +171,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                         onChange={(e) =>
                                             setMaterial({
                                                 ...material,
-                                                name: formatIdentifier(e.currentTarget.value),
+                                                name: utl.formatIdentifier(e.currentTarget.value),
                                             })
                                         }
                                         required
@@ -132,14 +200,12 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                     onChange={(e) => setMaterial({
                                         ...material,
                                         translation: e.currentTarget.value,
-                                        name: formatIdentifier(e.currentTarget.value),
+                                        name: utl.formatIdentifier(e.currentTarget.value),
                                     })}
                                     required
                                     hoverText="Name of the material. This is how the material is gonna be called in game."
                                 />
                             )
-
-
                         }
 
                         <ColorInput
@@ -164,7 +230,7 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                             onChange={(e) =>
                                 setMaterial({
                                     ...material,
-                                    item: formatIdentifier(e.currentTarget.value),
+                                    item: utl.formatIdentifier(e.currentTarget.value),
                                 })
                             }
                             required
@@ -191,13 +257,13 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                             title="Pallet Texture:"
                             name="m-pallet-texture"
                             onChange={(e) => {
-                                let image = validateImg(e.currentTarget.files![0], 8, 1);
+                                let image = utl.validateImg(e.currentTarget.files![0], 8, 1);
                                 if (typeof image === "string") {
-                                    alert(getImgAlertMessage(image, 8, 1));
+                                    alert(utl.getImgAlertMessage(image, 8, 1));
                                     return;
                                 }
                                 setMaterial({...material, fileName: e.currentTarget.files![0].name})
-                                getBase64(e.currentTarget.files![0], (it) =>
+                                utl.getBase64(e.currentTarget.files![0], (it) =>
                                     setMaterial({...material, palletTexture: it as string,})
                                 )
                             }}
@@ -221,30 +287,27 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                         </PrimaryButton>
                     </form>
                 )}
-            </div>
-            <div class="flex items-center gap-2 self-center p-3">
-                {!isOpen &&
-                    <PrimaryButton
-                        className={`p-1 h-min rounded-xl`}
-                        onClick={() => setMaterial({
-                            ...material,
-                            id: crypto.randomUUID(),
-                            index: genIndex(),
-                            color: "#ffffff"
-                        })}
-                        disabled={isOpen}
-                    >
-                        <Plus className={isOpen ? "fill-background" : "fill-text"}/></PrimaryButton>
-                }
+                {materials.map((p, idx) => (
+                    <Material
+                        onDragStart={(e) => handleDragStart(e, idx)}
+                        onDragEnter={() => handleDragEnter(idx)}
+                        key={p.name}
+                        material={p}
+                        remove={removeMat}
+                        edit={editMat}
+                        isOpen={isOpen}
+                        advanced={advancedState}
+                    />
+                ))}
             </div>
 
             {devMode &&
                 <>
-                    <CodePre>{format(material)}</CodePre>
+                    <CodePre>{utl.format(material)}</CodePre>
                     <SecondaryButton
                         className={`px-3 fixed left-3 top-56`}
                         onClick={() => {
-                            let id = crypto.randomUUID();
+                            let id = uuid();
                             addMat({
                                 id: id,
                                 name: id.slice(0, 5),
@@ -253,8 +316,8 @@ export default function MaterialSection({packData, setPackData, advancedState,}:
                                 palletTexture: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAABCAMAAADU3h9xAAAAAXNSR0IArs4c6QAAABhQTFRFl9FVjcJPeahCYJgWWZADU4IJRm0MPWMXzAAhkAAAABFJREFUCJljYGBkYmZhZWMHAABdAB2tV7ZvAAAAAElFTkSuQmCC",
                                 fileName: "cool_img.png",
                                 color: "#FFFFFF",
-                                index: genIndex()
-                            });
+                                index: utl.genIndex()
+                            }, -1);
                         }}
                     >qMat
                     </SecondaryButton>

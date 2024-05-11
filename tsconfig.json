@@ -21,16 +21,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"]
+    }
   },
   "include": [
     "src"
   ],
   "baseUrl": ".",
   "paths": {
-    "@/*": [
-      "./src/*"
-    ]
+    "@/*": ["./src/*"],
+    "react": ["./node_modules/preact/compat/"],
+    "react-dom": ["./node_modules/preact/compat/"]
   },
   "references": [
     {

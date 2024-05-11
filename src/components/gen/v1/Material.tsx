@@ -15,20 +15,16 @@ type MaterialProps = {
 };
 
 export default function Material({onDragStart, onDragEnter, material, remove, edit, isOpen, advanced}: MaterialProps) {
-
     return (
         <div
             draggable
             onDragStart={(e) => onDragStart(e)}
             onDragEnter={() => onDragEnter()}
             onDragOver={(e) => e.preventDefault()}
-            className="grid columns-2 grid-flow-col-dense auto-cols-auto justify-end gap-4 md:gap-8 xl:gap-16 bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative">
-
-            <div className="flex absolute left-5 self-center">
-                <div className="h-6 w-6 rounded-full" style={`background:${material.color};`}></div>
-            </div>
-
-            <span className="justify-self-end flex flex-row md:gap-3 items-center re">
+            className="grid columns-2 grid-flow-col-dense auto-cols-auto justify-end gap-4 md:gap-8 xl:gap-16 bg-secondary bg-opacity-40 px-8 py-4 rounded-3xl relative border-2"
+            style={`border-color:${material.color};`}
+        >
+            <span className="justify-self-end flex flex-row md:gap-3 items-center">
                 <span className="z-10">
                     {material.translation}
                     <span

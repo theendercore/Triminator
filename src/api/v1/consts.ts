@@ -1,14 +1,12 @@
-import {PackContextData} from "./ExtraTypes";
+import {PackInfo} from "./ExtraTypes";
 
-const getEmptyPack = (): PackContextData =>
+const getEmptyPackInfo = (): PackInfo =>
     JSON.parse(JSON.stringify({
-        version: "1.20.4",
+        version: "1.20.6",
         name: "",
         namespace: "",
         description: "",
         icon: null,
-        patterns: [],
-        materials: []
     }));
 
 const getEmptyPattern = (): PatternData =>
@@ -83,11 +81,11 @@ const getVanillaPatterns = (): string[] =>
         "trims/models/armor/host_leggings"
     ]))
 
-const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4"] as const
+const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4", "1.20.6"] as const
 
 
 export {
-    getEmptyPack,
+    getEmptyPackInfo,
     getEmptyPattern,
     getEmptyMaterial,
     getVanillaMaterials,

@@ -85,6 +85,8 @@ const resolveDataPackVersion = (version: MCVersion) => {
             return 18;
         case "1.20.4":
             return 26;
+        case "1.20.6":
+            return 41;
         default:
             throw Error("Unhandled version!")
     }
@@ -100,6 +102,8 @@ const resolveResourcePackVersion = (version: MCVersion) => {
             return 18;
         case "1.20.4":
             return 22;
+        case "1.20.6":
+            return 32;
         default:
             throw Error("Unhandled version!")
     }
@@ -125,7 +129,7 @@ export function getBase64(file: Blob, callback: (it: string | ArrayBuffer | null
         callback(reader.result)
     };
     reader.onerror = function (error) {
-        console.log('Error: ', error);
+        console.error('Error: ', error);
     };
     reader.readAsDataURL(file as Blob);
 }

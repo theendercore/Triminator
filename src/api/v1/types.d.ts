@@ -5,7 +5,8 @@ type PatternData = {
     item: string;
     decal?: boolean;
     baseTexture?: { name?: string; data: string };
-    leggingsTexture?:  { name?: string; data: string };
+    leggingsTexture?: { name?: string; data: string };
+    icon?: string;
 };
 
 type MaterialData = {
@@ -103,3 +104,5 @@ type NamedIndexes = {
     name: string;
     index: number
 }
+
+type IdentifiableTexture = { id: string, texture: string }
