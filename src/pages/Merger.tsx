@@ -2,6 +2,7 @@ import {useRef} from "preact/hooks";
 
 import {MutableRefObject} from "preact/compat";
 import PatternDisplay from "../components/gen/three/PatternDisplay.tsx";
+import {devMode} from "../api/dev.ts";
 
 export default function Merger({}: { path: string }) {
     return (
@@ -9,7 +10,7 @@ export default function Merger({}: { path: string }) {
             <h1 class="text-2xl p-6 ">Work in Progress</h1>
 
             <h2 class="text-xl p-3">Debug stuff pls ignore! 😃</h2>
-            <TestingBlock/>
+            { devMode && <TestingBlock/>}
         </ div>
     );
 
