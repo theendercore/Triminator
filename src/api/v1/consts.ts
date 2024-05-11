@@ -2,7 +2,7 @@ import {PackInfo} from "./ExtraTypes";
 
 const getEmptyPackInfo = (): PackInfo =>
     JSON.parse(JSON.stringify({
-        version: "1.20.4",
+        version: "1.20.6",
         name: "",
         namespace: "",
         description: "",
@@ -81,7 +81,7 @@ const getVanillaPatterns = (): string[] =>
         "trims/models/armor/host_leggings"
     ]))
 
-const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4"] as const
+const MCVersionList = ["1.20", "1.20.1", "1.20.2", "1.20.4", "1.20.6"] as const
 
 
 export {
